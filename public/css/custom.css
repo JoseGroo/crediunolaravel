@@ -1,0 +1,86 @@
+﻿
+.form-group > label {
+    font-weight: 700;
+}
+
+.symbology {
+    background:red;
+    position:relative;
+}
+
+    .symbology .btn {
+        position: absolute;
+        right: 0;
+        top: -3.7rem;
+    }
+
+
+
+.circliful .number,
+.circliful .percent {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+
+
+.contact-box.center-version {
+    border: 1px solid #e7eaec;
+    padding: 0;
+}
+.contact-box {
+    background-color: #ffffff;
+    border: 1px solid #e7eaec;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.contact-box.center-version > a {
+    display: block;
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+.contact-box > a {
+    color: inherit;
+}
+
+.contact-box.center-version > a img {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.rounded-circle {
+    border-radius: 50%!important;
+}
+
+.contact-box .contact-box-footer {
+    text-align: center;
+    background-color: #ffffff;
+    border-top: 1px solid #e7eaec;
+    padding: 15px 20px;
+}
+
+
+#imgPreviewFotoPerfil{
+    height: 300px;
+}
+
+.bitacora-cambio{
+    background: #ffeb99;
+    border: 1px solid #ffffff;
+}
+
+.modal-bitacora {
+    max-width: 1100px;
+}
+
+.font-active-status{
+    color: #008000;
+}
+
+.font-inactive-status{
+    color: #cc0000;
+}
