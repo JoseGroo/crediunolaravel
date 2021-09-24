@@ -22,7 +22,7 @@
                                 <td>{{ $item->rol->rol }}</td>
                                 <td>
                                     <a href="{{ route('users.edit', $item ) }}" class="btn btn-sm btn-info">Editar</a>
-                                    <a href="{{ route('users.details', $item) }}" class="btn btn-sm btn-white">Ver detalles</a>
+                                    <a href="{{ route('users.views_details', $item) }}" class="btn btn-sm btn-white">Ver detalles</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,7 +50,7 @@
                         <div class="media-body ">
                             <div class="float-right">
                                 <a href="{{ route('users.edit', $item ) }}" class="btn btn-sm btn-info">Editar</a>
-                                <a href="{{ route('users.details', $item) }}" class="btn btn-sm btn-white">Ver detalles</a>
+                                <a href="{{ route('users.views_details', $item) }}" class="btn btn-sm btn-white">Ver detalles</a>
                             </div>
                             <h4 class="m-0">{{ $item->nombre }} {{ $item->apellido_paterno }} <span class="font-normal">({{ $item->usuario }})</span></h4>
                             <h5 class="text-muted m-0">{{ $item->rol->rol }}</h5>
@@ -69,10 +69,12 @@
                 @foreach ($users as $item)
                     @php
                         $foto_perfil =  Storage::exists($item->foto) ? $item->foto : "public/user_profile/default.png";
+                        //$foto_perfil =  File::exists($item->foto) ? $item->foto : "images/avatars/default.png";
                         $icon_color = $item->activo ? "font-active-status" : "font-inactive-status";
                         $activo = $item->activo ? "Usuario activo" : "Usuario inactivo";
                         $accion_delete = $item->activo ? "Desactivar" : "Reactivar";
                         $icon_accion = $item->activo ? "mdi-delete" : "mdi-rotate-left";
+
                     @endphp
 
                 <div class="col-lg-4">
@@ -80,7 +82,8 @@
 
                         <a href="{{ route('users.details', $item->id) }}">
                             <i title="" class="mdi mdi-circle mdi-24px {{ $icon_color }}" style="position: absolute;top: 28px;left: 179px;"></i>
-                            <img alt="image" class="rounded-circle" src="{{ Storage::url($foto_perfil) }}">
+                            <img alt="{{ $item->foto }}" class="rounded-circle" src="{{ Storage::url($foto_perfil) }}">
+                            {{--<img alt="{{ $item->foto }}" class="rounded-circle" src="{{ asset($foto_perfil) }}">--}}
                             <h4 class="m-b-xs"><strong>{{ $item->nombre }} {{ $item->apellido_paterno }}</strong></h4>
                             <h5 class="m-b-xs">({{ $item->usuario }})</h5>
                             <div class="font-bold">{{ $item->rol }}</div>
@@ -89,7 +92,7 @@
                             <div class="m-t-xs btn-group">
                                 @if($item->activo)
                                     <a href="{{ route('users.edit', $item->id) }}" class="btn btn-xs btn-white"><i class="mdi mdi-pencil"></i> Editar </a>
-                                    {{--<a href="{{ route('users.details', $item->id) }}" class="btn btn-xs btn-white"><i class="mdi mdi-folder"></i> Detalles</a>--}}
+                                    {{--<a href="{{ route('users.views_details', $item->id) }}" class="btn btn-xs btn-white"><i class="mdi mdi-folder"></i> Detalles</a>--}}
 
                                     <button type="button" user-id="{{ $item->id }}" usuario="{{ $item->nombre }} {{ $item->apellido_paterno }} ({{ $item->usuario }})" class="btn btn-xs btn-white cambiar-contrasena"><i class="mdi mdi-textbox-password"></i> Contraseña</button>
                                 @endif

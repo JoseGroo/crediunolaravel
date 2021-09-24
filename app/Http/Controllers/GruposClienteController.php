@@ -6,6 +6,7 @@ use App\Enums\catalago_sistema;
 use App\Enums\movimiento_bitacora;
 use App\Helpers\HelperCrediuno;
 use App\Http\Requests\GruposRequest;
+use App\tbl_clientes;
 use App\tbl_grupos;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
@@ -170,5 +171,7 @@ class GruposClienteController extends Controller
             'Message'   => 'Ocurrio un error al intentar guardar la información.'
         ));
     }
+
+
     #endregion
 }

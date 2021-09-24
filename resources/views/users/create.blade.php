@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['users.create_post' ], 'method' => 'POST', 'id' => 'frmCrear', 'enctype' => 'multipart/form-data' ]) }}
 
         <div class="card">

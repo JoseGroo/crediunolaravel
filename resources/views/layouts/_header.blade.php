@@ -2,7 +2,6 @@
 @php
     $user = Auth::user();
     $nombre_completo = $user->nombre.' '.$user->apellido_paterno.' '.$user->apellido_materno;
-    $nombre_wrapper = strlen($nombre_completo) > 14 ? substr($nombre_completo, 0, 14).'...' : $nombre_completo;
 
     $rol = \App\Helpers\HelperCrediuno::get_rol_by_id($user->rol_id);
 
@@ -17,15 +16,16 @@
                 <img src="{{ asset('images/crediuno.png') }}" class="dark" height="40">
                 </a>
             </div>
-            <ul class="nav navbar-top-links navbar-left">
-                <li class="nav-item company">
-                    <a class="nav-link text-left" href="#">
-                        <span class="name">
-                            Crediuno
+            <form role="search" class="navbar-form-custom" style="width: 400px;" action="{{ route('clientes.search') }}">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="nombre" data-placeholder="Buscar cliente..." placeholder="Buscar cliente...">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn-xs btn-primary "><i class="mdi mdi-account-search" style="font-size: 40px;"></i></button>
                         </span>
-                    </a>
-                </li>
-            </ul>
+                    </div>
+                </div>
+            </form>
         </div>
 
 
@@ -38,16 +38,20 @@
                     <i class="mdi mdi-plus-circle-outline"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#url">
-                                <span class="mdi mdi-file-plus-outline"></span>
-                                Nueva solicitud
-                            </a>
+                    <a class="dropdown-item" href="{{ route('clientes.create') }}">
+                        <span class="mdi mdi-file-plus-outline"></span>
+                        Nuevo cliente
+                    </a>
 
-                            <a class="dropdown-item" href="#url">
-                                <span class="mdi mdi-account-plus"></span>
-                                Nuevo usuario
-                            </a>
-                        </div>
+                   @if(!$user->tiene_corte_abierto)
+                        <a class="dropdown-item" onclick="event.preventDefault(); $('#frmAbrirCorte').submit();">
+                            <span class="mdi mdi-file-plus-outline"></span>
+                            Abrir corte
+                            {{ Form::open([ 'route' => ['cortes.create_post' ], 'method' => 'POST', 'id' => 'frmAbrirCorte', 'style' => 'display:none;' ]) }}
+                            {{ Form::close() }}
+                        </a>
+                   @endif
+                </div>
             </li>
 
             <li class="nav-item separator">
@@ -64,7 +68,7 @@
                     <span class="name">
 
                         <span title="{{ $nombre_completo }}">
-                            {{ $nombre_wrapper }}
+                            {{ \Illuminate\Support\Str::of($nombre_completo)->limit(14) }}
                         </span>
                         <small>{{ $rol->rol }}</small>
                         <i class="mdi mdi-chevron-down"></i>
@@ -75,7 +79,7 @@
                         Mi Perfil
                     </a>--}}
 
-                    <a class="dropdown-item font-weight-bold" href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                    <a class="dropdown-item font-weight-bold" href="#" onclick="event.preventDefault(); $('#logoutForm').submit();">
                         Cerrar sesión
                         {{ Form::open([ 'route' => ['system.logoff' ], 'method' => 'POST', 'id' => 'logoutForm', 'style' => 'display:none;' ]) }}
                         {{ Form::close() }}

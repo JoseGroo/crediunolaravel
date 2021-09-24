@@ -113,6 +113,13 @@
                         <div class="form-control-plaintext">${{ number_format($model->dolar_moneda_venta, 2) }}</div>
                     </div>
                 </div>
+
+                <div class="col-md-2 col-sm-6 col-12">
+                    <div class="form-group">
+                        {{ Form::label('iva_divisa', 'IVA divisa') }}
+                        <div class="form-control-plaintext">${{ number_format($model->iva_divisa, 2) }}</div>
+                    </div>
+                </div>
             </div>
 
             <div class="form-row">

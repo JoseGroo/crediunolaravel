@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Lang;
 
 class AuthController extends Controller
 {
@@ -40,12 +41,19 @@ class AuthController extends Controller
             'usuario' => 'required',
             'contrasena' => 'required',
         ], [
-            'required' => 'Este campo es obligatorio.'
+            'required' => Lang::get('dictionary.message_required_field')
         ]);
 
 
         if(auth()->attempt(array('usuario' => $input['usuario'], 'password' => $input['contrasena'])))
         {
+            if(!auth()->user()->activo)
+            {
+                Auth::logout();
+                return redirect()->route('login')
+                    ->with('error',Lang::get('dictionary.message_user_not_exists'));
+            }
+
             HelperCrediuno::save_bitacora(null, movimiento_bitacora::InicioSesion, null, null, null);
 
             return redirect()->intended('');
@@ -53,13 +61,15 @@ class AuthController extends Controller
             //return redirect()->route('home');
         }else{
             return redirect()->route('login')
-                ->with('error','Usuario y/o contraseña incorrecta.');
+                ->with('error', Lang::get('dictionary.message_wrong_user_password'));
         }
     }
 
     public function logoff() {
 
-        HelperCrediuno::save_bitacora(null, movimiento_bitacora::CerroSesion, null, null, null);
+        if(\auth()->user())
+            HelperCrediuno::save_bitacora(null, movimiento_bitacora::CerroSesion, null, null, null);
+
         Auth::logout();
 
         return redirect()->route('login');

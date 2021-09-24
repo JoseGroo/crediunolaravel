@@ -13,6 +13,8 @@
 
                 <div class="card-body">
                     Binvenido {{ $user->nombre }} {{ $user->apellido_paterno }} {{ $user->apellido_materno }}
+
+
                 </div>
             </div>
         </div>

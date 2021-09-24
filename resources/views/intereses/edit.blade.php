@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['intereses.edit_post' ], 'method' => 'POST', 'id' => 'frmEdit' ]) }}
 
     {{ Form::hidden('interes_id', $model->interes_id) }}
@@ -139,14 +137,6 @@
     <script>
         $(function()
         {
-
-            $('.check-box-value').click(function(){
-                var vName = $(this).attr('id');
-                var vChecked = $(this).prop('checked') ? 1 : 0;
-
-                $('[name="' + vName + '"]').val(vChecked);
-            })
-
             $("#frmEdit").submit(function(){
                 var vSubmit = $(this).valid();
 

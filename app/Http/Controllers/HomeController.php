@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\tbl_contactos;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $date = Carbon::now()->addDays(3);
+        /*dd($date->dayOfWeek);
+        dd($date->format('l'));*/
+
         return view('home');
     }
 }

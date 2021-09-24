@@ -32,7 +32,7 @@ if (!S2) { S2 = {}; } else { require = S2; }
 /**
  * @license almond 0.3.1 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
- * see: http://github.com/jrburke/almond for details
+ * see: http://github.com/jrburke/almond for views_details
  */
 //Going sloppy to avoid 'use strict' string cost, but strict practices should
 //be followed.

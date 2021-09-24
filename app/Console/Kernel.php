@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\GenerarCargosDiarios;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        "App\Console\Commands\GenerarCargosDiarios",
+        GenerarCargosDiarios::class
     ];
 
     /**
@@ -25,11 +27,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        //$schedule->command('generar_cargos')->daily()->between('12:00', '05:00');
+        $schedule->command('generar_cargos')->everyMinute();
     }
 
     /**
      * Register the commands for the application.
-     *
+     * php artisan schedule:generar_cargos
      * @return void
      */
     protected function commands()

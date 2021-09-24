@@ -88,21 +88,9 @@ $(function () {
     //$(".pagedList a").click(getPage);
     $(document).on('click', '.pagedList a', getPage);
 
-    $('.datepicker').datepicker({
-        format: "dd/mm/yyyy",
-        todayBtn: "linked",
-        language: "es",
-        autoclose: true,
-        todayHighlight: true
-    });
 
-    setTimeout(function(){
-        $('.datepicker').each(function(){
-            var vPlaceholder = $(this).data('placeholder');
-            if(vPlaceholder != undefined)
-                $(this).attr('placeholder', vPlaceholder);
-        })
-    },1)
+
+    SetPlaceholderInputs();
 
     $("#btnCleanFilter").click(function (event)
     {
@@ -170,17 +158,21 @@ $(function () {
         }
     });
 
-
-    $("input, textarea").each(function(){
-        var placeholder = $(this).parents(".form-group").find("label").text();
-        $(this).attr("placeholder", placeholder);
-    })
 });
 
 var MaskInputs = function(){
     $('.phone-mask').mask('000-000-0000');
     $(".just-number").mask("#");
     $('.just-decimal').mask("##0.00", {reverse: true});
+
+    $('.datepicker').datepicker({
+        format: "dd/mm/yyyy",
+        todayBtn: "linked",
+        language: "es",
+        autoclose: true,
+        todayHighlight: true,
+        clearBtn: true
+    });
 }
 
 function ShowImage(imageId) {
@@ -346,7 +338,25 @@ $(document).ajaxSuccess(function()
     MaskInputs();
     FiltrarEvents();
     HideLoading();
+
+    SetPlaceholderInputs();
 })
+
+function SetPlaceholderInputs()
+{
+    $("input, textarea").each(function(){
+        var placeholder = $(this).parents(".form-group").find("label").text();
+        $(this).attr("placeholder", placeholder);
+    })
+
+    setTimeout(function(){
+        $('[data-placeholder]').each(function(){
+            var vPlaceholder = $(this).data('placeholder');
+            if(vPlaceholder != undefined)
+                $(this).attr('placeholder', vPlaceholder);
+        })
+    },1)
+}
 
 
 function MyToast(vTitulo, vMensaje, vTipo, vTiempo)
@@ -413,6 +423,12 @@ var SubmitFilterIndexs = function(vElement){
 }
 
 
+$(document).on('click', '.check-box-value', function(){
+    var vName = $(this).attr('id');
+    var vChecked = $(this).prop('checked') ? 1 : 0;
+
+    $('[name="' + vName + '"]').val(vChecked);
+})
 
 //#region bitacora
 

@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['grupos-cliente.create_post' ], 'method' => 'POST', 'id' => 'frmCrear' ]) }}
 
         <div class="card">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Config;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SucursalesRequest extends FormRequest
@@ -28,7 +29,7 @@ class SucursalesRequest extends FormRequest
             'ciudad_id'             => 'required|int',
             'sucursal'              => 'required|max:100',
             'numero_contrato'       => 'max:100',
-            'telefono'              => 'nullable|max:45|regex:/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/',
+            'telefono'              => 'nullable|max:45|regex:/'.Config::get('constants.regexs.phone').'/',
             'beneficiario'          => 'required|max:250',
             'dolar_compra'          => 'required|numeric',
             'dolar_venta'           => 'required|numeric',
@@ -36,6 +37,7 @@ class SucursalesRequest extends FormRequest
             'euro_venta'            => 'required|numeric',
             'dolar_moneda_compra'   => 'required|numeric',
             'dolar_moneda_venta'    => 'required|numeric',
+            'iva_divisa'    => 'required|numeric',
         ];
     }
 }

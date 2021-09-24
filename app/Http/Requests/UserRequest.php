@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Config;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -27,7 +28,7 @@ class UserRequest extends FormRequest
             'nombre'            => 'required|max:200',
             'apellido_paterno'  => 'required|max:200',
             'apellido_materno'  => 'max:200',
-            'telefono'          => 'nullable|max:20|regex:/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/',
+            'telefono'          => 'nullable|max:20|regex:/'.Config::get('constants.regexs.phone').'/',
             'seguro_social'     => 'max:45',
             'sucursal_id'       => 'required|int',
             'usuario'           => 'required|max:250',

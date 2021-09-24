@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['grupos-cliente.edit_post' ], 'method' => 'POST', 'id' => 'frmEdit' ]) }}
 
     {{ Form::hidden('grupo_id', $model->grupo_id) }}

@@ -15,7 +15,10 @@
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="form-group">
                         {{ Form::label('fecha', 'Fecha') }}
-                        <div class="form-control-plaintext">{{ $model->fecha }}</div>
+                        <div class="form-control-plaintext">
+                            {{ \App\Helpers\HelperCrediuno::$nombres_dias[\Carbon\Carbon::parse($model->fecha)->format('l')] }}
+                            {{ $model->fecha }}
+                        </div>
                     </div>
                 </div>
 

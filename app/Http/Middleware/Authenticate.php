@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
 
 class Authenticate extends Middleware
 {
@@ -14,8 +15,18 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+
         if (! $request->expectsJson()) {
             return route('login');
         }
+    }
+
+    public function handle($request, Closure $next)
+    {
+        if(!auth()->user() || !auth()->user()->activo)
+        {
+            return redirect()->route('system.logoff');
+        }
+        return $next($request);
     }
 }

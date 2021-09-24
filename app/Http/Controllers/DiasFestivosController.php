@@ -71,7 +71,7 @@ class DiasFestivosController extends Controller
         $model->fecha_creacion = $datetime_now;
 
         $response = tbl_dias_festivos::create($model);
-dd($response);
+
         if(!$response['saved'])
         {
             return redirect()->back()->withInput()

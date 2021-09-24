@@ -4,7 +4,6 @@
 
 
 @section('content')
-    @include('general._errors')
 
     {{ Form::open([ 'route' => ['users.edit_post' ], 'method' => 'POST', 'id' => 'frmEdit', 'enctype' => 'multipart/form-data' ]) }}
 
@@ -115,7 +114,6 @@
     {{ Form::close() }}
 
 @endsection
-
 
 
 @section("scripts")

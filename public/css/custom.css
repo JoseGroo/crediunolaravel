@@ -84,3 +84,28 @@
 .font-inactive-status{
     color: #cc0000;
 }
+
+.nav.nav-tabs > li > a {
+    color: black;
+}
+
+.tab-pane.active{
+    color: #495057;
+    background-color: #fff;
+
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-right: 1px solid transparent;
+
+    border-color: #dee2e6 #dee2e6 #fff;
+    padding: 14px 20px 14px 40px;
+}
+
+.adeudo-recibo-empeno{
+    color: #FE9A2E!important;
+    font-weight: bolder;
+}
+
+.table th, .table td{
+    vertical-align: middle!important;
+}

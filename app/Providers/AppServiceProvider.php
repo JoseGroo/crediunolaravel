@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('path.public',function(){
+            return'/Users/josemanuelguerrerosanchez/LaravelProjects/crediuno/public';
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Blade::directive('money_format', function ($money) {
+            return "<?php echo '$'. number_format($money, 2); ?>";
+        });
     }
 }

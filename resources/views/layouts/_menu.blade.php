@@ -24,6 +24,20 @@
                 </a>
             </li>
 
+            <li class="{{ HelperCrediuno::ActiveMenuControllers(array('avales')) }}">
+                <a href="{{ route('avales.index') }}" aria-expanded="false">
+                    <i class="mdi mdi-account-cash"></i>
+                    <span class="nav-label">Avales</span>
+                </a>
+            </li>
+
+            <li class="{{ HelperCrediuno::ActiveMenuControllers(array('clientes')) }}">
+                <a href="{{ route('clientes.index') }}" aria-expanded="false">
+                    <i class="mdi mdi-account-group-outline"></i>
+                    <span class="nav-label">Clientes</span>
+                </a>
+            </li>
+
 
             @switch($rol->rol)
                 @case("Administrador general")

@@ -77,6 +77,12 @@ class BitacoraController extends Controller
             case catalago_sistema::DiasFestivos:
                 $view = 'bitacora._detalles_dias_festivos';
                 break;
+            case catalago_sistema::Contactos:
+                $view = 'bitacora._detalles_contactos';
+                break;
+            case catalago_sistema::MediosPublicitarios:
+                $view = 'bitacora._detalles_medios_publicitarios';
+                break;
         }
         $view_html = view($view)
             ->with(compact($bitacora))

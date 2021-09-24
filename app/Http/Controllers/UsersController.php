@@ -8,8 +8,8 @@ use App\Helpers\HelperCrediuno;
 use App\Http\Requests\UserRequest;
 use App\tbl_roles;
 use App\tbl_sucursales;
+use Artisan;
 use Carbon\Carbon;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use PHPUnit\TextUI\Help;
-use Symfony\Component\Console\Input\Input;
+
 
 class UsersController extends Controller
 {
@@ -35,7 +34,7 @@ class UsersController extends Controller
         auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
 
         $nombre = request('sNombre');
-        $perPage = request('iPerPage') ?? 12;
+        $perPage = request('iPerPage') ?? 10;
 
         $users = tbl_usuarios::get_pagination($nombre, $perPage);
         if($request->ajax()){
@@ -72,7 +71,9 @@ class UsersController extends Controller
 
         $datetime_now = HelperCrediuno::get_datetime();
         $foto = request('foto');
+        //$ruta_foto = $foto ? HelperCrediuno::save_file($foto, public_path().'/user_profile') : "";
         $ruta_foto = $foto ? HelperCrediuno::save_file($foto, 'public/user_profile') : "";
+
 
         $data_usuario = request()->except(['_token', '_method']);
 
@@ -132,7 +133,10 @@ class UsersController extends Controller
         }
 
         $foto = request('foto');
+
         $ruta_foto = $foto ? HelperCrediuno::save_file($foto, 'public/user_profile') : "";
+        //$nombre_foto = $foto ? HelperCrediuno::save_file($foto, HelperCrediuno::$path_save_user_profile) : "";
+        //$ruta_foto = $foto ? substr(HelperCrediuno::$path_save_user_profile, 1).$nombre_foto : "";
 
         $usuario_original->nombre = request('nombre');
         $usuario_original->apellido_paterno = request('apellido_paterno');
@@ -143,7 +147,8 @@ class UsersController extends Controller
         $usuario_original->direccion = request('direccion');
         $usuario_original->telefono = request('telefono');
         $usuario_original->sucursal_id = request('sucursal_id');
-        $usuario_original->foto = $foto ? $ruta_foto : $usuario_original->foto;
+        $usuario_original->seguro_social = request('seguro_social');
+
 
 
         $response = tbl_usuarios::edit($usuario_original);
@@ -169,6 +174,7 @@ class UsersController extends Controller
     public function details($id = 0)
     {
         auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
+
 
         $usuario = tbl_usuarios::get_by_id($id);
 

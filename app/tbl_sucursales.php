@@ -13,7 +13,7 @@ class tbl_sucursales extends Model
 
     protected $fillable = [
         'sucursal_id', 'estado_id', 'ciudad_id', 'sucursal', 'numero_contrato', 'direccion', 'telefono', 'beneficiario', 'dolar_compra',
-        'dolar_venta', 'euro_compra', 'euro_venta', 'dolar_moneda_compra', 'dolar_moneda_venta'
+        'dolar_venta', 'euro_compra', 'euro_venta', 'dolar_moneda_compra', 'dolar_moneda_venta', 'iva_divisa'
     ];
 
     public static function create(tbl_sucursales $model)
@@ -57,11 +57,23 @@ class tbl_sucursales extends Model
         return $model;
     }
 
+    public static function get_list_by_ciudad_id($ciudad_id)
+    {
+        $model = tbl_sucursales::where([
+            ['activo', '=', true],
+            ['ciudad_id', '=', $ciudad_id]
+        ])->orderby('sucursal_id')
+            ->get();
+        return $model;
+    }
+
     public static function check_if_exists($sucursal, $id)
     {
         $model = tbl_sucursales::where([
             ['sucursal', '=', $sucursal],
-            ['sucursal_id', '!=', $id]
+            ['sucursal_id', '!=', $id],
+            ['activo', '=', true]
+
         ])->get()->count();
         return $model;
     }

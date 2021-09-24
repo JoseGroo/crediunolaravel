@@ -5,7 +5,11 @@
         'intereses',
         'sucursales',
         'users',
-        'dias-festivos'
+        'dias-festivos',
+        'descuentos',
+        'contactos',
+        'divisas',
+        'medios-publicitarios',
         ];
 @endphp
 
@@ -17,10 +21,15 @@
     </a>
     <ul class="nav nav-second-level collapse ">
         <li>
+            <a href="{{ route('contactos.index') }}">Contactos</a>
             <a href="{{ route('dias_festivos.index') }}">Días festivos</a>
+            <a href="{{ route('descuentos.index') }}">Descuentos</a>
+            <a href="{{ route('divisas.index') }}">Divisas</a>
             <a href="{{ route('fondos.index') }}">Fondos</a>
+            <a href="{{ route('forma_pago.index') }}">Formas de pago</a>
             <a href="{{ route('grupos-cliente.index') }}">Grupos</a>
             <a href="{{ route('intereses.index') }}">Intereses</a>
+            <a href="{{ route('medios-publicitarios.index') }}">Medios publicitarios</a>
             <a href="{{ route('sucursales.index') }}">Sucursales</a>
             <a href="{{ route('users.index') }}">Usuarios</a>
         </li>

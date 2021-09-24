@@ -147,6 +147,7 @@ class SucursalesController extends Controller
         $model_original->euro_venta = request('euro_venta');
         $model_original->dolar_moneda_compra = request('dolar_moneda_compra');
         $model_original->dolar_moneda_venta = request('dolar_moneda_venta');
+        $model_original->iva_divisa = request('iva_divisa');
 
 
         $response = tbl_sucursales::edit($model_original);

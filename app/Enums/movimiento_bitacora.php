@@ -15,4 +15,7 @@ final class movimiento_bitacora extends Enum implements LocalizedEnum
     const Reactivado = 6;
     const Elimino = 7;
     const CambioContrasena = 8;
+    const CanceloPrestamo = 9;
+    const EntregoPrestamo = 10;
+    const CanceloDescuento = 11;
 }

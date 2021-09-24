@@ -15,7 +15,10 @@
                     <tbody>
                     @foreach ($model as $item)
                         <tr>
-                            <td>{{ date('d/m/Y', strtotime($item->fecha)) }}</td>
+                            <td>
+                                {{ \App\Helpers\HelperCrediuno::$nombres_dias[\Carbon\Carbon::parse($item->fecha)->format('l')] }}
+                                {{ date('d/m/Y', strtotime($item->fecha)) }}
+                            </td>
                             <td>{{ $item->razon }}</td>
                             <td>
                                 <a href="{{ route('dias_festivos.edit', $item->dia_festivo_id ) }}" class="btn btn-sm btn-info">Editar</a>

@@ -9,11 +9,10 @@ class tbl_contactos extends Model
 {
     public $timestamps = false;
     protected $primaryKey = 'contacto_id';
-    protected $hidden = ['contacto_id', 'activo', 'creado_por', 'fecha_creacion'];
-
+    protected $hidden = ['contacto_id', 'cliente_id', 'activo', 'creado_por', 'fecha_creacion'];
 
     protected $fillable = [
-        'contacto_id', 'nombre', 'direccion', 'telefono', 'correo_electronico', 'sucursal_id'
+        'contacto_id', 'cliente_id', 'nombre', 'direccion', 'telefono', 'correo_electronico'
     ];
 
     public static function create(tbl_contactos $model)
@@ -38,17 +37,19 @@ class tbl_contactos extends Model
 
     public static function check_if_exists($nombre, $telefono, $id)
     {
-        DB::enableQueryLog();
-        $model = \DB::table("tbl_contactos")
-        ->where([
-            ['contacto_id', '!=', $id],
-            ['activo', '=', true]
-        ])
-            ->orWhere('nombre', $nombre)
-            ->orWhere('telefono', $telefono)
+        //DB::enableQueryLog();
+        $model = DB::table("tbl_contactos")
+            ->where([
+                ['contacto_id', '!=', $id],
+                ['activo', '=', true]
+            ])
+            ->where(function($query) use($nombre, $telefono) {
+                $query->where('nombre', $nombre);
+                $query->orWhere('telefono', $telefono);
+            })
             ->get()->count();
 
-        dd(DB::getQueryLog());
+        //dd(DB::getQueryLog());
         return $model;
     }
 
@@ -61,31 +62,15 @@ class tbl_contactos extends Model
         return $model;
     }
 
-    public static function get_pagination($fecha_inicio, $fecha_fin, $razon, $mostrar_dias_pasados, $perPage)
+    public static function get_pagination($nombre, $telefono, $perPage)
     {
 
         $model = tbl_contactos::where([
-            ['razon', 'LIKE', '%'.$razon.'%'],
+            ['nombre', 'LIKE', '%'.$nombre.'%'],
+            ['telefono', 'LIKE', '%'.$telefono.'%'],
             ['activo', '=', true],
         ])
-            ->where(function($query) use ($fecha_inicio, $fecha_fin, $mostrar_dias_pasados) {
-
-
-                if($mostrar_dias_pasados == null) {
-                    $query->where('fecha', '>=', DB::raw('curdate()'));
-                }
-
-                if(!empty($fecha_inicio)) {
-                    $fecha_inicio = DateTime::createFromFormat('d/m/Y', $fecha_inicio);
-                    $query->whereDate('fecha', '>=', $fecha_inicio->format('Y-m-d'));
-                }
-
-                if(!empty($fecha_fin)) {
-                    $fecha_fin = DateTime::createFromFormat('d/m/Y', $fecha_fin);
-                    $query->whereDate('fecha', '<=', $fecha_fin->format('Y-m-d'));
-                }
-            })
-            ->orderBy('fecha', 'asc')
+            ->orderBy('nombre', 'asc')
             ->paginate($perPage);
         return $model;
     }

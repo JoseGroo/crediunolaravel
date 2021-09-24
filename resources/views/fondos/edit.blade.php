@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['fondos.edit_post' ], 'method' => 'POST', 'id' => 'frmEdit' ]) }}
 
     {{ Form::hidden('fondo_id', $model->fondo_id) }}

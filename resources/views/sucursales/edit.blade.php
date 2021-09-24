@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['sucursales.edit_post' ], 'method' => 'POST', 'id' => 'frmEdit' ]) }}
 
     {{ Form::hidden('sucursal_id', $model->sucursal_id) }}
@@ -118,6 +116,13 @@
                     <div class="form-group">
                         {{ Form::label('dolar_moneda_venta', 'Dolar moneda venta') }}
                         {{ Form::text('dolar_moneda_venta', $model->dolar_moneda_venta, [ 'class' => 'form-control just-decimal' ]) }}
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-6 col-12">
+                    <div class="form-group">
+                        {{ Form::label('iva_divisa', 'IVA divisa') }}
+                        {{ Form::text('iva_divisa', $model->iva_divisa, [ 'class' => 'form-control just-decimal' ]) }}
                     </div>
                 </div>
 

@@ -40,6 +40,7 @@
             @include('layouts._title')
 
             <div class="wrapper wrapper-content animated fadeInRigh m-t-md">
+                @include('general._messages')
                 @yield('content')
             </div>
         </div>

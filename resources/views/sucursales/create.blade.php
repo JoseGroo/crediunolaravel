@@ -5,8 +5,6 @@
 
 @section('content')
 
-    @include('general._errors')
-
     {{ Form::open([ 'route' => ['sucursales.create_post' ], 'method' => 'POST', 'id' => 'frmCrear' ]) }}
 
         <div class="card">
@@ -116,6 +114,13 @@
                         <div class="form-group">
                             {{ Form::label('dolar_moneda_venta', 'Dolar moneda venta') }}
                             {{ Form::text('dolar_moneda_venta', null, [ 'class' => 'form-control just-decimal' ]) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ Form::label('iva_divisa', 'IVA divisa') }}
+                            {{ Form::text('iva_divisa', null, [ 'class' => 'form-control just-decimal' ]) }}
                         </div>
                     </div>
 

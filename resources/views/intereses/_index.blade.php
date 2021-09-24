@@ -18,8 +18,8 @@
                     @foreach ($model as $item)
                         <tr>
                             <td>{{ $item->nombre }}</td>
-                            <td class="text-center">${{ $item->interes_mensual }}</td>
-                            <td class="text-center">${{ $item->interes_diario }}</td>
+                            <td class="text-center">{{ $item->interes_mensual }}%</td>
+                            <td class="text-center">{{ $item->interes_diario }}%</td>
                             <td>
                                 <a href="{{ route('intereses.edit', $item->interes_id ) }}" class="btn btn-sm btn-info">Editar</a>
                                 <a href="{{ route('intereses.details', $item->interes_id) }}" class="btn btn-sm btn-white">Detalles</a>

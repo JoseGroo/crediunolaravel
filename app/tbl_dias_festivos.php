@@ -57,6 +57,15 @@ class tbl_dias_festivos extends Model
         return $model;
     }
 
+    public static function get_list_by_date($date)
+    {
+        $model = tbl_dias_festivos::where([
+            ['activo', '=', true],
+            ['fecha', '>=', $date]
+        ])->get();
+        return $model;
+    }
+
     public static function get_pagination($fecha_inicio, $fecha_fin, $razon, $mostrar_dias_pasados, $perPage)
     {
 

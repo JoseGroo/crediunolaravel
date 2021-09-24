@@ -38,6 +38,7 @@ class tbl_usuarios extends Authenticatable
         }
         return false;
     }
+
     public function hasRole($role)
     {
         $rol_id = auth()->user()->rol_id;
@@ -72,6 +73,18 @@ class tbl_usuarios extends Authenticatable
     {
         return $this->belongsTo(tbl_roles::class, 'rol_id', 'rol_id');
     }
+
+    public function tbl_cortes()
+    {
+        $model = $this->hasMany(tbl_cortes::class, 'usuario_id', 'id')->where('cerrado', false);
+        return $model;
+    }
+
+    public function getTblCorteAttribute()
+    {
+        return $this->tbl_cortes->first();
+    }
+
 
     public function sucursal()
     {
@@ -129,6 +142,16 @@ class tbl_usuarios extends Authenticatable
             ->select('usu.id', 'usu.nombre', 'usu.apellido_paterno', 'usu.apellido_materno', 'usu.usuario', 'rol.rol', 'usu.activo', 'usu.foto')
             ->paginate($perPage);
         return $model;
+    }
+
+    public function getTieneCorteAbiertoAttribute()
+    {
+        return $this->tbl_cortes->count() > 0;
+    }
+
+    public function getCorteIdAttribute()
+    {
+        return $this->tbl_cortes->first()->corte_id;
     }
 
 

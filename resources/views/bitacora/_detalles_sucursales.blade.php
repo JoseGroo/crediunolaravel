@@ -12,6 +12,7 @@
     $euro_venta_actuales = isset($model_actuales['euro_venta']) ? $model_actuales['euro_venta'] : '';
     $dolar_moneda_compra_actuales = isset($model_actuales['dolar_moneda_compra']) ? $model_actuales['dolar_moneda_compra'] : '';
     $dolar_moneda_venta_actuales = isset($model_actuales['dolar_moneda_venta']) ? $model_actuales['dolar_moneda_venta'] : '';
+    $iva_divisa_actuales = isset($model_actuales['iva_divisa']) ? $model_actuales['iva_divisa'] : '';
     
     $sucursal_anteriores = isset($model_anteriores['sucursal']) ? $model_anteriores['sucursal'] : '';
     $estado_name_anteriores = isset($model_anteriores['estado_name']) ? $model_anteriores['estado_name'] : '';
@@ -26,6 +27,7 @@
     $euro_venta_anteriores = isset($model_anteriores['euro_venta']) ? $model_anteriores['euro_venta'] : '';
     $dolar_moneda_compra_anteriores = isset($model_anteriores['dolar_moneda_compra']) ? $model_anteriores['dolar_moneda_compra'] : '';
     $dolar_moneda_venta_anteriores = isset($model_anteriores['dolar_moneda_venta']) ? $model_anteriores['dolar_moneda_venta'] : '';
+    $iva_divisa_anteriores = isset($model_anteriores['iva_divisa']) ? $model_anteriores['iva_divisa'] : '';
     
 @endphp
 
@@ -177,6 +179,16 @@
                             {{ Form::label('dolar_moneda_venta', 'Dolar moneda venta') }}
                             <div class="form-control-plaintext">${{ number_format($dolar_moneda_venta_actuales, 2) }}</div>
                         </div>
+                    </div> 
+                    
+                    @php
+                        $background_color_cambios = $iva_divisa_actuales != $iva_divisa_anteriores ? 'bitacora-cambio' : '';
+                    @endphp
+                    <div class="col-md-6 col-12 {{ $background_color_cambios }}">
+                        <div class="form-group">
+                            {{ Form::label('iva_divisa', 'IVA divisa') }}
+                            <div class="form-control-plaintext">${{ number_format($iva_divisa_actuales, 2) }}</div>
+                        </div>
                     </div>
                 </div>
 
@@ -290,6 +302,13 @@
                         <div class="form-group">
                             {{ Form::label('dolar_moneda_venta', 'Dolar moneda venta') }}
                             <div class="form-control-plaintext">${{ number_format($dolar_moneda_venta_anteriores, 2) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            {{ Form::label('iva_divisa', 'IVA divisa') }}
+                            <div class="form-control-plaintext">${{ number_format($iva_divisa_anteriores, 2) }}</div>
                         </div>
                     </div>
                 </div>
