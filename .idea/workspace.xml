@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/crediuno.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crediuno.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/HistorialClienteRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/HistorialClienteRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoAvalRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoAvalRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralAvalRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralAvalRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_contacto/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_contacto/_form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_laboral/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_laboral/_form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/historial/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/historial/_form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_contacto/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_contacto/_form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_laboral/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_laboral/_form.blade.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="crediuno" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>$pago_actualizado</find>
+      <find>adeud</find>
+      <find>$datetime_now</find>
+      <find>$adeudos_actuales</find>
+      <find>$adeudo</find>
+      <find>$prestamo</find>
+      <find>$renglon</find>
+      <find>frmPagos</find>
+      <find>$request</find>
+      <find>showing_loader</find>
+      <find>ShowLoading</find>
+      <find>dias fes</find>
+      <find>dia</find>
+      <find>dias_festivos</find>
+      <find>descuentos.create_post</find>
+      <find>descuento.inde</find>
+      <find>cliente</find>
+      <find>cliente_id</find>
+      <find>fest</find>
+      <find>movimiento</find>
+      <find>tbl_dias_festivos</find>
+      <find>fecha_vigencia</find>
+      <find>pago</find>
+      <find>btnOtraCantidad</find>
+      <find>guid</find>
+      <find>tbl_adeudos</find>
+      <find>$tbl_cheque</find>
+      <find>importe_pagado</find>
+      <find>tbl_cheques</find>
+      <find>$tbl_ficha_deposito</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>dia_festivo_id</replace>
+      <replace>dias_festivos.</replace>
+      <replace>razon</replace>
+      <replace>tbl_contactos</replace>
+      <replace>Contactos</replace>
+      <replace>contacto_id</replace>
+      <replace>telefono</replace>
+      <replace>correo_electronico</replace>
+      <replace>direccion</replace>
+      <replace>_anteriores</replace>
+      <replace>contactos</replace>
+      <replace>tbl_medios_publicitarios</replace>
+      <replace>divisas</replace>
+      <replace>DivisasController</replace>
+      <replace>iva_divisa</replace>
+      <replace>divisa_id</replace>
+      <replace>medios-publicitarios</replace>
+      <replace>medios-publicitarios.</replace>
+      <replace>medio_publicitario</replace>
+      <replace>MediosPublicitariosRequest</replace>
+      <replace>medios_publicitarios.</replace>
+      <replace>medio_publicitario_id</replace>
+      <replace>ClientesC</replace>
+      <replace>tbl_notas</replace>
+      <replace>details</replace>
+      <replace>aval</replace>
+      <replace>aval.</replace>
+      <replace>aval_id</replace>
+      <replace>formas_pago</replace>
+      <replace>descuentos</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/resources/views/prestamos/entregar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/details.blade.php" />
+        <option value="$PROJECT_DIR$/config/constants.php" />
+        <option value="$PROJECT_DIR$/resources/views/prestamos/generar.blade.php" />
+        <option value="$PROJECT_DIR$/app/Console/Commands/GenerarCargosDiarios.php" />
+        <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
+        <option value="$PROJECT_DIR$/app/Enums/tipo_intereses.php" />
+        <option value="$PROJECT_DIR$/app/Enums/estatus_adeudos.php" />
+        <option value="$PROJECT_DIR$/resources/views/prestamos/_detalles_prestamo.blade.php" />
+        <option value="$PROJECT_DIR$/app/Enums/tipos_pago.php" />
+        <option value="$PROJECT_DIR$/app/Enums/formas_pago.php" />
+        <option value="$PROJECT_DIR$/app/Enums/metodos_pago.php" />
+        <option value="$PROJECT_DIR$/public/css/custom.css" />
+        <option value="$PROJECT_DIR$/app/Enums/tipos_tarjeta.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/PagosRequest.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" />
+        <option value="$PROJECT_DIR$/app/tbl_pagos.php" />
+        <option value="$PROJECT_DIR$/app/Enums/tipo_pago.php" />
+        <option value="$PROJECT_DIR$/app/tbl_usuarios.php" />
+        <option value="$PROJECT_DIR$/app/Enums/tipos_movimientos_corte.php" />
+        <option value="$PROJECT_DIR$/app/tbl_adeudos.php" />
+        <option value="$PROJECT_DIR$/app/Helpers/HelperCrediuno.php" />
+        <option value="$PROJECT_DIR$/app/tbl_cargos.php" />
+        <option value="$PROJECT_DIR$/app/Enums/catalago_sistema.php" />
+        <option value="$PROJECT_DIR$/resources/views/prestamos/_pagos.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
+        <option value="$PROJECT_DIR$/resources/views/descuentos/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/_scripts.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/_styles.blade.php" />
+        <option value="$PROJECT_DIR$/app/tbl_clientes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/DescuentosRequest.php" />
+        <option value="$PROJECT_DIR$/app/Enums/estatus_descuentos.php" />
+        <option value="$PROJECT_DIR$/resources/views/descuentos/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Enums/movimiento_bitacora.php" />
+        <option value="$PROJECT_DIR$/resources/lang/en/enums.php" />
+        <option value="$PROJECT_DIR$/resources/views/clientes/pagos.blade.php" />
+        <option value="$PROJECT_DIR$/app/tbl_descuentos.php" />
+        <option value="$PROJECT_DIR$/resources/views/descuentos/_index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/lang/en/validation.php" />
+        <option value="$PROJECT_DIR$/resources/views/descuentos/details.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/DescuentosController.php" />
+        <option value="$PROJECT_DIR$/app/tbl_prestamos.php" />
+        <option value="$PROJECT_DIR$/app/tbl_cheques.php" />
+        <option value="$PROJECT_DIR$/app/tbl_tarjetas.php" />
+        <option value="$PROJECT_DIR$/app/tbl_fichas_deposito.php" />
+        <option value="$PROJECT_DIR$/app/tbl_transferencias_electronicas.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/menu_rol/_administrador_general.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/FormasPagoController.php" />
+        <option value="$PROJECT_DIR$/resources/views/formas_pago/index.blade.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/proengsoft/laravel-jsvalidation" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/hanneskod/classtools" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/bensampo/laravel-enum" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectId" id="1yrgjfk7hbWCaKxsdp4jS61JKzy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="clientes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="formas_pago" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crediuno" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crediuno" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="menu_rol" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views" />
+      <recent name="$PROJECT_DIR$/public/css" />
+      <recent name="$PROJECT_DIR$/public/js/jquery" />
+      <recent name="$PROJECT_DIR$/app/Enums" />
+      <recent name="$PROJECT_DIR$/resources/views/prestamos" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/clientes/views_details/documentos" />
+      <recent name="$PROJECT_DIR$/resources/views/clientes/details" />
+      <recent name="$PROJECT_DIR$/bootstrap" />
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$/resources/views/layouts" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="" />
+      <created>1584843676123</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584843676123</updated>
+      <workItem from="1584843678405" duration="16749000" />
+      <workItem from="1585192939599" duration="2949000" />
+      <workItem from="1585239723767" duration="33096000" />
+      <workItem from="1585701670206" duration="8537000" />
+      <workItem from="1585782630349" duration="33379000" />
+      <workItem from="1586216500921" duration="497000" />
+      <workItem from="1586300338360" duration="645000" />
+      <workItem from="1586641046608" duration="845000" />
+      <workItem from="1586915758604" duration="3370000" />
+      <workItem from="1587184801463" duration="7623000" />
+      <workItem from="1587518031725" duration="3229000" />
+      <workItem from="1587580854649" duration="3172000" />
+      <workItem from="1587657855897" duration="1057000" />
+      <workItem from="1587666764025" duration="2310000" />
+      <workItem from="1587672899834" duration="762000" />
+      <workItem from="1587673731699" duration="87000" />
+      <workItem from="1587673831257" duration="4125000" />
+      <workItem from="1587767878843" duration="2703000" />
+      <workItem from="1587928840489" duration="12082000" />
+      <workItem from="1588096602583" duration="5705000" />
+      <workItem from="1588132479089" duration="852000" />
+      <workItem from="1588134311415" duration="10844000" />
+      <workItem from="1588262272685" duration="2546000" />
+      <workItem from="1588289401206" duration="7932000" />
+      <workItem from="1588703626365" duration="4245000" />
+      <workItem from="1588727728853" duration="296000" />
+      <workItem from="1588864050126" duration="5000" />
+      <workItem from="1589003991746" duration="15918000" />
+      <workItem from="1589504313056" duration="1666000" />
+      <workItem from="1589581550843" duration="1727000" />
+      <workItem from="1589590013465" duration="11257000" />
+      <workItem from="1589820875630" duration="207000" />
+      <workItem from="1589990898586" duration="11121000" />
+      <workItem from="1590261745802" duration="7849000" />
+      <workItem from="1590771491306" duration="1771000" />
+      <workItem from="1590810558761" duration="295000" />
+      <workItem from="1591060558937" duration="89000" />
+      <workItem from="1591234243749" duration="1928000" />
+      <workItem from="1591419469870" duration="10465000" />
+      <workItem from="1591648562276" duration="1165000" />
+      <workItem from="1591663446853" duration="5061000" />
+      <workItem from="1591806907572" duration="2738000" />
+      <workItem from="1593043409937" duration="514000" />
+      <workItem from="1593097187486" duration="52000" />
+      <workItem from="1593109124878" duration="1916000" />
+      <workItem from="1593130647978" duration="952000" />
+      <workItem from="1593134727732" duration="1522000" />
+      <workItem from="1593285385539" duration="4742000" />
+      <workItem from="1593487352876" duration="408000" />
+      <workItem from="1593489327637" duration="511000" />
+      <workItem from="1593788235004" duration="51000" />
+      <workItem from="1593795858383" duration="538000" />
+      <workItem from="1593918544311" duration="2779000" />
+      <workItem from="1594078215250" duration="4555000" />
+      <workItem from="1594656215631" duration="598000" />
+      <workItem from="1594742038905" duration="200000" />
+      <workItem from="1594834520923" duration="185000" />
+      <workItem from="1594836934454" duration="205000" />
+      <workItem from="1594928210294" duration="10000" />
+      <workItem from="1595029397019" duration="332000" />
+      <workItem from="1595274879592" duration="823000" />
+      <workItem from="1595360361455" duration="393000" />
+      <workItem from="1595461103335" duration="603000" />
+      <workItem from="1595552199008" duration="81000" />
+      <workItem from="1595891375610" duration="5172000" />
+      <workItem from="1595996376302" duration="219000" />
+      <workItem from="1596034973911" duration="1017000" />
+      <workItem from="1596069379567" duration="339000" />
+      <workItem from="1596145514872" duration="790000" />
+      <workItem from="1596844123306" duration="547000" />
+      <workItem from="1597164761270" duration="7000" />
+      <workItem from="1597360067965" duration="358000" />
+      <workItem from="1597703574149" duration="5445000" />
+      <workItem from="1597886806118" duration="119000" />
+      <workItem from="1597946732281" duration="345000" />
+      <workItem from="1598163318717" duration="319000" />
+      <workItem from="1598294892365" duration="1740000" />
+      <workItem from="1598497739332" duration="102000" />
+      <workItem from="1598565609327" duration="404000" />
+      <workItem from="1598585077987" duration="508000" />
+      <workItem from="1598887425684" duration="1995000" />
+      <workItem from="1599090088372" duration="456000" />
+      <workItem from="1599231729904" duration="1473000" />
+      <workItem from="1600380257697" duration="2915000" />
+      <workItem from="1600707633182" duration="573000" />
+      <workItem from="1600718626918" duration="57000" />
+      <workItem from="1600722197078" duration="3356000" />
+      <workItem from="1601144135502" duration="467000" />
+      <workItem from="1601563064255" duration="1891000" />
+      <workItem from="1601684057248" duration="79000" />
+      <workItem from="1602000779752" duration="339000" />
+      <workItem from="1602034343341" duration="4000" />
+      <workItem from="1602293523321" duration="180000" />
+      <workItem from="1604328535529" duration="2236000" />
+      <workItem from="1604700062071" duration="2000" />
+      <workItem from="1606501018729" duration="7456000" />
+      <workItem from="1607528695163" duration="11000" />
+      <workItem from="1609170636676" duration="3483000" />
+      <workItem from="1609963498552" duration="507000" />
+      <workItem from="1609964202729" duration="366000" />
+      <workItem from="1609968200841" duration="1352000" />
+      <workItem from="1610518829280" duration="28000" />
+      <workItem from="1610911528131" duration="294000" />
+      <workItem from="1611109709601" duration="15000" />
+      <workItem from="1611176779580" duration="28557000" />
+      <workItem from="1613256239170" duration="9342000" />
+      <workItem from="1614397556605" duration="1087000" />
+      <workItem from="1614460656703" duration="2635000" />
+      <workItem from="1615314126306" duration="7959000" />
+      <workItem from="1615502812812" duration="37000" />
+      <workItem from="1616197879357" duration="6581000" />
+      <workItem from="1616442991011" duration="177000" />
+      <workItem from="1616629421121" duration="95000" />
+      <workItem from="1616685775380" duration="292000" />
+      <workItem from="1617932822776" duration="156000" />
+      <workItem from="1618019070130" duration="1539000" />
+      <workItem from="1618505867967" duration="2000" />
+      <workItem from="1619291935398" duration="2789000" />
+      <workItem from="1619443854190" duration="4898000" />
+      <workItem from="1619474295886" duration="34000" />
+      <workItem from="1619482772100" duration="810000" />
+      <workItem from="1620245284692" duration="1607000" />
+      <workItem from="1620334353783" duration="1016000" />
+      <workItem from="1620338314990" duration="2340000" />
+      <workItem from="1620407808741" duration="8362000" />
+      <workItem from="1620420246402" duration="2031000" />
+      <workItem from="1620497983762" duration="2797000" />
+      <workItem from="1621005828058" duration="26000" />
+      <workItem from="1621374507067" duration="2032000" />
+      <workItem from="1621381143088" duration="7561000" />
+      <workItem from="1621480273893" duration="2120000" />
+      <workItem from="1621526209320" duration="328000" />
+      <workItem from="1621551336478" duration="1104000" />
+      <workItem from="1621616595321" duration="5100000" />
+      <workItem from="1621890198876" duration="1135000" />
+      <workItem from="1621983592727" duration="2009000" />
+      <workItem from="1622771051889" duration="53000" />
+      <workItem from="1623257382960" duration="3071000" />
+      <workItem from="1623536511625" duration="905000" />
+      <workItem from="1623684405568" duration="66000" />
+      <workItem from="1624498288779" duration="252000" />
+      <workItem from="1624823554703" duration="199000" />
+      <workItem from="1624993707539" duration="3927000" />
+      <workItem from="1625151640068" duration="2757000" />
+      <workItem from="1625233563487" duration="3420000" />
+      <workItem from="1625272598358" duration="5860000" />
+      <workItem from="1625580122666" duration="3002000" />
+      <workItem from="1625667081461" duration="980000" />
+      <workItem from="1625702522403" duration="178000" />
+      <workItem from="1625771587248" duration="553000" />
+      <workItem from="1625780872694" duration="283000" />
+      <workItem from="1625785258827" duration="614000" />
+      <workItem from="1626203702561" duration="958000" />
+      <workItem from="1626208565296" duration="7150000" />
+      <workItem from="1626379786802" duration="139000" />
+      <workItem from="1626879281441" duration="437000" />
+      <workItem from="1626982721725" duration="6812000" />
+      <workItem from="1627150295164" duration="1311000" />
+      <workItem from="1627700836654" duration="412000" />
+      <workItem from="1628126599362" duration="2596000" />
+      <workItem from="1628260057223" duration="902000" />
+      <workItem from="1628450166441" duration="544000" />
+      <workItem from="1628559152840" duration="1290000" />
+      <workItem from="1628703050031" duration="45000" />
+      <workItem from="1630940184847" duration="2310000" />
+      <workItem from="1632517590366" duration="321000" />
+      <workItem from="1633015259748" duration="94000" />
+      <workItem from="1633065700697" duration="6537000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1588263522778</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588263522779</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initial commit">
+      <created>1632517624642</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632517624642</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="469740000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49693877" visible="true" weight="0.17521368" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.50306123" side_tool="true" weight="0.23382173" />
+      <window_info id="npm" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32959184" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32857144" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32959184" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/resources/views/prestamos/generar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="27" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dias_festivos/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="30" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/jquery/jquery-ui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="68" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/ClientesRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="264" column="5" selection-start-line="264" selection-start-column="5" selection-end-line="264" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/jquery-ui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/_menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" column="52" selection-start-line="43" selection-start-column="52" selection-end-line="43" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/ConyugeRequest.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/DivisasRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="48" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DiasFestivosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="53" column="4" lean-forward="true" selection-start-line="53" selection-start-column="4" selection-end-line="82" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#71#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_dias_festivos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="39" column="4" lean-forward="true" selection-start-line="39" selection-start-column="4" selection-end-line="48" selection-end-column="5" />
+          <folding>
+            <element signature="e#23#36#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/DescuentosRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Requests/DiasFestivosRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="28" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/fondos/details.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/estatus_descuentos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/movimiento_bitacora.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lang/en/enums.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="67" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
+          <folding>
+            <element signature="e#7#38#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/_styles.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="82" selection-start-line="7" selection-start-column="82" selection-end-line="7" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/descuentos/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="36" column="57" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_clientes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="126" column="38" selection-start-line="126" selection-start-column="38" selection-end-line="126" selection-end-column="38" />
+          <folding>
+            <element signature="e#23#41#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/descuentos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/_scripts.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="74" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_descuentos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="100" selection-start-line="16" selection-start-column="100" selection-end-line="16" selection-end-column="100" />
+          <folding>
+            <element signature="e#23#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/descuentos/_index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lang/en/validation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="775">
+          <caret line="272" column="27" selection-start-line="272" selection-start-column="9" selection-end-line="272" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DescuentosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="89" column="38" selection-start-line="89" selection-start-column="38" selection-end-line="89" selection-end-column="38" />
+          <folding>
+            <element signature="e#40#71#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_adeudos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/formas_pago.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_tarjetas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_fichas_deposito.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4530">
+          <caret line="363" selection-start-line="363" selection-end-line="363" />
+          <folding>
+            <element signature="e#40#48#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_cheques.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FondosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/formas_pago/edit.blade.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/details.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="131" selection-end-column="22" />
+          <folding>
+            <element signature="e#2559#4575#0#HTML" />
+            <element signature="e#4593#7078#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ContactosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FormasPagoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="20" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="20" />
+          <folding>
+            <element signature="e#40#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/menu_rol/_administrador_general.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3075">
+          <caret line="205" column="55" selection-start-line="205" selection-start-column="55" selection-end-line="205" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/descuentos/details.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="100" selection-start-line="32" selection-start-column="100" selection-end-line="32" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_prestamos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1065">
+          <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
+          <folding>
+            <element signature="e#23#53#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/estatus_prestamo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/clientes/pagos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3330">
+          <caret line="222" column="23" selection-start-line="222" selection-start-column="23" selection-end-line="222" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/formas_pago/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/estado_civil.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/unidad_tiempo.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-147" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Authenticate.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Enums/estatus_cliente.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tbl_transferencias_electronicas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

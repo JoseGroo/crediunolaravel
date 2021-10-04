@@ -35,7 +35,7 @@ class InformacionLaboralAvalRequest extends FormRequest
             'calle'                 => 'nullable|max:100',
             'codigo_postal'         => 'nullable|max:10',
             'jefe_inmediato'        => 'required|max:200',
-            'telefono'              => 'nullable|max:15|regex:/'.Config::get('constants.regexs.phone').'/',
+            'telefono'              => 'nullable|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
             'departamento'          => 'nullable|max:100',
             'antiguedad'            => 'required|int',
             'unidad_antiguedad'     => 'required|int',

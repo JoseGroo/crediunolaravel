@@ -27,7 +27,7 @@ class HistorialClienteRequest extends FormRequest
         return [
             'cliente_id'    => 'required|int',
             'acreedor'      => 'required_if:tiene_adeudo,==,1|nullable|max:100',
-            'telefono'      => 'required_if:tiene_adeudo,==,1|nullable|max:15|regex:/'.Config::get('constants.regexs.phone').'/',
+            'telefono'      => 'required_if:tiene_adeudo,==,1|nullable|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
             'adeudo'        => 'required_if:tiene_adeudo,==,1|nullable|numeric',
         ];
     }

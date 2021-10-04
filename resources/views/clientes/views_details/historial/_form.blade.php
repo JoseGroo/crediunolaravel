@@ -22,7 +22,7 @@
     <div class="col-md-4 col-sm-6 col-12">
         <div class="form-group">
             {{ Form::label('telefono', __('validation.attributes.telefono')) }}
-            {{ Form::text('telefono', $model->telefono ?? '', [ 'class' => 'form-control phone-mask' ]) }}
+            {{ Form::text('telefono', $model->telefono ?? '', [ 'class' => 'form-control' ]) }}
         </div>
     </div>
 

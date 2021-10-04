@@ -6,14 +6,14 @@
     <div class="col-md-4 col-sm-6 col-12">
         <div class="form-group">
             {{ Form::label('telefono_fijo', __('validation.attributes.telefono_fijo')) }}
-            {{ Form::text('telefono_fijo', $model->telefono_fijo ?? '', [ 'class' => 'form-control phone-mask' ]) }}
+            {{ Form::text('telefono_fijo', $model->telefono_fijo ?? '', [ 'class' => 'form-control' ]) }}
         </div>
     </div>
 
     <div class="col-md-4 col-sm-6 col-12">
         <div class="form-group">
             {{ Form::label('telefono_movil', __('validation.attributes.telefono_movil')) }}
-            {{ Form::text('telefono_movil', $model->telefono_movil ?? '', [ 'class' => 'form-control phone-mask' ]) }}
+            {{ Form::text('telefono_movil', $model->telefono_movil ?? '', [ 'class' => 'form-control' ]) }}
         </div>
     </div>
 
@@ -27,7 +27,7 @@
     <div class="col-md-4 col-sm-6 col-12">
         <div class="form-group">
             {{ Form::label('telefono_alternativo_1', __('validation.attributes.telefono_alternativo_1')) }}
-            {{ Form::text('telefono_alternativo_1', $model->telefono_alternativo_1 ?? '', [ 'class' => 'form-control phone-mask' ]) }}
+            {{ Form::text('telefono_alternativo_1', $model->telefono_alternativo_1 ?? '', [ 'class' => 'form-control' ]) }}
         </div>
     </div>
 
@@ -48,7 +48,7 @@
     <div class="col-md-4 col-sm-6 col-12">
         <div class="form-group">
             {{ Form::label('telefono_alternativo_2', __('validation.attributes.telefono_alternativo_2')) }}
-            {{ Form::text('telefono_alternativo_2', $model->telefono_alternativo_2 ?? '', [ 'class' => 'form-control phone-mask' ]) }}
+            {{ Form::text('telefono_alternativo_2', $model->telefono_alternativo_2 ?? '', [ 'class' => 'form-control' ]) }}
         </div>
     </div>
 
