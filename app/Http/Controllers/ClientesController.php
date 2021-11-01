@@ -79,7 +79,6 @@ class ClientesController extends Controller
 
     public function index(Request $request)
     {
-
         $logged_user = auth()->user();
         $sucursal_id = 0;
 
@@ -92,7 +91,6 @@ class ClientesController extends Controller
 
         $nombre = request('nombre');
         $domicilio = request('domicilio');
-
         $perPage = request('iPerPage') ?? 10;
 
         $model = tbl_clientes::get_pagination($nombre, $sucursal_id, $domicilio, $perPage);

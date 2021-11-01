@@ -25,6 +25,7 @@ use App\tbl_movimientos_corte;
 use App\tbl_prestamos;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class PrestamosController extends Controller
 {
@@ -435,8 +436,27 @@ class PrestamosController extends Controller
                 }
             }
         }
+
         #endregion
 
         return view('prestamos._pagos')->with(compact('prestamos'));
+    }
+
+    public function get_prestamos_by_cliente_id(Request $request)
+    {
+        auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
+
+        if($request->ajax()){
+            $cliente_id = $request->cliente_id;
+
+            $prestamos = tbl_prestamos::get_list_vigentes_by_cliente_id($cliente_id);
+
+            foreach ($prestamos as $item)
+                $item->folio = $item->folio;
+
+            return Response::json($prestamos);
+        }
+
+        return Response::json(null);
     }
 }

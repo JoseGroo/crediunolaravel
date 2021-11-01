@@ -15,9 +15,10 @@
                     </thead>
                     <tbody>
                     @foreach ($model as $item)
+
                         <tr>
                             <td>{{ $item->grupo }}</td>
-                            <td>{{ number_format(0, 0) }}</td>
+                            <td>{{ number_format($item->total_clientes, 0) }}</td>
                             <td>
                                 <a href="{{ route('grupos-cliente.edit', $item->grupo_id ) }}" class="btn btn-sm btn-info">Editar</a>
                                 <a href="{{ route('grupos-cliente.details', $item->grupo_id) }}" class="btn btn-sm btn-white">Detalles</a>

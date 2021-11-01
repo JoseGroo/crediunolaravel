@@ -28,9 +28,9 @@ class InformacionContactoAvalRequest extends FormRequest
             'aval_id'                   => 'required|int',
             'telefono_fijo'             => 'nullable|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
             'telefono_movil'            => 'required|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
-            'telefono_alternativo_1'    => 'required|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
-            'nombre_alternativo_1'      => 'required|max:200',
-            'parentesco_alternativo_1'  => 'required|max:40',
+            'telefono_alternativo_1'    => 'nullable|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
+            'nombre_alternativo_1'      => 'nullable|max:200',
+            'parentesco_alternativo_1'  => 'nullable|max:40',
             'telefono_alternativo_2'    => 'nullable|max:200',//|regex:/'.Config::get('constants.regexs.phone').'/
             'nombre_alternativo_2'      => 'nullable|max:200',
             'parentesco_alternativo_2'  => 'nullable|max:40',

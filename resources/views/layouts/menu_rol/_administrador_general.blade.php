@@ -11,6 +11,10 @@
         'divisas',
         'medios-publicitarios',
         ];
+
+    $controllers_cargos = [
+        '-'
+        ];
 @endphp
 
 <li class="{{ HelperCrediuno::ActiveMenuControllers($controllers_catalagos) }}">
@@ -32,6 +36,19 @@
             <a href="{{ route('medios-publicitarios.index') }}">Medios publicitarios</a>
             <a href="{{ route('sucursales.index') }}">Sucursales</a>
             <a href="{{ route('users.index') }}">Usuarios</a>
+        </li>
+    </ul>
+</li>
+<li class="{{ HelperCrediuno::ActiveMenuControllers($controllers_cargos) }}">
+    <a href="#">
+        <i class="mdi mdi-cash-refund"></i>
+        <span class="nav-label">Cargos </span>
+        <span class="mdi mdi-chevron-down"></span>
+    </a>
+    <ul class="nav nav-second-level collapse ">
+        <li>
+            <a href="{{ route('pagos.index') }}">Cargos manuales</a>
+            <a href="{{ route('pagos.eliminar_cargos') }}">Eliminar</a>
         </li>
     </ul>
 </li>

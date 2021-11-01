@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/crediuno.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crediuno.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/HistorialClienteRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/HistorialClienteRequest.php" afterDir="false" />
+    <list default="true" id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="quitando mascara de telefonos">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PagosController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CargosManualesRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tbl_cargos_manuales.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tbl_log_errors.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/general/errors.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pagos/_eliminar_cargos.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pagos/_index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pagos/eliminar_cargos.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pagos/generar_cargo.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pagos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/catalago_sistema.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/catalago_sistema.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoAvalRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoAvalRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionContactoRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralAvalRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralAvalRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/InformacionLaboralRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_contacto/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_contacto/_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_laboral/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/avales/views_details/informacion_laboral/_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/historial/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/historial/_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_contacto/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_contacto/_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_laboral/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/informacion_laboral/_form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_cargos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_cargos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_grupos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_grupos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_prestamos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_prestamos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/formas_pago/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formas_pago/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/grupos_cliente/_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/grupos_cliente/_index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/menu_rol/_administrador_general.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/menu_rol/_administrador_general.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,20 +367,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/pagos" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/pagos" />
       <recent name="$PROJECT_DIR$/resources/views" />
+      <recent name="$PROJECT_DIR$/resources/views/general" />
       <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/public/js/jquery" />
-      <recent name="$PROJECT_DIR$/app/Enums" />
-      <recent name="$PROJECT_DIR$/resources/views/prestamos" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/clientes/views_details/documentos" />
@@ -561,7 +575,10 @@
       <workItem from="1630940184847" duration="2310000" />
       <workItem from="1632517590366" duration="321000" />
       <workItem from="1633015259748" duration="94000" />
-      <workItem from="1633065700697" duration="6537000" />
+      <workItem from="1633065700697" duration="11601000" />
+      <workItem from="1633458024366" duration="13728000" />
+      <workItem from="1635429985910" duration="593000" />
+      <workItem from="1635458797897" duration="568000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1588263522778</created>
@@ -577,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632517624642</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="quitando mascara de telefonos">
+      <created>1633368874687</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1633368874687</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -625,7 +649,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="quitando mascara de telefonos" />
+    <option name="LAST_COMMIT_MESSAGE" value="quitando mascara de telefonos" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/views/prestamos/generar.blade.php">

@@ -20,22 +20,32 @@
                 <div class="form-row">
 
                    <div class="col-md-12">
-                       <ul class="nav nav-tabs" id="tabFormasPago" role="tablist">
+                       <ul class="nav nav-tabs nav-fill" id="tabFormasPago" role="tablist">
 
-                           @foreach($formas_pago as $item)
-                               <li class="nav-item">
-                                   <a class="nav-link" data-toggle="tab" href="#tab-{{ $item->value }}" role="tab" aria-controls="tab-{{ $item->value }}" aria-selected="true">{{ $item->description }}</a>
-                               </li>
-                           @endforeach
+                           <li class="nav-item">
+                               <a class="nav-link active" data-toggle="tab" href="#tab-cheque" role="tab" aria-controls="tab-cheque" aria-selected="true">Cheque</a>
+                           </li>
+
+                           <li class="nav-item">
+                               <a class="nav-link" data-toggle="tab" href="#tab-tarjeta" role="tab" aria-controls="tab-tarjeta" aria-selected="true">Tarjeta de crédito/debito</a>
+                           </li>
+
+                           <li class="nav-item">
+                               <a class="nav-link" data-toggle="tab" href="#tab-ficha-deposito" role="tab" aria-controls="tab-ficha-deposito" aria-selected="true">Ficha de deposito</a>
+                           </li>
+
+                           <li class="nav-item">
+                               <a class="nav-link" data-toggle="tab" href="#tab-transferencia-electronica" role="tab" aria-controls="tab-transferencia-electronica" aria-selected="true">Transferencia electronica</a>
+                           </li>
 
                        </ul>
 
                        <div class="tab-content">
-                           <div id="tab-documentos" class="tab-pane">
+                           <div id="tab-cheque" class="tab-pane show active">
                                kp2
                            </div>
-                           <div id="tab-documentos" class="tab-pane">
-                               kp2
+                           <div id="tab-tarjeta" class="tab-pane">
+                               kp2asdasd
                            </div>
                        </div>
                    </div>

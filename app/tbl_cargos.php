@@ -117,4 +117,9 @@ class tbl_cargos extends Model
 
         return $model;
     }
+
+    public function tbl_adeudo()
+    {
+        return $this->belongsTo(tbl_adeudos::class, 'adeudo_id', 'adeudo_id');
+    }
 }

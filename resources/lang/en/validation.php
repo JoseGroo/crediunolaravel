@@ -275,6 +275,10 @@ return [
         'comentario'            => 'Comentario',
         'cliente_id'            => 'Cliente',
         'estatus'               => 'Estatus',
+        'recibo'                => 'Recibo',
+        'prestamo'              => 'Prestamo',
+        'prestamo_id'           => 'Prestamo',
+        'adeudo_id'             => 'Recibo',
     ],
 
 ];

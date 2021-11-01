@@ -35,6 +35,12 @@ class tbl_grupos extends Model
         }
     }
 
+    public function tbl_clientes()
+    {
+        $model = $this->hasMany(tbl_clientes::class, 'grupo_id', 'grupo_id');
+        return $model->where('activo', '=', true);
+    }
+
     public static function get_list()
     {
         $model = tbl_grupos::where([
@@ -73,4 +79,12 @@ class tbl_grupos extends Model
             ->paginate($perPage);
         return $model;
     }
+
+    #region Attributes
+
+    public function getTotalClientesAttribute()
+    {
+        return $this->tbl_clientes->count();
+    }
+    #endregion
 }

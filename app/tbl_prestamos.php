@@ -79,8 +79,8 @@ class tbl_prestamos extends Model
     public static function check_if_liquidado_by_prestamo_id($prestamo_id)
     {
         $model = \DB::select("
-            
-            SELECT 
+
+            SELECT
                 (
                 IFNULL((
                     SELECT SUM(adeu.importe_total)
@@ -91,12 +91,22 @@ class tbl_prestamos extends Model
                 (
                 IFNULL((
                     SELECT SUM(carg.importe_total)
-                    FROM tbl_cargos carg where carg.prestamo_id = $prestamo_id AND carg.estatus = 1    
+                    FROM tbl_cargos carg where carg.prestamo_id = $prestamo_id AND carg.estatus = 1
                         ),0)
                 ) AS deuda_actual;
         ");
 
         return collect($model)->first()->deuda_actual <= 0;
+    }
+
+    public static function get_list_generados_by_cliente_id($cliente_id)
+    {
+        $model = tbl_prestamos::where([
+            ['cliente_id', '=', $cliente_id],
+            ['estatus', '=', estatus_prestamo::Vigente],
+            ['activo', '=', true]
+        ])->get();
+        return $model;
     }
 
     #region Objetos de llaves foraneas
@@ -116,6 +126,21 @@ class tbl_prestamos extends Model
         return $model->where('activo', '=', true)
             //->where('estatus', '=', estatus_adeudos::Vigente)
             ->orderBy('fecha_limite_pago');
+    }
+
+    public function tbl_cargos()
+    {
+        $model = $this->hasMany(tbl_cargos::class, 'prestamo_id', 'prestamo_id');
+        return $model->where('tbl_cargos.activo', '=', true)
+            ->join('tbl_adeudos as adeu', 'adeu.adeudo_id', '=', 'tbl_cargos.adeudo_id')
+            //->where('estatus', '=', estatus_adeudos::Vigente)
+            ->orderBy('adeu.fecha_limite_pago')
+            ->select([
+                'tbl_cargos.importe_total',
+                'adeu.numero_pago',
+                'adeu.fecha_limite_pago',
+                'tbl_cargos.cargo_id'
+            ]);
     }
 
     public function tbl_aval()
@@ -158,5 +183,6 @@ class tbl_prestamos extends Model
         }
         return $folio . $this->prestamo_id;
     }
+
     #endregion
 }
