@@ -71,6 +71,15 @@ class tbl_cargos extends Model
         return $model;
     }
 
+    public static function get_by_adeudo_id($id)
+    {
+        $model = tbl_cargos::where([
+            ['adeudo_id', '=', $id],
+            ['activo', '=', true]
+        ])->first();
+        return $model;
+    }
+
 
     public static function get_list_for_cargos()
     {

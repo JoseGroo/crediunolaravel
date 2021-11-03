@@ -182,6 +182,7 @@ Route::get('prestamos/get_list_avales_by_name', 'PrestamosController@get_list_av
 Route::get('prestamos/get_pagos_by_prestamo_id', 'PrestamosController@get_pagos_by_prestamo_id')->name('prestamos.get_pagos_by_prestamo_id');
 Route::get('prestamos/get_pagos_acreditar_cantidad', 'PrestamosController@get_pagos_acreditar_cantidad')->name('prestamos.get_pagos_acreditar_cantidad');
 Route::get('prestamos/get_prestamos_by_cliente_id', 'PrestamosController@get_prestamos_by_cliente_id')->name('prestamos.get_prestamos_by_cliente_id');
+Route::get('prestamos/get_recibos_by_prestamo_id', 'PrestamosController@get_recibos_by_prestamo_id')->name('prestamos.get_recibos_by_prestamo_id');
 //endregion
 
 //region adeudos
@@ -190,6 +191,7 @@ Route::get('pagos/index', 'PagosController@index')->name('pagos.index');
 Route::get('pagos/eliminar_cargos', 'PagosController@eliminar_cargos')->name('pagos.eliminar_cargos');
 Route::post('pagos/eliminar_cargos_post', 'PagosController@eliminar_cargos_post')->name('pagos.eliminar_cargos_post');
 Route::get('pagos/generar_manual', 'PagosController@generar_manual')->name('pagos.generar_manual');
+Route::post('pagos/generar_manual_post', 'PagosController@generar_manual_post')->name('pagos.generar_manual_post');
 //endregion
 
 //region cortes

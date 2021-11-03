@@ -5,7 +5,7 @@
 
 @section('content')
 
-    {{ Form::open([ 'route' => ['pagos.generar_manual' ], 'method' => 'POST', 'id' => 'frmCrear' ]) }}
+    {{ Form::open([ 'route' => ['pagos.generar_manual_post' ], 'method' => 'POST', 'id' => 'frmCrear' ]) }}
 
         <div class="card">
             <div class="card-header">
@@ -41,7 +41,7 @@
                     <div class="col-md-4 col-sm-6 col-12">
                         <div class="form-group">
                             {{ Form::label('importe', __('validation.attributes.importe')) }}
-                            {{ Form::text('importe', null, [ 'class' => 'form-control' ]) }}
+                            {{ Form::text('importe', null, [ 'class' => 'form-control just-decimal' ]) }}
                         </div>
                     </div>
 
@@ -94,7 +94,7 @@
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    $('#prestamo_id').empty().append('<option>Seleccionar opcion</option>');
+                    $('#prestamo_id').empty().append('<option value="">Seleccionar opcion</option>');
 
                     if(data != null)
                     {
@@ -144,7 +144,34 @@
                 }
             });
 
+            $('#prestamo_id').change(function(){
+                var vPrestamoId = $(this).val();
+                $.ajax({
+                    url: "{{ route('prestamos.get_recibos_by_prestamo_id') }}",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                        prestamo_id: vPrestamoId
+                    },
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        $('#adeudo_id').empty().append('<option value="">Seleccionar opcion</option>');
 
+                        if(data != null)
+                        {
+                            for(var item of data)
+                            {
+                                $('#adeudo_id').append('<option value="' + item.adeudo_id + '">' + item.numero_pago + '</option>');
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        console.log("error");
+                        console.log(error.responseText);
+                    }
+                });
+            })
 
             $("#frmCrear").submit(function(){
                 var vSubmit = $(this).valid();

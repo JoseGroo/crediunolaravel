@@ -12,21 +12,20 @@
                         <th>Prestamo</th>
                         <th>Adeudo</th>
                         <th>Importe</th>
-                        <th></th>
+                        <th>Comentario</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($model as $item)
                         <tr>
-                            <td>{{ $item->razon }}</td>
+                            <td>{{ $item->nombre }} {{ $item->apellido_paterno }}  {{ $item->apellido_materno }} </td>
                             <td>
-                                {{ \App\Helpers\HelperCrediuno::$nombres_dias[\Carbon\Carbon::parse($item->fecha)->format('l')] }}
-                                {{ date('d/m/Y', strtotime($item->fecha)) }}
+                                {{ date('d/m/Y H:i:s', strtotime($item->fecha_creacion)) }}
                             </td>
-                            <td>{{ $item->razon }}</td>
-                            <td>
-                                <button type="button" data-dia-festivo-id="{{ $item->dia_festivo_id }}" class="btn btn-sm btn-danger delete">Eliminar</button>
-                            </td>
+                            <td>{{ $item->prestamo_id }}</td>
+                            <td>{{ $item->numero_pago }}</td>
+                            <td>@money_format($item->importe)</td>
+                            <td>{{ $item->comentario }}</td>
                         </tr>
                     @endforeach
                     </tbody>

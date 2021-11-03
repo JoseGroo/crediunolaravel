@@ -148,4 +148,13 @@ class tbl_adeudos extends Model
 
         return $model;
     }
+
+    public static function get_list_by_prestamo_id($prestamo_id)
+    {
+        $model = DB::table('tbl_adeudos')
+            ->where('prestamo_id', '=', $prestamo_id)
+            ->get();
+
+        return $model;
+    }
 }

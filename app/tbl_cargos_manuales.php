@@ -12,6 +12,10 @@ class tbl_cargos_manuales extends Model
     protected $primaryKey = 'cargo_manual_id';
     protected $hidden = ['cargo_manual_id', 'activo', 'creado_por', 'fecha_creacion'];
 
+    protected $fillable = [
+        'cliente_id', 'adeudo_id', 'prestamo_id', 'importe', 'comentario'
+    ];
+
     public static function create(tbl_cargos_manuales $model)
     {
         try{
@@ -54,9 +58,10 @@ class tbl_cargos_manuales extends Model
                 "cli.apellido_paterno",
                 "cli.apellido_materno",
                 "car_man.prestamo_id",
-                "adeu.recibo",
+                "adeu.numero_pago",
                 "car_man.importe",
                 "car_man.comentario",
+                "car_man.fecha_creacion",
             ])
             ->paginate($perPage);
         return $model;

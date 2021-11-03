@@ -15,7 +15,7 @@ class tbl_prestamos extends Model
 
 
     protected $hidden = [
-        'prestamo_id', 'cliente_id', 'interes_id', 'aval_id',
+        'cliente_id', 'interes_id', 'aval_id',
         'garantia_id', 'activo', 'creado_por', 'fecha_creacion', 'usuario_entrego_id'
     ];
 

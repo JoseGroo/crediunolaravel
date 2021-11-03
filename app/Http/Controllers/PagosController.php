@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Enums\catalago_sistema;
+use App\Enums\estatus_adeudos;
 use App\Enums\movimiento_bitacora;
 use App\Helpers\HelperCrediuno;
+use App\Http\Requests\CargosManualesRequest;
 use App\tbl_cargos;
 use App\tbl_cargos_manuales;
 use App\tbl_clientes;
 use App\tbl_prestamos;
 use App\tbl_sucursales;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Lang;
@@ -33,6 +36,7 @@ class PagosController extends Controller
         $perPage = request('iPerPage') ?? 10;
 
         $model = tbl_cargos_manuales::get_pagination($fecha_inicio, $fecha_fin, $cliente, $perPage);
+
         if($request->ajax()){
             return view('pagos._index')
                 ->with(compact("model"))
@@ -97,5 +101,54 @@ class PagosController extends Controller
         auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
 
         return view('pagos.generar_cargo');
+    }
+
+    public function generar_manual_post(CargosManualesRequest $request)
+    {
+        auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
+
+        $datetime_now = HelperCrediuno::get_datetime();
+        $data_model = request()->except(['_token', '_method']);
+
+        $model = new tbl_cargos_manuales($data_model);
+
+        $model->activo = true;
+        $model->creado_por = auth()->user()->id;
+        $model->fecha_creacion = $datetime_now;
+
+        $response = tbl_cargos_manuales::create($model);
+
+        if(!$response['saved'])
+        {
+            return redirect()->back()->withInput()
+                ->with('error',$response['error']);
+        }
+
+        $cargo = tbl_cargos::get_by_adeudo_id($request->adeudo_id);
+        $today = Carbon::createFromFormat('Y-m-d', $datetime_now->format('Y-m-d'));
+        if($cargo == null)
+        {
+            $cargo = new tbl_cargos();
+            $cargo->adeudo_id = $request->adeudo_id;
+            $cargo->interes = $request->importe;
+            $cargo->importe_total = $request->importe;
+            $cargo->prestamo_id = $request->prestamo_id;
+            $cargo->estatus = estatus_adeudos::Vigente;
+            $cargo->fecha_ultima_actualizacion = $today;
+            $cargo->iva = 0;
+            $cargo->activo = true;
+            $cargo->fecha_creacion = $datetime_now;
+            $response = tbl_cargos::create($cargo);
+        }else
+        {
+            $cargo->interes += $request->importe;
+            $cargo->importe_total += $request->importe;
+            $cargo->fecha_ultima_actualizacion = $today;
+            $cargo->estatus = estatus_adeudos::Vigente;
+            $response = tbl_cargos::edit_model($cargo);
+        }
+
+        HelperCrediuno::save_bitacora($model->contacto_id, movimiento_bitacora::GeneroCargoManual, $this->catalago_sistema, null, null);
+        return redirect()->route('pagos.index');
     }
 }

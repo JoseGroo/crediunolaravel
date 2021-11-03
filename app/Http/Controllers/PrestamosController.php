@@ -459,4 +459,18 @@ class PrestamosController extends Controller
 
         return Response::json(null);
     }
+
+    public function get_recibos_by_prestamo_id(Request $request)
+    {
+        auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
+
+        if($request->ajax()){
+
+            $prestamos = tbl_adeudos::get_list_by_prestamo_id($request->prestamo_id);
+
+            return Response::json($prestamos);
+        }
+
+        return Response::json(null);
+    }
 }
