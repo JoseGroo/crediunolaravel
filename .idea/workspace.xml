@@ -3,16 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/movimiento_bitacora.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/movimiento_bitacora.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PagosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PagosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tbl_adeudos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_adeudos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tbl_cargos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_cargos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tbl_cargos_manuales.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_cargos_manuales.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tbl_prestamos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_prestamos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pagos/_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pagos/_index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pagos/generar_cargo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pagos/generar_cargo.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,7 +348,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="advanced.settings" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -565,7 +555,8 @@
       <workItem from="1633458024366" duration="13728000" />
       <workItem from="1635429985910" duration="593000" />
       <workItem from="1635458797897" duration="588000" />
-      <workItem from="1635883487831" duration="3486000" />
+      <workItem from="1635883487831" duration="3539000" />
+      <workItem from="1635947729524" duration="281000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1588263522778</created>
@@ -595,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635805037545</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="cargos manuales">
+      <created>1635947657537</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1635947657537</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -645,7 +643,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="quitando mascara de telefonos" />
     <MESSAGE value="avances" />
-    <option name="LAST_COMMIT_MESSAGE" value="avances" />
+    <MESSAGE value="cargos manuales" />
+    <option name="LAST_COMMIT_MESSAGE" value="cargos manuales" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/views/prestamos/generar.blade.php">

@@ -17,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
             return'/Users/josemanuelguerrerosanchez/LaravelProjects/crediuno/public';
         });
     }
-
     /**
      * Bootstrap any application services.
      *
