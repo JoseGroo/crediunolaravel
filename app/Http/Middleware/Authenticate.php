@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
+use Auth;
 
 class Authenticate extends Middleware
 {
@@ -21,7 +22,7 @@ class Authenticate extends Middleware
         }
     }
 
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, ...$guards)
     {
         if(!auth()->user() || !auth()->user()->activo)
         {

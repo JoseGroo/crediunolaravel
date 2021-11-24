@@ -3,7 +3,7 @@
 @section("title", "Listado de formas de pago")
 
 @section('create_button')
-    <a class="btn btn-sm btn-info" style="float:right;" href="{{ route('fondos.create') }}">Crear nuevo fondo</a>
+
 @endsection
 
 @section('content')
@@ -14,7 +14,6 @@
                 <h5 class="card-title">Formas de pago</h5>
 
             </div>
-
 
             <div class="card-body">
                 <div class="form-row">
@@ -42,10 +41,16 @@
 
                        <div class="tab-content">
                            <div id="tab-cheque" class="tab-pane show active">
-                               kp2
+                               @include('formas_pago._cheques', [ 'model' => $cheques])
                            </div>
                            <div id="tab-tarjeta" class="tab-pane">
-                               kp2asdasd
+                               @include('formas_pago._tarjeta', [ 'model' => $tarjetas])
+                           </div>
+                           <div id="tab-ficha-deposito" class="tab-pane">
+                               @include('formas_pago._ficha_deposito', [ 'model' => $ficha_deposito])
+                           </div>
+                           <div id="tab-transferencia-electronica" class="tab-pane">
+                               @include('formas_pago._transferencia_electronica', [ 'model' => $transferencias_electronicas])
                            </div>
                        </div>
                    </div>

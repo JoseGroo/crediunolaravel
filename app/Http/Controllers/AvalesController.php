@@ -37,7 +37,9 @@ use Lang;
 use Storage;
 use Throwable;
 
-class AvalesController extends Controller
+class
+
+AvalesController extends Controller
 {
     private $catalago_sistema = catalago_sistema::Avales;
     private $catalago_sistema_documentos = catalago_sistema::DocumentosCliente;

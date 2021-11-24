@@ -80,7 +80,8 @@ class DescuentosController extends Controller
         $model = new tbl_descuentos($data_model);
         $model->fecha_vigencia = Carbon::createFromFormat('d/m/Y', $model->fecha_vigencia);
 
-        if($request->fecha_vigencia < $datetime_now)
+
+        if($model->fecha_vigencia->format('d/m/Y') < $datetime_now->format('d/m/Y'))
         {
             return redirect()->back()->withInput(request()->all())
                 ->with('error', 'La fecha de vigencia no puede ser antes de hoy.');

@@ -40,4 +40,17 @@ class tbl_cheques extends Model
             return ['saved' => false, 'error' => $e];
         }
     }
+
+    public function tbl_cliente()
+    {
+        return $this->belongsTo(tbl_clientes::class, 'cliente_id', 'cliente_id');
+    }
+
+    public static function get_list()
+    {
+        $model = tbl_cheques::where([
+            ['activo', '=', true]
+        ])->get();
+        return $model;
+    }
 }

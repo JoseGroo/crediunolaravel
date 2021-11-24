@@ -154,6 +154,11 @@ class tbl_usuarios extends Authenticatable
         return $this->tbl_cortes->first()->corte_id;
     }
 
+    public function getNombreCompletoAttribute()
+    {
+        return $this->nombre.' '.$this->apellido_paterno;
+    }
+
 
     //use Notifiable;
 

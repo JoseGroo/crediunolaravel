@@ -172,6 +172,35 @@ class GruposClienteController extends Controller
         ));
     }
 
+    public function add_cliente_to_group(Request $request)
+    {
+        auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
 
+        if($request->ajax()){
+            $model = tbl_clientes::get_by_id($request->cliente_id);
+            $model->grupo_id = $request->grupo_id;
+
+            $response = tbl_clientes::edit($model);
+
+            if(!$response['saved'])
+            {
+                return Response::json(array(
+                    'Saved' => false,
+                    'Message'   => 'Ocurrio un error al intentar guardar la información: '.$response['error']
+                ));
+            }
+
+            HelperCrediuno::save_bitacora($model->cliente_id, movimiento_bitacora::AgregoClienteAGrupo, $this->catalago_sistema, null, null);
+            return Response::json(array(
+                'Saved' => true,
+                'Message'   => 'Se agrego correctamente el cliente al grupo.'
+            ));
+        }
+
+        return Response::json(array(
+            'Saved' => false,
+            'Message'   => 'Ocurrio un error al intentar guardar la información.'
+        ));
+    }
     #endregion
 }

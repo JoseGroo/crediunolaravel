@@ -7,7 +7,18 @@
     }
 });
 
-
+function NumberFormat(value)
+{
+    value += '';
+    var x = value.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
 
 $.extend($.validator.messages, {
     required: "Este campo es obligatorio.",
@@ -62,7 +73,7 @@ $(function () {
     //$("#pagedList .pagination-container .pagination").addClass("pagination-sm");
 
 
-    
+
     CreateAutocompletesBootstrap();//CreateAutocompletes();
 
 
@@ -227,11 +238,11 @@ var FiltrarEvents = function(){
         .change(function () {
             var vElement = $(this);
             if ($(vElement).val().length > 0) {
-                $(vElement).siblings(".clean-filter").css({ display: "table-cell" }).parent().removeClass('noFiltering');       
+                $(vElement).siblings(".clean-filter").css({ display: "table-cell" }).parent().removeClass('noFiltering');
             }
             else {
                 $(vElement).siblings(".clean-filter").css({ display: "none" }).parent().addClass('noFiltering');
-             
+
             }
             ShowLoading();
             $(vElement).blur();
@@ -270,7 +281,7 @@ function CreateAutocompletesBootstrap()
         //    }
         //});
 
-       
+
         var myAccentMap = { "á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u" };
         var vUrl = $(this).attr("data-autocomple");// + "?term=" + $(this).val();
         var vElement = $(this);
@@ -433,7 +444,7 @@ $(document).on('click', '.check-box-value', function(){
 //#region bitacora
 
 $(document).on('click', '#iActualizarBitacora', function () {
-    
+
     $("#FiltrarBitacora").prop("selectedIndex", 0);
     ShowLoading();
     $("#frmBitacora").submit();

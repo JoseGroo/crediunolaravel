@@ -6,6 +6,7 @@ use App\Enums\catalago_sistema;
 use App\Enums\movimiento_bitacora;
 use App\Helpers\HelperCrediuno;
 use App\tbl_cortes;
+use App\tbl_sucursales;
 use Auth;
 use Illuminate\Http\Request;
 use Lang;
@@ -17,6 +18,27 @@ class CortesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
+        auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
+
+        $perPage = $request->iPerPage ?? 10;
+
+        $model = tbl_cortes::get_pagination($request->fecha_inicio, $request->fecha_fin, $request->sucursal_id, $perPage);
+        if($request->ajax()){
+            return view('cortes._index')
+                ->with(compact("model"))
+                ->with(compact('perPage'));
+        }
+
+        $sucursales = tbl_sucursales::get_list()->pluck('sucursal', 'sucursal_id');
+
+        return view('cortes.index')
+            ->with(compact("model"))
+            ->with(compact("sucursales"))
+            ->with(compact('perPage'));
     }
 
     public function create_post()

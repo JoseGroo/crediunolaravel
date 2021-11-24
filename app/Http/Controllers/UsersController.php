@@ -148,9 +148,7 @@ class UsersController extends Controller
         $usuario_original->telefono = request('telefono');
         $usuario_original->sucursal_id = request('sucursal_id');
         $usuario_original->seguro_social = request('seguro_social');
-
-
-
+        $usuario_original->foto = $foto ? $ruta_foto : $usuario_original->foto;
         $response = tbl_usuarios::edit($usuario_original);
 
         if(!$response['saved'])

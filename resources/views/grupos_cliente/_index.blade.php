@@ -22,8 +22,8 @@
                             <td>
                                 <a href="{{ route('grupos-cliente.edit', $item->grupo_id ) }}" class="btn btn-sm btn-info">Editar</a>
                                 <a href="{{ route('grupos-cliente.details', $item->grupo_id) }}" class="btn btn-sm btn-white">Detalles</a>
-                                <button type="button" grupo-id="{{ $item->grupo_id }}" class="btn btn-sm btn-success add-client">Agregar cliente</button>
-                                <button type="button" grupo-id="{{ $item->grupo_id }}" class="btn btn-sm btn-danger delete">Eliminar</button>
+                                <button type="button" data-grupo-id="{{ $item->grupo_id }}" data-grupo="{{ $item->grupo }}" class="btn btn-sm btn-success add-client">Agregar cliente</button>
+                                <button type="button" data-grupo-id="{{ $item->grupo_id }}" class="btn btn-sm btn-danger delete">Eliminar</button>
                             </td>
                         </tr>
                     @endforeach

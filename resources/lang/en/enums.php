@@ -35,7 +35,8 @@ return [
         movimiento_bitacora::CambioContrasena => 'Cambio contraseña',
         movimiento_bitacora::CanceloPrestamo => 'Cancelo prestamo',
         movimiento_bitacora::EntregoPrestamo => 'Entrego prestamo',
-        movimiento_bitacora::CanceloDescuento => 'Cancelo descuento'
+        movimiento_bitacora::CanceloDescuento => 'Cancelo descuento',
+        movimiento_bitacora::AgregoClienteAGrupo => 'Se agrego cliente a un grupo.'
     ],
 
 

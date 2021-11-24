@@ -1,6 +1,7 @@
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/bootstrap/sweetAlert/sweetalert2.all.min.js')}}"></script>
 <script src="{{asset('js/bootstrap/select2/select2.js')}}"></script>
+<script src="{{asset('js/bootstrap/select2/i18n/es.js')}}"></script>
 <script src="{{asset('js/bootstrap/toastr/toastr.js')}}"></script>
 <script src="{{asset('js/jquery/mask/mask.js')}}"></script>
 <script src="{{asset('js/bootstrap/autocomplete/mockjax.js')}}"></script>

@@ -279,6 +279,10 @@ return [
         'prestamo'              => 'Prestamo',
         'prestamo_id'           => 'Prestamo',
         'adeudo_id'             => 'Recibo',
+        'divisa_id'             => 'Divisa',
+        'movimiento'            => 'Movimiento',
+        'cantidad'              => 'Cantidad',
+        'paga_con'              => 'Paga con',
     ],
 
 ];

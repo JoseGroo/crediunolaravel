@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\catalago_sistema;
 use App\Enums\movimiento_bitacora;
+use App\Enums\tipo_compra_venta_divisa;
 use App\Helpers\HelperCrediuno;
 use App\Http\Requests\DivisasRequest;
 use App\tbl_ciudades;
@@ -143,5 +144,19 @@ class DivisasController extends Controller
         }
 
         return redirect()->route('divisas.index');
+    }
+
+    public function compra_venta($id = 0)
+    {
+        auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol, HelperCrediuno::$admin_rol, HelperCrediuno::$ventanilla]);
+
+        $sucursal = auth()->user()->sucursal;
+        $divisas = tbl_divisas::get_list()->pluck('divisa', 'divisa_id');
+        $tipo_compra_venta_divisa = tipo_compra_venta_divisa::toSelectArray();
+
+        return view('divisas.comprar_venta')
+            ->with(compact('divisas'))
+            ->with(compact('tipo_compra_venta_divisa'))
+            ->with(compact('sucursal'));
     }
 }

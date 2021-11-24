@@ -158,8 +158,15 @@ class PrestamosController extends Controller
         $importe_total_por_pago = 0;
         for ($i = 0; $i < $cantidad_pagos; $i++)
         {
-            if($i == 0 && $model->dia_pago_manual == null)
+            if($i == 0 && $model->dia_pago_manual == null) {
                 $fecha_limite_pago->addDays($sumar_dias_primer_pago);
+
+                if($model->periodo == periodos_prestamos::Semanal){
+                    while($fecha_limite_pago->dayOfWeek != $model->dia_pago){
+                        $fecha_limite_pago->addDays(1);
+                    }
+                }
+            }
 
             if($model->periodo == periodos_prestamos::Quincenal && $i == 0 && $model->dia_pago_manual == null)
                 $fecha_limite_pago = HelperCrediuno::obtener_fecha_quincenal($fecha_limite_pago);

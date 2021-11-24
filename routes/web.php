@@ -49,6 +49,7 @@ Route::get('grupos-cliente/{id?}/edit', 'GruposClienteController@edit')->name('g
 Route::post('grupos-cliente/edit_post', 'GruposClienteController@edit_post')->name('grupos-cliente.edit_post');
 Route::get('grupos-cliente/{id?}/details', 'GruposClienteController@details')->name('grupos-cliente.details');
 Route::post('grupos-cliente/delete', 'GruposClienteController@delete')->name('grupos-cliente.delete');
+Route::post('grupos-cliente/add_cliente_to_group', 'GruposClienteController@add_cliente_to_group')->name('grupos-cliente.add_cliente_to_group');
 
 //endregion
 
@@ -110,6 +111,8 @@ Route::get('divisas/', 'DivisasController@index')->name('divisas.index');
 Route::get('divisas/index', 'DivisasController@index')->name('divisas.index');
 Route::get('divisas/{id?}/edit', 'DivisasController@edit')->name('divisas.edit');
 Route::post('divisas/edit_post', 'DivisasController@edit_post')->name('divisas.edit_post');
+Route::get('divisas/compra_venta', 'DivisasController@compra_venta')->name('divisas.compra_venta');
+Route::post('divisas/compra_venta_post', 'DivisasController@compra_venta_post')->name('divisas.compra_venta_post');
 //endregion
 
 //region medios publicitarios
@@ -153,6 +156,7 @@ Route::post('clientes/hacer_aval', 'ClientesController@hacer_aval')->name('clien
 Route::get('clientes/{id?}/pagos', 'ClientesController@pagos')->name('clientes.pagos');
 Route::post('clientes/pago_post', 'ClientesController@pago_post')->name('clientes.pago_post');
 Route::post('clientes/autocomplete_cliente', 'ClientesController@autocomplete_cliente')->name('clientes.autocomplete_cliente');
+Route::post('clientes/autocomplete_cliente_html', 'ClientesController@autocomplete_cliente_html')->name('clientes.autocomplete_cliente_html');
 //endregion
 
 //region avales
@@ -195,6 +199,8 @@ Route::post('pagos/generar_manual_post', 'PagosController@generar_manual_post')-
 //endregion
 
 //region cortes
+Route::get('cortes/', 'CortesController@index')->name('cortes.index');
+Route::get('cortes/index', 'CortesController@index')->name('cortes.index');
 Route::post('cortes/create_post', 'CortesController@create_post')->name('cortes.create_post');
 //endregion
 

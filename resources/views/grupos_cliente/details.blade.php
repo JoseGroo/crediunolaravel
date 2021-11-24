@@ -22,7 +22,7 @@
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="form-group">
                         {{ Form::label('total_clientes', 'Total de clientes') }}
-                        <div class="form-control-plaintext">{{ number_format(0, 0) }}</div>
+                        <div class="form-control-plaintext">{{ number_format($model->total_clientes, 0) }}</div>
                     </div>
                 </div>
 

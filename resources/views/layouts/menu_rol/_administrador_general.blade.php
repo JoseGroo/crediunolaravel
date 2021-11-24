@@ -39,6 +39,16 @@
         </li>
     </ul>
 </li>
+
+
+
+<li class="{{ HelperCrediuno::ActiveMenuControllers(array('cortes')) }}">
+    <a href="{{ route('cortes.index') }}" aria-expanded="false">
+        <i class="mdi mdi-cash-register"></i>
+        <span class="nav-label">Cortes</span>
+    </a>
+</li>
+
 <li class="{{ HelperCrediuno::ActiveMenuControllers($controllers_cargos) }}">
     <a href="#">
         <i class="mdi mdi-cash-refund"></i>

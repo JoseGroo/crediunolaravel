@@ -42,6 +42,10 @@
                         <span class="mdi mdi-file-plus-outline"></span>
                         Nuevo cliente
                     </a>
+                    <a class="dropdown-item" href="{{ route('divisas.compra_venta') }}">
+                        <span class="mdi mdi-cash"></span>
+                        Compar/Venta de divisa
+                    </a>
 
                    @if(!$user->tiene_corte_abierto)
                         <a class="dropdown-item" onclick="event.preventDefault(); $('#frmAbrirCorte').submit();">

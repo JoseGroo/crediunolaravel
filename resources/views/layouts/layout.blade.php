@@ -24,6 +24,7 @@
 
     @section("styles")
         @include("layouts._styles")
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.1.1/dist/select2-bootstrap-5-theme.min.css" />
     @show
 
     @section("scripts")

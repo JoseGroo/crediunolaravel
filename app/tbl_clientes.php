@@ -130,6 +130,19 @@ class tbl_clientes extends Model
         return $model;
     }
 
+    public static function get_list_by_search_html($cliente)
+    {
+        $model = tbl_clientes::where([
+            ['activo', '=', true]
+        ])
+            ->where(DB::raw("CONCAT(cliente_id, '-', COALESCE(nombre,''), ' ', COALESCE(apellido_paterno,''), ' ', COALESCE(apellido_materno,''))"), 'LIKE', "%".$cliente."%")
+            ->select("*")
+            ->take(50)
+            ->orderBy(DB::raw("CONCAT(COALESCE(nombre,''), ' ', COALESCE(apellido_paterno,''), ' ', COALESCE(apellido_materno,''))"), 'ASC')
+            ->get();
+        return $model;
+    }
+
     public static function get_pagination($nombre, $sucursal_id, $domicilio, $perPage)
     {
         //$domicilio = "Juan de la granja";

@@ -40,6 +40,31 @@
 
 @endsection
 
+<div class="modal inmodal" id="modalAddToGroup" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInUp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Agregar cliente a grupo <span id="sGrupo"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            {{ Form::label('cliente_id', __('validation.attributes.cliente')) }}
+                            {{ Form::select('cliente_id', [], null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion', 'autofocus' => true ]) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnAddCliente" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section("scripts")
@@ -48,17 +73,21 @@
     <script>
         var vGrupoId = 0;
 
-        $(document).on('click', '.add-client', function(){
+
+        $(document).on('click', '.add-client', function(event){
             event.preventDefault();
 
-            vGrupoId = $(this).attr("grupo-id");
-            Swal.fire("En construccion, Grupo Id: " + vGrupoId);
+            vGrupoId = $(this).data("grupo-id");
+            var vGrupo = $(this).data("grupo");
+            $('#sGrupo').text(vGrupo);
+
+            $('#modalAddToGroup').modal('show');
         })
 
         $(document).on('click', '.delete', function(event){
             event.preventDefault();
 
-            vGrupoId = $(this).attr("grupo-id");
+            vGrupoId = $(this).data("grupo-id");
 
             Swal.fire({
                 title: '¿Desea continuar?',
@@ -95,6 +124,81 @@
                         }
                     });
                 }
+            })
+        })
+
+        $(function (){
+            $('#cliente_id').select2({
+                theme: 'bootstrap-5',
+                allowClear: true,
+                language: 'es',
+                width:'100%',
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                templateResult: function (data) {
+                    return data.html;
+                },
+                templateSelection: function (data) {
+                    return data.text;
+                },
+                minimumInputLength: 1,
+                placeholder: 'Busca un cliente',
+                ajax: {
+                    url: '{{ route('clientes.autocomplete_cliente_html') }}',
+                    dataType: 'json',
+                    method: 'POST',
+                    delay: 250,
+
+                    data: function (params) {
+                        return {
+                            term: params.term,
+                            _token: "{{ csrf_token() }}"
+                        }
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            });
+
+            $('#btnAddCliente').click(function(){
+
+                var vClienteId = $('#cliente_id').val();
+
+                if(vClienteId.length <= 0){
+                    MyToast('Notificación', 'El cliente es obligatorio.', 'warning');
+                    return;
+                }
+
+                ShowLoading("Agregando cliente...");
+                $.ajax({
+                    url: "{{route('grupos-cliente.add_cliente_to_group')}}",
+                    dataType: "json",
+                    type: "POST",
+                    data: {
+                        grupo_id: vGrupoId,
+                        cliente_id: vClienteId,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    cache: false,
+                    success: function (data) {
+                        if(data.Saved)
+                        {
+                            $("#frmIndex").submit();
+                            $('#cliente_id').val('').trigger('change');
+                            $('#modalAddToGroup').modal('hide');
+                        }
+                        Swal.fire('Notificación', data.Message, data.Saved ? 'success' : 'error');
+
+                    },
+                    error: function (error) {
+                        console.log("error");
+                        console.log(error.responseText);
+                    }
+                });
             })
         })
     </script>

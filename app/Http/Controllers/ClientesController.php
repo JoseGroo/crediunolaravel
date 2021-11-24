@@ -1439,11 +1439,25 @@ class ClientesController extends Controller
 
             $clientes = tbl_clientes::get_list_by_search($cliente);
 
-            $arr = [];
-            array_push($arr, ['value' => 'Jose', 'label' => 'Jose', 'id' => 1]);
-            array_push($arr, ['value' => 'Manuel', 'label' => 'Manuel', 'id' => 2]);
             return Response::json($clientes);
         }
+    }
+
+    public function autocomplete_cliente_html(Request $request)
+    {
+        $clientes = tbl_clientes::get_list_by_search_html($request->term);
+
+        $clientes_response = $clientes->map(function ($item, $key) {
+            return [
+                'id' => $item->cliente_id,
+                'text' => '#' . $item->cliente_id . ' - ' . $item->full_name,
+                'html' => view('clientes._search_select2')
+                    ->with(compact('item'))
+                    ->render()
+
+            ];
+        });
+        return Response::json($clientes_response);
     }
     #endregion
 }

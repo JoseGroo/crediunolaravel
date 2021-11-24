@@ -109,3 +109,7 @@
 .table th, .table td{
     vertical-align: middle!important;
 }
+
+.dropdown-menu{
+    z-index: 2010!important;
+}
