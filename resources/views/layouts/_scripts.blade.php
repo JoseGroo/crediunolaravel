@@ -10,4 +10,5 @@
 <script src="{{asset('js/fancybox/js/jquery.fancybox.min.js')}}"></script>
 <script src="{{asset('js/jquery/jquery-ui.js')}}"></script>
 <script src="{{asset('js/bootstrap/datepicker/datepicker.js')}}"></script>
+<script src="{{asset('js/jquery.cookie.js')}}"></script>
 <script src="{{asset('js/init.js')}}"></script>

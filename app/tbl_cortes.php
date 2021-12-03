@@ -11,9 +11,9 @@ class tbl_cortes extends Model
     public $timestamps = false;
     protected $primaryKey = 'corte_id';
 
-    protected $hidden = [
+    /*protected $hidden = [
         'corte_id', 'usuario_id', 'activo', 'creado_por', 'fecha_creacion', 'usuario_entrego_id'
-    ];
+    ];*/
 
     protected $fillable = [
         'corte_id', 'usuario_id', 'fecha_cierre', 'cerrado', 'fondos'

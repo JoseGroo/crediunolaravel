@@ -63,6 +63,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Lang;
+use Luecano\NumeroALetras\NumeroALetras;
 use PHPUnit\TextUI\Help;
 
 
@@ -232,12 +233,18 @@ class ClientesController extends Controller
 
     public function pagos($id = 0)
     {
+
         HelperCrediuno::generar_cargos();
         $model = tbl_clientes::get_by_id($id);
         if(!$model)
             abort(404);
 
         $prestamos = tbl_prestamos::get_list_vigentes_by_cliente_id($id);
+
+        if(!auth()->user()->tiene_corte_abierto){
+            \request()->session()->flash('message_prestamo', 'No tiene corte abierto para realizar esta operación.');
+            return redirect()->route('clientes.details', $id);
+        }
 
         if($prestamos->count() <= 0)
         {
@@ -248,10 +255,17 @@ class ClientesController extends Controller
         $formas_pago = formas_pago::toSelectArray();
         $tipos_tarjetas = tipos_tarjeta::toSelectArray();
 
+        $pagos = session('pagos');
+        $paga_con = session('paga_con');
+        $cambio = session('cambio');
+
         return view('clientes.pagos')
             ->with(compact('model'))
             ->with(compact('formas_pago'))
             ->with(compact('tipos_tarjetas'))
+            ->with(compact('paga_con'))
+            ->with(compact('cambio'))
+            ->with(compact('pagos'))
             ->with(compact('prestamos'));
     }
 
@@ -366,8 +380,9 @@ class ClientesController extends Controller
 
 
         //#region Se realiza el pago
-        //funciona para Efectivo, Refinanciar, Retencion
         $primer_pago = true;
+
+        $lista_pagos = [];
         foreach ($request->adeudos as $item)
         {
             $adeudo = $adeudos_actuales->where('adeudo_id', $item['adeudo_id'])->first();
@@ -443,7 +458,7 @@ class ClientesController extends Controller
             $pago->fecha_creacion = $datetime_now;
 
             $response = tbl_pagos::create($pago);
-
+            array_push($lista_pagos, $pago);
             if(!$response['saved'])
             {
                 return redirect()->back()->withInput()
@@ -494,7 +509,42 @@ class ClientesController extends Controller
         }
 
         HelperCrediuno::save_bitacora($model->cliente_id, movimiento_bitacora::CreoNuevoRegistro, $this->catalago_sistema, null, null);*/
+
+        \request()->session()->flash('pagos', $lista_pagos);
+        \request()->session()->flash('paga_con', $request->paga_con);
+        \request()->session()->flash('cambio', $request->cambio);
         return redirect()->route('clientes.pagos', $cliente_id);
+    }
+
+    public function download_pdf_pagos(Request $request){
+
+        $pagos = tbl_pagos::get_list_by_ids($request->pagos_ids);
+        $prestamos = tbl_prestamos::get_list_vigentes_by_cliente_id($request->cliente_id);
+        $saldo_anterior = $prestamos->sum('total_adeudo') + $pagos->sum('importe');
+        $cliente = tbl_clientes::get_by_id($request->cliente_id);
+        /*printf('Saldo anterior: ' . $saldo_anterior);
+        dd('Saldo actual: ' . $prestamos->sum('total_adeudo'));*/
+        /*printf($request->paga_con);
+        printf($request->cambio);
+        dd('');*/
+        /*dd($pagos->first()->prestamo_id);*/
+
+        $formatter = new NumeroALetras();
+        $formatter->conector = '';
+        $paga_con_letra =  $formatter->toInvoice($request->paga_con, 2, 'M.N.***');
+
+        $data = [
+            'pagos' => $pagos,
+            'saldo_anterior' => $saldo_anterior,
+            'saldo_actual' => $prestamos->sum('total_adeudo'),
+            'paga_con' => $request->paga_con,
+            'cambio' => $request->cambio,
+            'cliente' => $cliente,
+            'paga_con_letra' => $paga_con_letra,
+            'user' => Auth::user()
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_pagos', 'ticket-pago');
     }
 
     #region Ajaxs

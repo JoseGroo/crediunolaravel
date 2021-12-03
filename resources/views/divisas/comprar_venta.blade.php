@@ -4,19 +4,18 @@
 
 
 @section('content')
+    {{ Form::open([ 'route' => ['divisas.compra_venta_post' ], 'method' => 'POST', 'id' => 'frmCrear' ]) }}
 
-    {{ Form::open([ 'route' => ['descuentos.create_post' ], 'method' => 'POST', 'id' => 'frmCrear' ]) }}
+    <input type="hidden" id="dolar_venta" value="{{ $sucursal->dolar_venta }}">
+    <input type="hidden" id="dolar_compra" value="{{ $sucursal->dolar_compra }}">
 
-<input type="hidden" id="dolar_venta" value="{{ $sucursal->dolar_venta }}">
-<input type="hidden" id="dolar_compra" value="{{ $sucursal->dolar_compra }}">
+    <input type="hidden" id="dolar_moneda_venta" value="{{ $sucursal->dolar_moneda_venta }}">
+    <input type="hidden" id="dolar_moneda_compra" value="{{ $sucursal->dolar_moneda_compra }}">
 
-<input type="hidden" id="dolar_moneda_venta" value="{{ $sucursal->dolar_moneda_venta }}">
-<input type="hidden" id="dolar_moneda_compra" value="{{ $sucursal->dolar_moneda_compra }}">
+    <input type="hidden" id="euro_venta" value="{{ $sucursal->euro_venta }}">
+    <input type="hidden" id="euro_compra" value="{{ $sucursal->euro_compra }}">
 
-<input type="hidden" id="euro_venta" value="{{ $sucursal->euro_venta }}">
-<input type="hidden" id="euro_compra" value="{{ $sucursal->euro_compra }}">
-
-<input type="hidden" id="iva_divisa" value="{{ $sucursal->iva_divisa }}">
+    <input type="hidden" id="iva_divisa" value="{{ $sucursal->iva_divisa }}">
 
     <div class="form-row">
         <div class="col-3">
@@ -83,8 +82,8 @@
 
                     <div class="col-md-4 col-sm-6 col-12">
                         <div class="form-group">
-                            {{ Form::label('movimiento', __('validation.attributes.movimiento')) }}
-                            {{ Form::select('movimiento', $tipo_compra_venta_divisa, null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion' ]) }}
+                            {{ Form::label('tipo', __('validation.attributes.movimiento')) }}
+                            {{ Form::select('tipo', $tipo_compra_venta_divisa, null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion' ]) }}
                         </div>
                     </div>
 
@@ -148,7 +147,7 @@
                 <div class="form-row mt-5">
                     <div class="col-md-12 col-sm-12 col-12">
                         <div class="form-group text-right">
-                            <button type="submit" class="btn btn-sm btn-primary">Realizar movimiento</button>
+                            <button type="button" id="btnAbrirModal" class="btn btn-sm btn-primary">Realizar movimiento</button>
                         </div>
                     </div>
                 </div>
@@ -156,6 +155,77 @@
         </div>
     {{ Form::close() }}
 
+
+<div class="modal inmodal" id="modalConfirmarMovimiento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated bounceInUp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Verificar los datos del movimiento para procesarlo.</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Divisa</h5>
+                                <hr>
+                                <p class="card-text text-monospace" id="pDivisaConfirmation"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Cantidad</h5>
+                                <hr>
+                                <p class="card-text text-monospace" id="pCantidadConfirmation"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Importe</h5>
+                                <hr>
+                                <p class="card-text text-monospace" id="pImporteConfirmation"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="offset-4 col-md-4 compra-divisa">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">IVA</h5>
+                                <hr>
+                                <p class="card-text text-monospace" id="pIVAConfirmation"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarMovimiento">Confirmar movimiento</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if($compra_venta_divisas)
+    {{ Form::open([ 'route' => ['divisas.download_pdf' ], 'method' => 'POST', 'id' => 'frmGeneratePdf' ]) }}
+    <input type="hidden" name="compra_venta_divisa_id" value="{{ $compra_venta_divisas->compra_venta_divisa_id }}">
+    <input type="hidden" name="pago_con" value="{{ $compra_venta_divisas->pago_con }}">
+    <input type="hidden" name="cambio" value="{{ $compra_venta_divisas->cambio }}">
+    {{ Form::close() }}
+@endif
 @endsection
 
 @section("scripts")
@@ -169,17 +239,17 @@
         var vCompraDivisa = 0;
         var vVentaDivisa = 0;
         var CalculateTotal = function(){
-            var vMovimiento = $('#movimiento').val();
+            var vTipo = $('#tipo').val();
 
             $('#sCambio, #sTotal, #sIVA').text('0.00');
 
-            if(vMovimiento.length > 0)
+            if(vTipo.length > 0)
             {
                 var vCantidad = $('#cantidad').val();
                 vCantidad = vCantidad.length > 0 ? parseFloat($('#cantidad').val()) : 0;
 
                 //COMPRA
-                if(vMovimiento == 1)
+                if(vTipo == 1)
                 {
                     $('.compra-divisa').hide();
                     var vTotal = vCantidad * vCompraDivisa;
@@ -214,6 +284,23 @@
 
         $(function()
         {
+            @if($compra_venta_divisas)
+            Swal.fire({
+                title: '¿Desea imprimir el ticket?',
+                text: 'Se guardo correctamente su compra/venta de divisa.',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#809fff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "Si, continuar",
+                cancelButtonText: "No, cancelar",
+            }).then((result) => {
+                if (result.value) {
+                    $('#frmGeneratePdf').submit();
+                }
+            })
+            @endif
+
             $('#tbPesoDivisa').keyup(function(){
 
                 if($('#divisa_id').val().length > 0)
@@ -261,10 +348,31 @@
                 CalculateTotal();
             })
 
-            $('#movimiento').change(CalculateTotal);
+            $('#tipo').change(CalculateTotal);
 
             $('#cantidad, #paga_con').keyup(function(){
                 CalculateTotal();
+            })
+
+            $('#btnAbrirModal').click(function (){
+                if(!$("#frmCrear").valid())
+                    return;
+
+                var vDivisa = $("#divisa_id option:selected").text();
+                var vMovimiento = $("#tipo option:selected").text();
+
+                $('#pDivisaConfirmation').text(vDivisa + '(' + vMovimiento + ')');
+                var vCantidad = $('#cantidad').val();
+                vCantidad = vCantidad.length > 0 ? NumberFormat(parseFloat(vCantidad).toFixed(2)) : '0.00';
+                $('#pCantidadConfirmation').text(vCantidad);
+                $('#pImporteConfirmation').text('$' + $('#sTotal').text());
+                $('#pIVAConfirmation').text('$' + $('#sIVA').text());
+
+                $('#modalConfirmarMovimiento').modal('show');
+            })
+
+            $('#btnConfirmarMovimiento').click(function(){
+                $("#frmCrear").submit();
             })
 
             $("#frmCrear").submit(function(){

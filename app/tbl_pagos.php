@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Enums\tipo_adeudo;
+use App\Enums\tipo_pago;
 use Illuminate\Database\Eloquent\Model;
 
 class tbl_pagos extends Model
@@ -39,5 +41,39 @@ class tbl_pagos extends Model
         catch(\Exception $e){
             return ['saved' => false, 'error' => $e];
         }
+    }
+
+    public static function get_list_by_ids($ids)
+    {
+        $model = tbl_pagos::where([
+            ['activo', '=', true]
+        ])->whereIn('pago_id', $ids)
+            ->orderby('pago_id')
+            ->get();
+        return $model;
+    }
+
+    public function tbl_adeudo()
+    {
+        $model = $this->belongsTo(tbl_adeudos::class, 'external_id', 'adeudo_id');
+        return $this->tipo == tipo_pago::Adeudo ? $model : null;
+    }
+
+    public function tbl_cargo()
+    {
+        $model = $this->belongsTo(tbl_cargos::class, 'external_id', 'cargo_id');
+        return $this->tipo == tipo_pago::Cargo ? $model : null;
+    }
+
+    public function getPrestamoIdAttribute()
+    {
+        $value = $this->tipo == tipo_pago::Adeudo ? $this->tbl_adeudo->prestamo_id : $this->tbl_cargo->prestamo_id;
+        return $value;
+    }
+
+    public function getNumeroPagoAttribute()
+    {
+        $value = $this->tipo == tipo_pago::Adeudo ? $this->tbl_adeudo->numero_pago : $this->tbl_cargo->tbl_adeudo->numero_pago;
+        return $value;
     }
 }

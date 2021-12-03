@@ -5,13 +5,9 @@
     $total_cargos = 0;
     foreach($prestamos as $item)
     {
-        foreach ($item->tbl_adeudos as $adeudo)
-        {
-            if($adeudo->tbl_cargo)
-                $total_cargos += $adeudo->tbl_cargo->importe_total;
-        }
-        $total_recibos += $item->tbl_adeudos->sum('importe_total') + $item->tbl_adeudos->sum('tbl_cargo->importe_total');
-        $recibos_pendientes += $item->tbl_adeudos->count();
+        $total_cargos += $item->total_cargos;
+        $total_recibos += $item->total_recibos;
+        $recibos_pendientes += $item->recibos_pendientes;
     }
     $total_adeudo += $total_cargos + $total_recibos;
 @endphp

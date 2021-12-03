@@ -220,9 +220,18 @@
     </div>
 
     <div id="divPagosHidden"></div>
-    <input type="hidden" id="guid" name="guid">
     {{ Form::close() }}
 
+    @if($pagos)
+        {{ Form::open([ 'route' => ['clientes.download_pdf_pagos' ], 'method' => 'POST', 'id' => 'frmGeneratePdf' ]) }}
+        @foreach($pagos as $item)
+            <input type="hidden" name="pagos_ids[]" value="{{ $item->pago_id }}">
+        @endforeach
+        <input type="hidden" name="paga_con" value="{{ $paga_con }}">
+        <input type="hidden" name="cambio" value="{{ $cambio }}">
+        {{ Form::hidden('cliente_id', $model->cliente_id) }}
+        {{ Form::close() }}
+    @endif
 @endsection
 
 
@@ -230,21 +239,28 @@
 @section("scripts")
     @parent
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" defer></script>
 
     <script>
-        function CheckIfPayed() {
-            var cookieVal = $.cookie($("#guid").val());
-            if (cookieVal == null || cookieVal === 'undefined') {
-                setTimeout("checkCookie();", 1000);
-            }
-            else {
-                //Aqui se redirecciona
-            }
-        }
 
         $(function()
         {
+            @if($pagos)
+            Swal.fire({
+                title: '¿Desea imprimir el ticket?',
+                text: 'Se guardo correctamente el pago.',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#809fff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "Si, continuar",
+                cancelButtonText: "No, cancelar",
+            }).then((result) => {
+                if (result.value) {
+                    $('#frmGeneratePdf').submit();
+                }
+            })
+            @endif
+
             $('#ocultar_cargos').click(function(){
                 if($(this).prop('checked'))
                 {
@@ -370,7 +386,6 @@
                     $('#divPagosHidden').append(vInputs);
                 })
                 ShowLoading('Realizando pago...');
-                CheckIfPayed();
                 $('#frmPagos').submit();
             })
         })

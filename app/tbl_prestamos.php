@@ -76,6 +76,8 @@ class tbl_prestamos extends Model
         return $model;
     }
 
+
+
     public static function check_if_liquidado_by_prestamo_id($prestamo_id)
     {
         $model = \DB::select("
@@ -183,6 +185,37 @@ class tbl_prestamos extends Model
         }
         return $folio . $this->prestamo_id;
     }
+
+    public function getTotalRecibosAttribute()
+    {
+        $total_recibos = $this->tbl_adeudos->sum('importe_total') + $this->tbl_adeudos->sum('tbl_cargo->importe_total');
+        return $total_recibos;
+    }
+
+    public function getRecibosPendientesAttribute()
+    {
+        $recibos_pendientes = $this->tbl_adeudos->count();
+        return $recibos_pendientes;
+    }
+
+    public function getTotalCargosAttribute()
+    {
+        $total_cargos = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            if($adeudo->tbl_cargo)
+                $total_cargos += $adeudo->tbl_cargo->importe_total;
+        }
+
+        return $total_cargos;
+    }
+
+    public function getTotalAdeudoAttribute()
+    {
+        return $this->total_cargos + $this->total_recibos;
+    }
+
+
 
     #endregion
 }

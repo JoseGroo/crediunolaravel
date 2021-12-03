@@ -16,6 +16,7 @@ use App\Enums\tipo_adeudo;
 use App\Enums\tipo_fondo;
 use App\Enums\tipo_intereses;
 use App\Enums\tipo_nota;
+use App\Enums\tipo_pago;
 use App\Enums\tipos_documento;
 use App\Enums\tipos_garantia;
 use App\Enums\tipos_movimientos_corte;
@@ -61,6 +62,12 @@ return [
     tipo_fondo::class => [
         tipo_fondo::Bancario => 'Bancario',
         tipo_fondo::Consigna => 'De consigna',
+    ],
+
+
+    tipo_pago::class => [
+        tipo_pago::Adeudo => 'Recibo',
+        tipo_pago::Cargo => 'Cargo',
     ],
 
     estatus_cliente::class => [

@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+ç@extends('layouts.layout')
 
 @section("title", "Crear nuevo contacto")
 

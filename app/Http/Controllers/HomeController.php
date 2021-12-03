@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\tbl_contactos;
-use Carbon\Carbon;
+use App\Helpers\HelperCrediuno;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -23,12 +23,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $date = Carbon::now()->addDays(3);
-        /*dd($date->dayOfWeek);
-        dd($date->format('l'));*/
+        $corte = session('corte');
 
-        return view('home');
+        return view('home')
+            ->with(compact("corte"));
+    }
+
+    public function download()
+    {
+        $data = [
+            'titulo' => 'Hola soy una prueba'
+        ];
+        return HelperCrediuno::generate_pdf($data, 'test_pdf', 'home_test');
     }
 }

@@ -113,6 +113,8 @@ Route::get('divisas/{id?}/edit', 'DivisasController@edit')->name('divisas.edit')
 Route::post('divisas/edit_post', 'DivisasController@edit_post')->name('divisas.edit_post');
 Route::get('divisas/compra_venta', 'DivisasController@compra_venta')->name('divisas.compra_venta');
 Route::post('divisas/compra_venta_post', 'DivisasController@compra_venta_post')->name('divisas.compra_venta_post');
+Route::post('divisas/download_pdf', 'DivisasController@download_pdf')->name('divisas.download_pdf');
+
 //endregion
 
 //region medios publicitarios
@@ -157,6 +159,7 @@ Route::get('clientes/{id?}/pagos', 'ClientesController@pagos')->name('clientes.p
 Route::post('clientes/pago_post', 'ClientesController@pago_post')->name('clientes.pago_post');
 Route::post('clientes/autocomplete_cliente', 'ClientesController@autocomplete_cliente')->name('clientes.autocomplete_cliente');
 Route::post('clientes/autocomplete_cliente_html', 'ClientesController@autocomplete_cliente_html')->name('clientes.autocomplete_cliente_html');
+Route::post('clientes/download_pdf_pagos', 'ClientesController@download_pdf_pagos')->name('clientes.download_pdf_pagos');
 //endregion
 
 //region avales
@@ -202,6 +205,7 @@ Route::post('pagos/generar_manual_post', 'PagosController@generar_manual_post')-
 Route::get('cortes/', 'CortesController@index')->name('cortes.index');
 Route::get('cortes/index', 'CortesController@index')->name('cortes.index');
 Route::post('cortes/create_post', 'CortesController@create_post')->name('cortes.create_post');
+Route::post('cortes/download_pdf', 'CortesController@download_pdf')->name('cortes.download_pdf');
 //endregion
 
 //region bitacora
@@ -224,6 +228,7 @@ Route::get('forma-pago/get_list', 'FormasPagoController@get_list')->name('forma_
 //endregion
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('home/download', 'HomeController@download')->name('home.download');
 
 
 
@@ -235,3 +240,8 @@ Route::get('/linkstorage', function () {
     symlink($targetFolder,$linkFolder);
     echo 'Symlink process successfully completed';
 });
+
+
+
+Route::get('/cookie/set','CookieController@setCookie');
+Route::get('/cookie/get','CookieController@getCookie');

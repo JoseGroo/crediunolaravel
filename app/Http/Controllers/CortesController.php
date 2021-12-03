@@ -68,7 +68,18 @@ class CortesController extends Controller
 
         HelperCrediuno::save_bitacora($corte->corte_id, movimiento_bitacora::CreoNuevoRegistro, $this->catalago_sistema, null, null);
 
-        \request()->session()->flash('success_message', 'Se abrio correctamente su corte');
+        \request()->session()->flash('corte', $corte);
         return redirect()->route('home');
+    }
+
+    public function download_pdf(Request $request){
+        $corte = tbl_cortes::get_by_id($request->corte_id);
+
+        $data = [
+            'user' => Auth::user(),
+            'corte' => $corte
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'cortes.pdf_corte_abierto', 'ticket-corte-abierto');
     }
 }

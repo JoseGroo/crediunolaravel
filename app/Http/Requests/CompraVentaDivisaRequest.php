@@ -25,7 +25,7 @@ class CompraVentaDivisaRequest extends FormRequest
     {
         return [
             'divisa_id'     => 'required|int',
-            'movimiento'    => 'required|int',
+            'tipo'    => 'required|int',
             'cantidad'      => 'required|numeric'
         ];
     }

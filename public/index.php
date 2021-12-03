@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -21,7 +20,9 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';//LOCAL
+//require __DIR__.'/../laravel/vendor/autoload.php';//PRODUCTION
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +36,8 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
-
+$app = require_once __DIR__.'/../bootstrap/app.php';//LOCAL
+//$app = require_once __DIR__.'/../laravel/bootstrap/app.php';//PRODUCTION
 /*
 |--------------------------------------------------------------------------
 | Run The Application

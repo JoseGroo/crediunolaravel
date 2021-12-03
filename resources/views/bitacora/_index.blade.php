@@ -18,7 +18,7 @@
                     @foreach ($model as $item)
                         <tr>
                             <td>{{ $item->nombre }} {{ $item->apellido_paterno }} {{ $item->apellido_materno }}</td>
-                            <td>{{ date('d/m/Y H:m:s', strtotime($item->fecha)) }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->fecha)->format('d/m/Y h:i:s a') }}</td>
                             <td>{{ movimiento_bitacora::getDescription($item->movimiento) }}</td>
                             <td>{{ catalago_sistema::getDescription($item->catalago_sistema) }}</td>
                             <td class="text-center align-middle">
