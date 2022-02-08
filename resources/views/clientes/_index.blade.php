@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <h5 class="text-muted m-0">
-                                        <i class="mdi mdi-office-building"></i> {{ $item->sucursal }} | Saldo: $1233.00
+                                        <i class="mdi mdi-office-building"></i> {{ $item->sucursal }} | Saldo: @money_format($item->total_deuda)
                                     </h5>
                                 </div>
 

@@ -75,6 +75,33 @@
         {
             margin-top: 30px;
         }
+
+        .table-bordered {
+            border: 1px solid #000;
+        }
+
+        .table-bordered {
+            border: 1px solid #000;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        table {
+            border-collapse: collapse;
+        }
+
+        .table > tbody > tr > td, .table > tfoot > tr > td {
+            border-top: 1px solid #000;
+            line-height: 1.42857;
+            padding: 1px;
+            vertical-align: top;
+        }
+
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #000;
+        }
     </style>
 </head>
 <body>

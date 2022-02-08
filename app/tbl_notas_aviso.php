@@ -2,20 +2,21 @@
 
 namespace App;
 
-use App\Enums\tipo_nota;
 use Illuminate\Database\Eloquent\Model;
 
-class tbl_notas extends Model
+class tbl_notas_aviso extends Model
 {
+    protected $table = "tbl_notas_aviso";
     public $timestamps = false;
-    protected $primaryKey = 'nota_id';
-    protected $hidden = ['activo', 'creado_por', 'fecha_creacion'];
+    protected $primaryKey = 'nota_aviso_id';
+
 
     protected $fillable = [
-        'nota_id', 'nota'
+        'nota_aviso_id', 'cliente_id', 'nota'
     ];
 
-    public static function create(tbl_notas $model)
+
+    public static function create(tbl_notas_aviso $model)
     {
         try{
             return ['saved' => $model->save(), 'error' => ''];
@@ -25,7 +26,7 @@ class tbl_notas extends Model
         }
     }
 
-    public static function edit(tbl_notas $model)
+    public static function edit(tbl_notas_aviso $model)
     {
         try{
             return ['saved' => $model->update(), 'error' => ''];
@@ -35,30 +36,29 @@ class tbl_notas extends Model
         }
     }
 
-    public function usuario_creo()
+    public function tbl_creado_por()
     {
         return $this->belongsTo(tbl_usuarios::class, 'creado_por', 'id');
     }
 
 
-    public static function get_list_by_cliente_id($cliente_id)
+    public static function get_list_by_cliente_id_no_visto($cliente_id)
     {
-        $model = tbl_notas::where([
+        $model = tbl_notas_aviso::where([
             ['activo', '=', true],
+            ['visto', '=', false],
             ['cliente_id', '=', $cliente_id],
         ])->orderby('fecha_creacion', 'desc')
             ->get();
         return $model;
     }
 
-    public static function get_last_by_cliente_tipo_admin($cliente_id)
+    public static function get_list_by_cliente_id($cliente_id)
     {
-        $model = tbl_notas::where([
+        $model = tbl_notas_aviso::where([
             ['activo', '=', true],
             ['cliente_id', '=', $cliente_id],
-            ['tipo', '=', tipo_nota::Administrador]
         ])->orderby('fecha_creacion', 'desc')
-            ->take(2)
             ->get();
         return $model;
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CobroOtrosConceptosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,6 +132,7 @@ Route::post('medios-publicitarios/delete', 'MediosPublicitariosController@delete
 //region clientes
 Route::get('clientes/', 'ClientesController@index')->name('clientes.index');
 Route::get('clientes/index', 'ClientesController@index')->name('clientes.index');
+Route::get('clientes/{archivo}/download_fie', 'ClientesController@download_fie')->name('clientes.download_fie');
 Route::get('clientes/search', 'ClientesController@search')->name('clientes.search');
 Route::get('clientes/create', 'ClientesController@create')->name('clientes.create');
 Route::post('clientes/create_post', 'ClientesController@create_post')->name('clientes.create_post');
@@ -160,6 +162,12 @@ Route::post('clientes/pago_post', 'ClientesController@pago_post')->name('cliente
 Route::post('clientes/autocomplete_cliente', 'ClientesController@autocomplete_cliente')->name('clientes.autocomplete_cliente');
 Route::post('clientes/autocomplete_cliente_html', 'ClientesController@autocomplete_cliente_html')->name('clientes.autocomplete_cliente_html');
 Route::post('clientes/download_pdf_pagos', 'ClientesController@download_pdf_pagos')->name('clientes.download_pdf_pagos');
+Route::get('clientes/{id?}/historial', 'ClientesController@historial')->name('clientes.historial');
+Route::get('clientes/get_tab_historial', 'ClientesController@get_tab_historial')->name('clientes.get_tab_historial');
+Route::post('clientes/nueva_nota_cliente_post', 'ClientesController@nueva_nota_cliente_post')->name('clientes.nueva_nota_cliente_post');
+Route::post('clientes/nueva_nota_aviso_post', 'ClientesController@nueva_nota_aviso_post')->name('clientes.nueva_nota_aviso_post');
+Route::get('clientes/{id?}/estado_prestamo', 'ClientesController@estado_prestamo')->name('clientes.historial.estado_prestamo');
+
 //endregion
 
 //region avales
@@ -225,6 +233,13 @@ Route::get('/auth/logoff', 'AuthController@logoff')->name('system.logoff');
 Route::get('forma-pago/', 'FormasPagoController@index')->name('forma_pago.index');
 Route::get('forma-pago/index', 'FormasPagoController@index')->name('forma_pago.index');
 Route::get('forma-pago/get_list', 'FormasPagoController@get_list')->name('forma_pago.get_list');
+//endregion
+
+//region cobro otros conceptos
+Route::get('cobro-otros-conceptos/cobro', 'CobroConceptosController@cobro')->name('cobro_otros_conceptos.cobro');
+Route::post('cobro-otros-conceptos/cobro_post', 'CobroConceptosController@cobro_post')->name('cobro_otros_conceptos.cobro_post');
+Route::post('cobro-otros-conceptos/download_pdf', 'CobroConceptosController@download_pdf')->name('cobro_otros_conceptos.download_pdf');
+
 //endregion
 
 Route::get('/', 'HomeController@index')->name('home');

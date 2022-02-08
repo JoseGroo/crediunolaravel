@@ -145,7 +145,6 @@ class tbl_clientes extends Model
 
     public static function get_pagination($nombre, $sucursal_id, $domicilio, $perPage)
     {
-        //$domicilio = "Juan de la granja";
         DB::enableQueryLog();
         $model = DB::table('tbl_clientes AS cli')
             ->where('cli.activo', true)
@@ -177,7 +176,14 @@ class tbl_clientes extends Model
                     "cli.calle",
                     "suc.sucursal",
                     "inf.telefono_fijo",
-                    "inf.telefono_movil"
+                    "inf.telefono_movil",
+                    DB::raw("(
+                        SELECT SUM(adeu.importe_total) + SUM(carg.importe_total)
+                        FROM tbl_prestamos prest
+                        LEFT JOIN tbl_adeudos adeu ON adeu.prestamo_id = prest.prestamo_id AND adeu.activo = 1 AND adeu.estatus = 1
+                        LEFT JOIN tbl_cargos carg ON carg.adeudo_id = adeu.adeudo_id AND carg.activo = 1 AND carg.estatus = 1
+                        WHERE prest.activo = 1 AND prest.cliente_id = cli.cliente_id AND prest.estatus = 2
+                    ) AS total_deuda")
                     ])
             ->paginate($perPage);
         //dd(DB::getQueryLog());

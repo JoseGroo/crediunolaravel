@@ -4,6 +4,7 @@ namespace App;
 
 use App\Enums\estatus_adeudos;
 use App\Enums\estatus_prestamo;
+use App\Enums\periodos_prestamos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -66,17 +67,16 @@ class tbl_prestamos extends Model
         return $model;
     }
 
-    public static function get_list_vigentes_by_cliente_id($cliente_id)
+    public static function get_list_by_cliente_id_and_status($cliente_id, $estatus)
     {
         $model = tbl_prestamos::where([
             ['cliente_id', '=', $cliente_id],
-            ['estatus', '=', estatus_prestamo::Vigente],
+            ['estatus', '=', $estatus],
             ['activo', '=', true]
-        ])->get();
+        ])->orderby('prestamo_id', 'desc')
+            ->get();
         return $model;
     }
-
-
 
     public static function check_if_liquidado_by_prestamo_id($prestamo_id)
     {
@@ -86,14 +86,14 @@ class tbl_prestamos extends Model
                 (
                 IFNULL((
                     SELECT SUM(adeu.importe_total)
-                    FROM tbl_adeudos adeu where adeu.prestamo_id = $prestamo_id AND adeu.estatus = 1
+                    FROM tbl_adeudos adeu where adeu.prestamo_id = $prestamo_id AND adeu.estatus = 1 AND adeu.activo  = 1
                         ),0)
                 )
                 +
                 (
                 IFNULL((
                     SELECT SUM(carg.importe_total)
-                    FROM tbl_cargos carg where carg.prestamo_id = $prestamo_id AND carg.estatus = 1
+                    FROM tbl_cargos carg where carg.prestamo_id = $prestamo_id AND carg.estatus = 1 AND carg.activo  = 1
                         ),0)
                 ) AS deuda_actual;
         ");
@@ -151,50 +151,26 @@ class tbl_prestamos extends Model
     }
     #endregion
 
-
-
     #region Attributes
 
     public function getFolioAttribute()
     {
         $id_length = Str::length($this->prestamo_id);
+        $ceros = '00000';
+        $folio = Str::substr($ceros, 0,Str::length($ceros) - $id_length);
 
-        switch ($id_length)
-        {
-            case 1:
-                $folio = '000000';
-                break;
-            case 2:
-                $folio = '00000';
-                break;
-            case 3:
-                $folio = '0000';
-                break;
-            case 4:
-                $folio = '000';
-                break;
-            case 5:
-                $folio = '00';
-                break;
-            case 6:
-                $folio = '0';
-                break;
-            default:
-                $folio = '';
-                break;
-        }
         return $folio . $this->prestamo_id;
     }
 
     public function getTotalRecibosAttribute()
     {
-        $total_recibos = $this->tbl_adeudos->sum('importe_total') + $this->tbl_adeudos->sum('tbl_cargo->importe_total');
+        $total_recibos = $this->tbl_adeudos->where('estatus', '=', estatus_adeudos::Vigente)->sum('importe_total') + $this->tbl_cargos->where('estatus', '=', estatus_adeudos::Vigente)->sum('tbl_cargo->importe_total');
         return $total_recibos;
     }
 
     public function getRecibosPendientesAttribute()
     {
-        $recibos_pendientes = $this->tbl_adeudos->count();
+        $recibos_pendientes = $this->tbl_adeudos->where('estatus', '=', estatus_adeudos::Vigente)->count();
         return $recibos_pendientes;
     }
 
@@ -215,7 +191,117 @@ class tbl_prestamos extends Model
         return $this->total_cargos + $this->total_recibos;
     }
 
+    public function getNumeroRecibosAttribute()
+    {
+        return $this->tbl_adeudos->count();
+    }
 
+    public function getNumeroCargosAttribute()
+    {
+        return $this->tbl_cargos->count();
+    }
+
+    public function getTotalPagosCargosAttribute()
+    {
+        return $this->tbl_cargos;
+    }
+
+    public function getTotalPagadoCargosAttribute()
+    {
+        $total_pagado_cargos = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            if($adeudo->tbl_cargo)
+                $total_pagado_cargos += $adeudo->tbl_cargo->importe_pagado;
+        }
+
+        return $total_pagado_cargos;
+    }
+
+    public function getTotalPagadoRecibosAttribute()
+    {
+        $total_pagado_recibos = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            $total_pagado_recibos += $adeudo->importe_pagado;
+        }
+
+        return $total_pagado_recibos;
+    }
+
+    public function getTotalPagadoConDescuentoAttribute()
+    {
+        $total = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            $total += $adeudo->importe_pagado_descuento;
+            if($adeudo->tbl_cargo)
+                $total += $adeudo->tbl_cargo->importe_pagado_descuento;
+        }
+
+        return $total;
+    }
+
+    public function getTotalPagosConDescuentoAttribute()
+    {
+        $total = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            $total += $adeudo->total_pagos_descuento;
+            if($adeudo->tbl_cargo)
+                $total += $adeudo->tbl_cargo->total_pagos_descuento;
+        }
+
+        return $total;
+    }
+
+    public function getTotalPagadoRefinanciamientoAttribute()
+    {
+        $total = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            $total += $adeudo->importe_pagado_refinanciamiento;
+            if($adeudo->tbl_cargo)
+                $total += $adeudo->tbl_cargo->importe_pagado_refinanciamiento;
+        }
+
+        return $total;
+    }
+
+    public function getTotalPagosRefinanciamientoAttribute()
+    {
+
+        $total = 0;
+        foreach ($this->tbl_adeudos as $adeudo)
+        {
+            $total += $adeudo->total_pagos_refinanciamiento;
+            if($adeudo->tbl_cargo)
+                $total += $adeudo->tbl_cargo->total_pagos_refinanciamiento;
+        }
+
+        return $total;
+    }
+
+    public function getDuracionTextAttribute()
+    {
+        $periodo =  "";
+        switch ($this->periodo)
+        {
+            case periodos_prestamos::Diario:
+                $periodo = " Dia(s)";
+                break;
+            case periodos_prestamos::Semanal:
+                $periodo = " Semana(s)";
+                break;
+            case periodos_prestamos::Quincenal:
+                $periodo = " Quincena(s)";
+                break;
+            case periodos_prestamos::Mensual:
+                $periodo = " Mes(es)";
+                break;
+        }
+        return $this->plazo . $periodo;
+    }
 
     #endregion
 }

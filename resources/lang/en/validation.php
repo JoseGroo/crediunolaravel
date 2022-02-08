@@ -283,6 +283,7 @@ return [
         'movimiento'            => 'Movimiento',
         'cantidad'              => 'Cantidad',
         'paga_con'              => 'Paga con',
+        'concepto'              => 'Concepto',
     ],
 
 ];

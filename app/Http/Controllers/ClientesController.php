@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use App\Enums\archivos_descarga;
 use App\Enums\catalago_sistema;
 use App\Enums\estado_civil;
 use App\Enums\estatus_adeudos;
@@ -27,6 +28,7 @@ use App\Http\Requests\HistorialClienteRequest;
 use App\Http\Requests\InformacionContactoRequest;
 use App\Http\Requests\InformacionLaboralRequest;
 use App\Http\Requests\LimiteCreditoUpdateRequest;
+use App\Http\Requests\NotaClienteRequest;
 use App\Http\Requests\ReferenciasClienteRequest;
 use App\tbl_adeudos;
 use App\tbl_avales;
@@ -51,6 +53,7 @@ use App\tbl_informacion_laboral_cliente;
 use App\tbl_medios_publicitarios;
 use App\tbl_movimientos_corte;
 use App\tbl_notas;
+use App\tbl_notas_aviso;
 use App\tbl_pagos;
 use App\tbl_prestamos;
 use App\tbl_referencias_cliente;
@@ -218,6 +221,8 @@ class ClientesController extends Controller
         $estados_civiles = estado_civil::toSelectArray();
         $unidades_tiempo = unidad_tiempo::toSelectArray();
 
+        $notas_aviso = tbl_notas_aviso::get_list_by_cliente_id_no_visto($id);
+
         return view('clientes.details')
             ->with(compact('model'))
             ->with(compact('estatus'))
@@ -228,6 +233,7 @@ class ClientesController extends Controller
             ->with(compact('estados'))
             ->with(compact('sexos'))
             ->with(compact('unidades_tiempo'))
+            ->with(compact('notas_aviso'))
             ->with(compact('estados_civiles'));
     }
 
@@ -239,18 +245,18 @@ class ClientesController extends Controller
         if(!$model)
             abort(404);
 
-        $prestamos = tbl_prestamos::get_list_vigentes_by_cliente_id($id);
+        $prestamos = tbl_prestamos::get_list_by_cliente_id_and_status($id, estatus_prestamo::Vigente);
 
         if(!auth()->user()->tiene_corte_abierto){
             \request()->session()->flash('message_prestamo', 'No tiene corte abierto para realizar esta operación.');
             return redirect()->route('clientes.details', $id);
         }
 
-        if($prestamos->count() <= 0)
+        /*if($prestamos->count() <= 0)
         {
             \request()->session()->flash('message_prestamo', 'No tiene pagos pendientes.');
             return redirect()->route('clientes.details', $id);
-        }
+        }*/
 
         $formas_pago = formas_pago::toSelectArray();
         $tipos_tarjetas = tipos_tarjeta::toSelectArray();
@@ -519,7 +525,7 @@ class ClientesController extends Controller
     public function download_pdf_pagos(Request $request){
 
         $pagos = tbl_pagos::get_list_by_ids($request->pagos_ids);
-        $prestamos = tbl_prestamos::get_list_vigentes_by_cliente_id($request->cliente_id);
+        $prestamos = tbl_prestamos::get_list_by_cliente_id_and_status($request->cliente_id, estatus_prestamo::Vigente);
         $saldo_anterior = $prestamos->sum('total_adeudo') + $pagos->sum('importe');
         $cliente = tbl_clientes::get_by_id($request->cliente_id);
         /*printf('Saldo anterior: ' . $saldo_anterior);
@@ -545,6 +551,35 @@ class ClientesController extends Controller
         ];
 
         return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_pagos', 'ticket-pago');
+    }
+
+    public function historial($id = 0)
+    {
+        $model = tbl_clientes::get_by_id($id);
+        if(!$model)
+            abort(404);
+
+        $model->edad = Carbon::parse($model->fecha_nacimiento)->age;
+        $model->fecha_nacimiento = Carbon::parse($model->fecha_nacimiento)->format('d/m/Y');
+
+
+        return view('clientes.historial.historial')
+            ->with(compact('model'));
+    }
+
+    public function estado_prestamo($id = 0)
+    {
+        $prestamo = tbl_prestamos::get_by_id($id);
+        $model = tbl_clientes::get_by_id($prestamo->cliente_id);
+        if(!$model)
+            abort(404);
+
+        $model->edad = Carbon::parse($model->fecha_nacimiento)->age;
+        $model->fecha_nacimiento = Carbon::parse($model->fecha_nacimiento)->format('d/m/Y');
+
+        return view('clientes.historial.estado_prestamo')
+            ->with(compact('prestamo'))
+            ->with(compact('model'));
     }
 
     #region Ajaxs
@@ -816,6 +851,8 @@ class ClientesController extends Controller
             ->with(compact('tipos_documento'))
             ->with(compact('model'));
     }
+
+
 
     public function delete_documento()
     {
@@ -1509,5 +1546,164 @@ class ClientesController extends Controller
         });
         return Response::json($clientes_response);
     }
+
+    public function get_tab_historial(Request $request)
+    {
+        $cliente_id = $request->cliente_id;
+        $tab = $request->tab;
+
+        switch ($tab)
+        {
+            case 'tab-notas-cliente':
+                $model = tbl_notas::get_list_by_cliente_id($cliente_id);
+                return view('clientes.historial._notas_cliente')
+                    ->with(compact('model'));
+                break;
+            case 'tab-notas-aviso':
+                $model = tbl_notas_aviso::get_list_by_cliente_id($cliente_id);
+                return view('clientes.historial._notas_aviso')
+                    ->with(compact('model'));
+                break;
+            case 'tab-prestamos-vigentes':
+                $model = tbl_prestamos::get_list_by_cliente_id_and_status($cliente_id, estatus_prestamo::Vigente);
+                return view('clientes.historial._prestamos')
+                    ->with(compact('model'));
+                break;
+            case 'tab-prestamos-liquidados':
+                $model = tbl_prestamos::get_list_by_cliente_id_and_status($cliente_id, estatus_prestamo::Liquidado);
+                return view('clientes.historial._prestamos')
+                    ->with(compact('model'));
+                break;
+            default:
+                return "<h1>En construccion</h1>";
+                break;
+        }
+    }
+
+    public function nueva_nota_cliente_post(NotaClienteRequest $request)
+    {
+        if(request()->ajax())
+        {
+            $datetime_now = HelperCrediuno::get_datetime();
+
+            $model = new tbl_notas();
+
+            $model->nota = $request->nota;
+            $model->cliente_id = $request->cliente_id;
+            $model->tipo = tipo_nota::Ventanilla;
+            $model->activo = true;
+            $model->creado_por = auth()->user()->id;
+            $model->fecha_creacion = $datetime_now;
+            $response = tbl_notas::create($model);
+
+            if(!$response['saved'])
+            {
+                return Response::json(array(
+                    'Saved'     => false,
+                    'Message'   => Lang::get('dictionary.message_an_error_occurred').' '.$response['error']
+                ));
+            }
+
+            $model_list = tbl_notas::get_list_by_cliente_id($model->cliente_id);
+
+            $html = view('clientes.historial._notas_cliente')
+                ->with('model', $model_list)
+                ->render();
+
+            HelperCrediuno::save_bitacora($model->nota_id, movimiento_bitacora::CreoNuevoRegistro, catalago_sistema::NotaCliente, null, null);
+            return Response::json(array(
+                'Saved'     => true,
+                'Message'   => Lang::get('dictionary.message_save_correctly'),
+                'Html'      => $html
+            ));
+        }
+
+        return Response::json(array(
+            'Saved' => false,
+            'Message'   => Lang::get('dictionary.message_an_error_occurred')
+        ));
+    }
+
+    public function nueva_nota_aviso_post(NotaClienteRequest $request)
+    {
+        if(request()->ajax())
+        {
+            $datetime_now = HelperCrediuno::get_datetime();
+
+            $model = new tbl_notas_aviso();
+
+            $model->nota = $request->nota;
+            $model->cliente_id = $request->cliente_id;
+            $model->visto = false;
+            $model->activo = true;
+            $model->creado_por = auth()->user()->id;
+            $model->fecha_creacion = $datetime_now;
+            $response = tbl_notas_aviso::create($model);
+
+            if(!$response['saved'])
+            {
+                return Response::json(array(
+                    'Saved'     => false,
+                    'Message'   => Lang::get('dictionary.message_an_error_occurred').' '.$response['error']
+                ));
+            }
+
+            $model_list = tbl_notas_aviso::get_list_by_cliente_id($model->cliente_id);
+
+            $html = view('clientes.historial._notas_aviso')
+                ->with('model', $model_list)
+                ->render();
+
+            HelperCrediuno::save_bitacora($model->nota_id, movimiento_bitacora::CreoNuevoRegistro, catalago_sistema::NotaAviso, null, null);
+            return Response::json(array(
+                'Saved'     => true,
+                'Message'   => Lang::get('dictionary.message_save_correctly'),
+                'Html'      => $html
+            ));
+        }
+
+        return Response::json(array(
+            'Saved' => false,
+            'Message'   => Lang::get('dictionary.message_an_error_occurred')
+        ));
+    }
     #endregion
+
+    public function download_fie($archivo)
+    {
+        $file = storage_path('app/public');
+        $content_type = "";
+        switch ($archivo)
+        {
+            case archivos_descarga::SolicitudCliente:
+                $file .= "/files/solicitud-prestamo.pdf";
+                $content_type = "application/pdf";
+                break;
+            case archivos_descarga::AvisoCobro:
+                $file .= "/files/aviso-de-cobro.docx";
+                $content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            case archivos_descarga::Cuestionario:
+                $file .= "/files/cuestionario.doc";
+                $content_type = "application/msword";
+                break;
+            case archivos_descarga::HojaLogo:
+                $file .= "/files/hoja-logo.docx";
+                $content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            case archivos_descarga::FormatoIngresos:
+                $file .= "/files/formato-ingresos.docx";
+                $content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            case archivos_descarga::FormatoCorte:
+                $file .= "/files/formato-corte-ventanilla.xlsx";
+                $content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                break;
+        }
+
+        $headers = array(
+            'Content-Type: '.$content_type,
+        );
+        return Response::download($file, basename($file), $headers);
+    }
 }

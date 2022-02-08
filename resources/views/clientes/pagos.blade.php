@@ -6,6 +6,20 @@
     {{ Form::open([ 'route' => ['clientes.pago_post' ], 'method' => 'POST', 'id' => 'frmPagos' ]) }}
     {{ Form::hidden('cliente_id', $model->cliente_id) }}
 
+    @if($prestamos->count() <= 0)
+        <div class="form-row">
+            <div class="col-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    No tiene pagos pendientes.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
             <div class="col-md-12">

@@ -14,11 +14,18 @@
     <div class="col-md-9">
         <div class="row">
             <div class="col-md-4">
+                @if(Route::currentRouteName() == 'clientes.details')
                 <p id="pLimiteCredito" style="cursor: pointer; display: table;">
                     <i class="mdi mdi-cash-usd" title="Limite de crédito"></i>
                     $<span id="spanLimiteCredito">{{ number_format($model->limite_credito, 2) }}</span>
                     <i class="mdi mdi-pencil" style="font-size: 12px; display: table-cell; vertical-align: middle;"></i>
                 </p>
+                @else
+                    <p style="display: table;">
+                        <i class="mdi mdi-cash-usd" title="Limite de crédito"></i>
+                        $<span id="spanLimiteCredito">{{ number_format($model->limite_credito, 2) }}</span>
+                    </p>
+                @endif
             </div>
 
             <div class="col-md-4">

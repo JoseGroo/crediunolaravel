@@ -270,6 +270,7 @@ class PrestamosController extends Controller
 
         $prestamo->estatus = $request->action == 1 ? estatus_prestamo::Vigente : estatus_prestamo::Cancelado;
         $prestamo->usuario_entrego_id = auth()->user()->id;
+        $prestamo->fecha_entraga = $datetime_now;
         $response = tbl_prestamos::edit($prestamo);
 
         if(!$response['saved'])

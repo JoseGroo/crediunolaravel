@@ -8,23 +8,24 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
+            
             <div class="card">
                 <div class="card-header">@yield('title')</div>
 
                 <div class="card-body">
                     Binvenido {{ $user->nombre }} {{ $user->apellido_paterno }} {{ $user->apellido_materno }}
-<!--<a href="{{ route('home.download') }}">Descargar</a>-->
+
 
                 </div>
             </div>
         </div>
     </div>
 
-    @if($corte)
+    {{--@if($corte)
         {{ Form::open([ 'route' => ['cortes.download_pdf' ], 'method' => 'POST', 'id' => 'frmGeneratePdf' ]) }}
         <input type="hidden" name="corte_id" value="{{ $corte->corte_id }}">
         {{ Form::close() }}
-    @endif
+    @endif--}}
 @endsection
 
 
@@ -35,7 +36,7 @@
 
         $(function()
         {
-            @if($corte)
+            {{--@if($corte)
             Swal.fire({
                 title: '¿Desea imprimir el ticket?',
                 text: 'Se abrio correctamente su corte.',
@@ -50,7 +51,7 @@
                     $('#frmGeneratePdf').submit();
                 }
             })
-            @endif
+            @endif--}}
         })
     </script>
 @endsection

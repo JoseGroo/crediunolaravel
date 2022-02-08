@@ -12,4 +12,5 @@ final class tipos_movimientos_corte extends Enum implements LocalizedEnum
     const PagosCargos = 3;
     const CompraDivisa = 4;
     const VentaDivisa = 5;
+    const CobroOtroConcepto = 6;
 }

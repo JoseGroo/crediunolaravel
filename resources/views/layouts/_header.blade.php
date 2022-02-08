@@ -29,8 +29,42 @@
         </div>
 
 
+
         <ul class="nav navbar-top-links navbar-right">
 
+            <li class="nav-item icon dropdown">
+                <a class="nav-linkdropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false" id="dropdownMenuButton">
+                    <i class="mdi mdi-download-multiple"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::SolicitudCliente) }}">
+                        <span class="mdi mdi-file-pdf"></span>
+                        Solicitud cliente
+                    </a>
+                    <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::AvisoCobro) }}">
+                        <span class="mdi mdi-file-word"></span>
+                        Aviso de cobro
+                    </a>
+                    <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::Cuestionario) }}">
+                        <span class="mdi mdi-file-word"></span>
+                        Cuestionario
+                    </a>
+                    <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::HojaLogo) }}">
+                        <span class="mdi mdi-file-word"></span>
+                        Hoja con logo
+                    </a>
+                    <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::FormatoIngresos) }}">
+                        <span class="mdi mdi-file-word"></span>
+                        Formato de ingresos
+                    </a>
+                    <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::FormatoCorte) }}">
+                        <span class="mdi mdi-file-excel"></span>
+                        Formato de corte
+                    </a>
+
+                </div>
+            </li>
 
             <li class="nav-item icon dropdown">
                 <a class="nav-linkdropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -48,6 +82,11 @@
                         <a class="dropdown-item" href="{{ route('divisas.compra_venta') }}">
                             <span class="mdi mdi-cash"></span>
                             Compar/Venta de divisa
+                        </a>
+
+                        <a class="dropdown-item" href="{{ route('cobro_otros_conceptos.cobro') }}">
+                            <span class="mdi mdi-cash"></span>
+                            Cobrar otro concepto
                         </a>
                     @endif
 

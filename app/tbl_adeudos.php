@@ -4,6 +4,8 @@ namespace App;
 
 use App\Enums\estatus_adeudos;
 use App\Enums\estatus_prestamo;
+use App\Enums\formas_pago;
+use App\Enums\tipo_pago;
 use App\Helpers\HelperCrediuno;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -68,9 +70,46 @@ class tbl_adeudos extends Model
         return $model->where('activo', '=', true);
     }
 
+    public function tbl_pagos()
+    {
+        $model = $this->hasMany(tbl_pagos::class, 'external_id', 'adeudo_id')->where([
+            ['activo', '=', true],
+            ['tipo', '=', tipo_pago::Adeudo],
+        ]);
+        return $model;
+    }
+
+    #endregion
+
+    #region Attributes
+
+    public function getImportePagadoAttribute()
+    {
+        return $this->tbl_pagos->sum('importe');
+    }
+
     public function getTblCargoAttribute()
     {
         return $this->tbl_cargos->first();
+    }
+    public function getImportePagadoDescuentoAttribute()
+    {
+        return $this->tbl_pagos->where('metodo_pago', formas_pago::Descuento)->sum('importe');
+    }
+
+    public function getTotalPagosDescuentoAttribute()
+    {
+        return $this->tbl_pagos->where('metodo_pago', formas_pago::Descuento)->count();
+    }
+
+    public function getImportePagadoRefinanciamientoAttribute()
+    {
+        return $this->tbl_pagos->where('metodo_pago', formas_pago::Refinanciar)->sum('importe');
+    }
+
+    public function getTotalPagosRefinanciamientoAttribute()
+    {
+        return $this->tbl_pagos->where('metodo_pago', formas_pago::Refinanciar)->count();
     }
     #endregion
 

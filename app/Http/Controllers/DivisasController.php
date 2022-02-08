@@ -214,6 +214,7 @@ class DivisasController extends Controller
         $total = 0;
         $paga_con = $request->paga_con;
         $importe_iva = 0;
+        $cambio = 0;
         if($model->tipo == tipo_compra_venta_divisa::Compra)
         {
              $total = $model->cantidad * $compra_divisa;

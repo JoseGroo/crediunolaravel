@@ -52,6 +52,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        //return parent::render($request, $exception);
         $datetime_now = HelperCrediuno::get_datetime();
         $log = new tbl_log_errors();
         $log->message = $exception->getMessage();

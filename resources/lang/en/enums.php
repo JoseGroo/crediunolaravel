@@ -56,6 +56,7 @@ return [
         catalago_sistema::Avales => 'Avales',
         catalago_sistema::Prestamos => 'Prestamos',
         catalago_sistema::Cortes => 'Cortes',
+        catalago_sistema::CobroOtrosConceptos => 'Cobro otros conceptos',
     ],
 
 

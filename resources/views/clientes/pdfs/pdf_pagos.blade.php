@@ -47,7 +47,7 @@
         </div>
 
         <div>
-            <table>
+            <table class="table table-bordered">
                 <tr>
                     <td>Pagare</td>
                     <td>Recibo</td>

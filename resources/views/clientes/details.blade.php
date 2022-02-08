@@ -39,11 +39,12 @@
                         </div>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a href="{{ route('prestamos.generar', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-account-cash"></i> Prestamo</a>
-                            <a href="#" class="btn btn-info"><i class="mdi mdi-history"></i> Historial</a>
+                            <a href="{{ route('clientes.historial', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-history"></i> Historial</a>
                             @if(Auth::user()->tiene_corte_abierto)
                                 <a href="{{ route('clientes.pagos', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-cash-usd"></i> Pagos</a>
                                 <a href="{{ route('prestamos.entregar', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-cash-refund"></i> Entregar prestamo</a>
                             @endif
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
                         </div>
                     </div>
                 </div>
@@ -293,6 +294,75 @@
             </div>
         </div>
     </div>
+
+<div class="modal inmodal" id="modalReportes" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated bounceInUp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Reportes</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-row">
+                    <div class="col">
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if($notas_aviso && !$notas_aviso->isEmpty())
+    <div class="modal inmodal" id="modalNotasAviso" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated bounceInUp">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Notas de aviso</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <ol>
+                                @foreach ($notas_aviso as $item)
+                                    <li>{{ $item->nota }}</li>
+                                @endforeach
+                            </ol>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnNotasAvisoVistas" class="btn btn-primary">Vistas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
 @endsection
 
@@ -852,6 +922,14 @@
 
         $(function()
         {
+            @if($notas_aviso && !$notas_aviso->isEmpty())
+            $('#modalNotasAviso').modal('show');
+            @endif
+
+            $('#btnNotasAvisoVistas').click(function(){
+
+            })
+
             $("#btnSaveLimiteCredito").click(function(){
                 var vForm = $("#frmEditLimiteCredito");
 

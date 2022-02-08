@@ -24,4 +24,7 @@ final class catalago_sistema extends Enum implements LocalizedEnum
     const Descuentos = 15;
     const Adeudos = 16;
     const Divisas = 17;
+    const CobroOtrosConceptos = 18;
+    const NotaCliente = 19;
+    const NotaAviso = 20;
 }

@@ -11,14 +11,9 @@
                         <th>Empleado</th>
                         <th>Sucursal</th>
                         <th>Fecha</th>
-                        <th>Efectivo</th>
-                        <th>Descuento</th>
-                        <th>Refinanciar</th>
-                        <th>Retención</th>
                         <th>Total MN</th>
                         <th>Total USD</th>
                         <th>Total USD M</th>
-                        <th>Total EUR</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -30,11 +25,6 @@
                             <td>{{ $item->tbl_usuario->nombre_completo }}</td>
                             <td>{{ $item->tbl_usuario->sucursal->sucursal }}</td>
                             <td>{{ date('d/m/Y', strtotime($item->fecha_creacion)) }}</td>
-                            <td>@money_format(0) - </td>
-                            <td>@money_format(0) - </td>
-                            <td>@money_format(0) - </td>
-                            <td>@money_format(0) - </td>
-                            <td>@money_format(0) - </td>
                             <td>@money_format(0) - </td>
                             <td>@money_format(0) - </td>
                             <td>@money_format(0) - </td>
