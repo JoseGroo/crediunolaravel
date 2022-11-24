@@ -144,6 +144,7 @@ Route::post('clientes/edit_limite_credito', 'ClientesController@edit_limite_cred
 Route::get('clientes/get_notas', 'ClientesController@get_notas')->name('clientes.get_notas');
 Route::get('clientes/get_tab_information', 'ClientesController@get_tab_information')->name('clientes.get_tab_information');
 Route::get('clientes/get_form_documento', 'ClientesController@get_form_documento')->name('clientes.get_form_documento');
+Route::get('clientes/get_ligas', 'ClientesController@get_ligas')->name('clientes.get_ligas');
 Route::post('clientes/manage_documentos', 'ClientesController@manage_documentos')->name('clientes.manage_documentos');
 Route::post('clientes/delete_documento', 'ClientesController@delete_documento')->name('clientes.delete_documento');
 Route::get('clientes/get_form_referencia', 'ClientesController@get_form_referencia')->name('clientes.get_form_referencia');
@@ -167,7 +168,10 @@ Route::get('clientes/get_tab_historial', 'ClientesController@get_tab_historial')
 Route::post('clientes/nueva_nota_cliente_post', 'ClientesController@nueva_nota_cliente_post')->name('clientes.nueva_nota_cliente_post');
 Route::post('clientes/nueva_nota_aviso_post', 'ClientesController@nueva_nota_aviso_post')->name('clientes.nueva_nota_aviso_post');
 Route::get('clientes/{id?}/estado_prestamo', 'ClientesController@estado_prestamo')->name('clientes.historial.estado_prestamo');
-
+Route::post('clientes/notas_aviso_vistas', 'ClientesController@notas_aviso_vistas')->name('clientes.notas_aviso_vistas');
+Route::post('clientes/certificado_patrimonial_pdf', 'ClientesController@certificado_patrimonial_pdf')->name('clientes.certificado_patrimonial_pdf');
+Route::post('clientes/carta_urgente_pdf', 'ClientesController@carta_urgente_pdf')->name('clientes.carta_urgente_pdf');
+Route::post('clientes/recordatorio_atrasos_pdf', 'ClientesController@recordatorio_atrasos_pdf')->name('clientes.recordatorio_atrasos_pdf');
 //endregion
 
 //region avales
@@ -188,6 +192,8 @@ Route::post('avales/hacer_cliente', 'AvalesController@hacer_cliente')->name('ava
 //endregion
 
 //region prestamos
+Route::get('prestamos/', 'PrestamosController@index')->name('prestamos.index');
+Route::get('prestamos/index', 'PrestamosController@index')->name('prestamos.index');
 Route::get('prestamos/{id?}/generar', 'PrestamosController@generar')->name('prestamos.generar');
 Route::post('prestamos/generar_post', 'PrestamosController@generar_post')->name('prestamos.generar_post');
 Route::get('prestamos/{id?}/entregar', 'PrestamosController@entregar')->name('prestamos.entregar');
@@ -198,6 +204,12 @@ Route::get('prestamos/get_pagos_by_prestamo_id', 'PrestamosController@get_pagos_
 Route::get('prestamos/get_pagos_acreditar_cantidad', 'PrestamosController@get_pagos_acreditar_cantidad')->name('prestamos.get_pagos_acreditar_cantidad');
 Route::get('prestamos/get_prestamos_by_cliente_id', 'PrestamosController@get_prestamos_by_cliente_id')->name('prestamos.get_prestamos_by_cliente_id');
 Route::get('prestamos/get_recibos_by_prestamo_id', 'PrestamosController@get_recibos_by_prestamo_id')->name('prestamos.get_recibos_by_prestamo_id');
+Route::get('prestamos/{id?}/reestructurar', 'PrestamosController@reestructurar')->name('prestamos.reestructurar');
+Route::post('prestamos/reestructurar_post', 'PrestamosController@reestructurar_post')->name('prestamos.reestructurar_post');
+Route::get('prestamos/get_view_prestamos_by_cliente_id', 'PrestamosController@get_view_prestamos_by_cliente_id')->name('prestamos.get_view_prestamos_by_cliente_id');
+Route::get('prestamos/simulate', 'PrestamosController@simulate')->name('prestamos.simulate');
+Route::post('prestamos/simulate_post', 'PrestamosController@simulate_post')->name('prestamos.simulate_post');
+Route::post('prestamos/get_adeudos_simulador', 'PrestamosController@get_adeudos_simulador')->name('prestamos.get_adeudos_simulador');
 //endregion
 
 //region adeudos
@@ -214,6 +226,14 @@ Route::get('cortes/', 'CortesController@index')->name('cortes.index');
 Route::get('cortes/index', 'CortesController@index')->name('cortes.index');
 Route::post('cortes/create_post', 'CortesController@create_post')->name('cortes.create_post');
 Route::post('cortes/download_pdf', 'CortesController@download_pdf')->name('cortes.download_pdf');
+Route::get('cortes/{id?}/details', 'CortesController@details')->name('cortes.details');
+Route::get('cortes/get_tab_details', 'CortesController@get_tab_details')->name('cortes.get_tab_details');
+Route::post('cortes/hacer_transferencia_post', 'CortesController@hacer_transferencia_post')->name('cortes.hacer_transferencia_post');
+Route::post('cortes/hacer_transferencia_caja_post', 'CortesController@hacer_transferencia_caja_post')->name('cortes.hacer_transferencia_caja_post');
+Route::post('cortes/cancelar_movimientos', 'CortesController@cancelar_movimientos')->name('cortes.cancelar_movimientos');
+Route::post('cortes/cerrar', 'CortesController@cerrar')->name('cortes.cerrar');
+Route::post('cortes/cancelar_transferencia_fondo', 'CortesController@cancelar_transferencia_fondo')->name('cortes.cancelar_transferencia_fondo');
+Route::post('cortes/cancelar_transferencia_entre_caja', 'CortesController@cancelar_transferencia_entre_caja')->name('cortes.cancelar_transferencia_entre_caja');
 //endregion
 
 //region bitacora
@@ -260,3 +280,4 @@ Route::get('/linkstorage', function () {
 
 Route::get('/cookie/set','CookieController@setCookie');
 Route::get('/cookie/get','CookieController@getCookie');
+Route::get('image/{filename}', 'HomeController@displayImage')->name('image.displayImage');

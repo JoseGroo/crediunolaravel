@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Enums\unidad_tiempo;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class tbl_referencias_cliente extends Model
@@ -55,9 +56,33 @@ class tbl_referencias_cliente extends Model
             ->get();
         return $model;
     }
+
+    public static function get_list_by_full_name($full_name)
+    {
+        $query = tbl_referencias_cliente::query()
+            ->where([
+                ['activo', '=', true]
+            ])
+            ->where(DB::raw("CONCAT(COALESCE(nombre,''), ' ', COALESCE(apellido_paterno,''), ' ', COALESCE(apellido_materno,''))"), '=', $full_name);
+
+        return $query->get();
+    }
+
+    public function tbl_cliente()
+    {
+        return $this->belongsTo(tbl_clientes::class, 'cliente_id', 'cliente_id');
+    }
+    #region Attributes
+
+    public function getFullNameAttribute()
+    {
+        return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
+    }
+
     public function getTiempoConocerloCompletoAttribute()
     {
 
         return $this->tiempo_conocerlo. ' ' .unidad_tiempo::getDescription($this->unidad_tiempo_conocerlo);
     }
+    #endregion
 }

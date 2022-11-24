@@ -163,7 +163,7 @@ return [
         formas_pago::Cheque => 'Cheque',
         formas_pago::Tarjeta => 'Tarjeta de crédito/debito',
         formas_pago::Descuento => 'Descuento',
-        formas_pago::FichaDeposito => 'Ficha de deposito',
+        formas_pago::FichaDeposito => 'Deposito',
         formas_pago::TransferenciaElectronica => 'Transferencia electronica',
         formas_pago::Refinanciar => 'Refinanciar',
         formas_pago::Retencion => 'Retención',

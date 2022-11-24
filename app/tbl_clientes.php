@@ -145,7 +145,7 @@ class tbl_clientes extends Model
 
     public static function get_pagination($nombre, $sucursal_id, $domicilio, $perPage)
     {
-        DB::enableQueryLog();
+        //DB::enableQueryLog();
         $model = DB::table('tbl_clientes AS cli')
             ->where('cli.activo', true)
             ->where(DB::raw("CONCAT(COALESCE(cli.nombre,''), ' ', COALESCE(cli.apellido_paterno,''), ' ', COALESCE(cli.apellido_materno,''))"), 'LIKE', "%".$nombre."%")

@@ -33,6 +33,18 @@ class tbl_compra_venta_divisas extends Model
         }
     }
 
+    public static function edit(tbl_compra_venta_divisas $model)
+    {
+        try{
+
+            $model->update();
+            return ['saved' => true, 'error' => ''];
+        }
+        catch(\Exception $e){
+            return ['saved' => false, 'error' => $e];
+        }
+    }
+
     public static function get_by_id($id)
     {
         $model = tbl_compra_venta_divisas::where([

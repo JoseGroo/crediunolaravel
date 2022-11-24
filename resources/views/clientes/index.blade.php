@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-12 col-sm-3 col-12 text-right">
                         <label class="d-block">&nbsp;</label>
-                        <button class="btn btn-sm btn-blue filtrar" type="submit">Buscar</button>
+                        <button class="btn btn-sm btn-blue" type="submit">Buscar</button>
                         <a href="{{ route('clientes.index') }}" id="btnCleanFilter" class="btn btn-sm btn-white">Limpiar filtros</a>
                     </div>
                 </div>

@@ -284,6 +284,12 @@ return [
         'cantidad'              => 'Cantidad',
         'paga_con'              => 'Paga con',
         'concepto'              => 'Concepto',
+        'fondo_id'              => 'Fondo',
+        'corte_destino_id'      => 'Corte destino',
+        'saldo_total'           => 'Saldo total',
+        'pagos_vencidos'        => 'Pagos vencidos',
+        'argumento'             => 'Argumento',
+        'total_pagos'           => 'Total de pagos',
     ],
 
 ];

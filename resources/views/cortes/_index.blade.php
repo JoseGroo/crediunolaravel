@@ -21,15 +21,15 @@
                     @foreach ($model as $item)
                         @php($status_color = $item->cerrado ? 'text-danger' : 'text-success')
                         <tr>
-                            <td><i title="{{ $item->cerrado  ? 'Cerrado' : 'Abierto' }}" class="mdi mdi-checkbox-blank-circle {{ $status_color }}"></i></td>
+                            <td><i title="{{ $item->cerrado  ? 'Cerrado' : 'Abierto' }}" data-toogle="tooltip" class="mdi mdi-checkbox-blank-circle {{ $status_color }}"></i></td>
                             <td>{{ $item->tbl_usuario->nombre_completo }}</td>
                             <td>{{ $item->tbl_usuario->sucursal->sucursal }}</td>
                             <td>{{ date('d/m/Y', strtotime($item->fecha_creacion)) }}</td>
-                            <td>@money_format(0) - </td>
-                            <td>@money_format(0) - </td>
-                            <td>@money_format(0) - </td>
+                            <td>@money_format($item->importe_moneda_nacional)</td>
+                            <td>@money_format($item->importe_dolares)</td>
+                            <td>@money_format($item->importe_dolares_m)</td>
                             <td>
-                                <a href="{{ route('dias_festivos.details', $item->corte_id) }}" class="btn btn-sm btn-white">Detalles</a>
+                                <a href="{{ route('cortes.details', $item->corte_id) }}" class="btn btn-sm btn-white">Detalles</a>
                             </td>
                         </tr>
                     @endforeach

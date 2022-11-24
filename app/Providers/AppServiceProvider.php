@@ -26,7 +26,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Blade::directive('money_format', function ($money) {
-            return "<?php echo '$'. number_format($money, 2); ?>";
+            $symbol = '$';
+            if($money < 0)
+            {
+                $money = $money * (-1);
+                $symbol = '-$';
+            }
+            return "<?php echo '$symbol' . number_format($money, 2); ?>";
         });
     }
 }

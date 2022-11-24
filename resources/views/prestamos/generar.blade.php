@@ -30,7 +30,13 @@
                     <div class="col-md-4 col-sm-6 col-12">
                         <div class="form-group">
                             {{ Form::label('interes_id', __('validation.attributes.interes_id')) }}
-                            {{ Form::select('interes_id', $intereses, null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion']) }}
+                            {{--{{ Form::select('interes_id', $intereses, null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion']) }}--}}
+                            <select class="form-control" name="interes_id" id="interes_id">
+                                <option>Seleccionar opcion</option>
+                                @foreach($intereses as  $item)
+                                    <option value="{{ $item->interes_id }}" data-all-info="{{ $item }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -84,7 +90,7 @@
                     <div class="col-md-4 col-sm-6 col-12">
                         <div class="form-group">
                             {{ Form::label('dia_descanso', __('validation.attributes.dia_descanso')) }}
-                            {{ Form::select('dia_descanso', $dias_semana, null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion']) }}
+                            {{ Form::select('dia_descanso', $dias_semana, \App\Enums\dias_semana::Domingo, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion']) }}
                         </div>
                     </div>
                 </div>
@@ -246,6 +252,11 @@
                     <label>@lang('validation.attributes.plazo'):</label>
                     <label id="lPlazo"></label>
                 </div>
+
+                <div class="col-md-12" style="font-size: 25px;">
+                    <label class="font-bold">Importe por pago:</label>
+                    <label class="font-bold" id="lImportePorPago"></label>
+                </div>
             </div>
         </div>
     </div>
@@ -261,6 +272,7 @@
 
     <script>
         var Confirmed = false;
+        var periodoMultiplicacion = 0;
 
         $(document).on('click', '.seleccionar-aval', function(){
             var vAvalId = $(this).data('id');
@@ -277,6 +289,20 @@
                 $('#dia_pago').prop('disabled', vDisabledDiaPago);
                 $('#dia_descanso').prop('disabled', vDisabledDescanso);
 
+                switch (parseInt($(this).val())){
+                    case 1:
+                        periodoMultiplicacion = 1;
+                        break;
+                    case 2:
+                        periodoMultiplicacion = 4;
+                        break;
+                    case 3:
+                        periodoMultiplicacion = 2;
+                        break;
+                    case 4:
+                        periodoMultiplicacion = 1;
+                        break;
+                }
             })
 
             $('#garantia_existente').click(function(){
@@ -371,6 +397,25 @@
                     $('#lCapital').text($('#capital').val());
                     $('#lTipo').text($('#interes_id option:selected').text());
                     $('#lPlazo').text($('#plazo').val());
+
+                    var plazo = parseInt($("#plazo").val());
+                    var cantidadPagos = parseInt(periodoMultiplicacion) * plazo;
+                    var capital = parseFloat($("#capital").val());
+                    var adeudoCapital = capital / cantidadPagos
+                    var interesObj = $("#interes_id option:selected").data('all-info');
+
+                    var tazaIva = $('#aplico_taza_preferencial').prop('checked') ? parseFloat($('#taza_iva').val()) : parseFloat(interesObj.interes_mensual);
+                    var importeIntereses = (capital * tazaIva)/100
+
+                    var importeIva = (importeIntereses *  parseFloat(interesObj.iva))/100;
+                    var adeudoIva= plazo * importeIva;
+                    var adeudoInteres = plazo * importeIntereses;
+
+                    var interes = adeudoInteres/cantidadPagos;
+                    var iva = adeudoIva/cantidadPagos;
+                    var totalPago = adeudoCapital  + interes + iva;
+
+                    $('#lImportePorPago').text('$' + NumberFormat(totalPago.toFixed(2)));
 
                     var divConfirmacion = $('#divConfirmacionDatos').clone();
                     Swal.fire({

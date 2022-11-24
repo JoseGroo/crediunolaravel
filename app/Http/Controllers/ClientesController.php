@@ -68,6 +68,7 @@ use Illuminate\Support\Facades\Storage;
 use Lang;
 use Luecano\NumeroALetras\NumeroALetras;
 use PHPUnit\TextUI\Help;
+use Str;
 
 
 class ClientesController extends Controller
@@ -90,9 +91,8 @@ class ClientesController extends Controller
          {
              $sucursal_id = request('sucursal_id');
          }else{
-             $logged_user->sucursal_id;
+             $sucursal_id = $logged_user->sucursal_id;
          }
-
         $nombre = request('nombre');
         $domicilio = request('domicilio');
         $perPage = request('iPerPage') ?? 10;
@@ -165,6 +165,7 @@ class ClientesController extends Controller
         $model->estatus = estatus_cliente::EnInvestigacion;
         $model->mostrar_cobranza = true;
         $model->limite_credito = 0;
+        $model->es_aval = false;
         $model->activo = true;
         $model->creado_por = auth()->user()->id;
         $model->fecha_creacion = $datetime_now;
@@ -195,6 +196,20 @@ class ClientesController extends Controller
 
             $response = tbl_conyuge_cliente::create($datos_conyuge);
         }
+
+        $operacion = new tbl_movimientos_corte();
+        $operacion->cliente_id = $model->cliente_id;
+        $operacion->tipo = tipos_movimientos_corte::AltaCliente;
+        $operacion->importe = 0;
+        $operacion->corte_id = auth()->user()->corte_id;
+        $operacion->metodo_pago = formas_pago::Efectivo;
+        $operacion->external_id = $model->cliente_id;
+        $operacion->estatus = estatus_movimientos_corte::Activo;
+        $operacion->activo = true;
+        $operacion->creado_por = auth()->user()->id;
+        $operacion->fecha_creacion = $datetime_now;
+
+        $response = tbl_movimientos_corte::create($operacion);
 
         HelperCrediuno::save_bitacora($model->cliente_id, movimiento_bitacora::CreoNuevoRegistro, $this->catalago_sistema, null, null);
         return redirect()->route('clientes.index');
@@ -454,7 +469,8 @@ class ClientesController extends Controller
             $pago->iva = $restar_importes_iva;
             $pago->importe = $pago->capital + $pago->interes + $pago->iva;
             $formas_pago_para_cambio = collect(array(
-                formas_pago::Cheque, formas_pago::FichaDeposito,
+                formas_pago::Cheque,
+                formas_pago::FichaDeposito,
                 formas_pago::TransferenciaElectronica,
                 formas_pago::Tarjeta
             ));
@@ -562,8 +578,9 @@ class ClientesController extends Controller
         $model->edad = Carbon::parse($model->fecha_nacimiento)->age;
         $model->fecha_nacimiento = Carbon::parse($model->fecha_nacimiento)->format('d/m/Y');
 
-
+        $total_prestamos_liquidados = tbl_prestamos::get_total_by_cliente_id_and_status($id, estatus_prestamo::Liquidado);
         return view('clientes.historial.historial')
+            ->with(compact('total_prestamos_liquidados'))
             ->with(compact('model'));
     }
 
@@ -724,6 +741,18 @@ class ClientesController extends Controller
 
         return view('clientes.views_details._ultimas_notas')
             ->with(compact('notas'));
+    }
+
+    public function get_ligas(Request $request)
+    {
+        $avales = tbl_prestamos::get_ligas_avales_by_cliente_id($request->cliente_id);
+        $avalados = tbl_prestamos::get_ligas_avalados_by_aval_id($request->aval_id);
+        $referencias = tbl_referencias_cliente::get_list_by_full_name($request->full_name);
+
+        return view('clientes.views_details._ligas')
+            ->with(compact('avalados'))
+            ->with(compact('referencias'))
+            ->with(compact('avales'));
     }
 
     public function get_tab_information()
@@ -1667,6 +1696,39 @@ class ClientesController extends Controller
             'Message'   => Lang::get('dictionary.message_an_error_occurred')
         ));
     }
+
+    public function notas_aviso_vistas(Request $request)
+    {
+        if(request()->ajax())
+        {
+            $model = tbl_notas_aviso::get_list_by_cliente_id_no_visto($request->cliente_id);
+
+            foreach ($model as $item){
+                $item->visto = true;
+                $response = tbl_notas_aviso::edit($item);
+                $json_model = $item->toJson();
+                HelperCrediuno::save_bitacora($item->nota_aviso_id, movimiento_bitacora::MarcoVistaNotasCliente, catalago_sistema::NotaAviso, $json_model, null);
+            }
+
+            if(!$response['saved'])
+            {
+                return Response::json(array(
+                    'Saved'     => false,
+                    'Message'   => Lang::get('dictionary.message_an_error_occurred').' '.$response['error']
+                ));
+            }
+
+            return Response::json(array(
+                'Saved'     => true,
+                'Message'   => Lang::get('dictionary.message_save_correctly')
+            ));
+        }
+
+        return Response::json(array(
+            'Saved' => false,
+            'Message'   => Lang::get('dictionary.message_an_error_occurred')
+        ));
+    }
     #endregion
 
     public function download_fie($archivo)
@@ -1705,5 +1767,116 @@ class ClientesController extends Controller
             'Content-Type: '.$content_type,
         );
         return Response::download($file, basename($file), $headers);
+    }
+
+    public function certificado_patrimonial_pdf(Request $request){
+        $datetime_now = HelperCrediuno::get_datetime();
+
+        $nota = new tbl_notas();
+        $nota->cliente_id = $request->cliente_id;
+        $nota->nota = 'Se envio una certificaciòn patrimonial. ' . $request->argumento;
+        $nota->tipo = tipo_nota::Ventanilla;
+        $nota->activo = true;
+        $nota->creado_por = auth()->user()->id;
+        $nota->fecha_creacion = $datetime_now;
+
+        $response = tbl_notas::create($nota);
+
+
+        $cliente  = tbl_clientes::get_by_id($request->cliente_id);
+
+        $cliente->calle = $request->calle ?: $cliente->calle;
+        $cliente->numero_exterior = $request->numero_exterior ?: $cliente->numero_exterior;
+        $cliente->colonia = $request->colonia ?: $cliente->colonia;
+        $cliente->codigo_postal = $request->codigo_postal ?: $cliente->codigo_postal;
+
+        $saldo_total = $request->saldo_total ?: tbl_adeudos::get_total_adeudo_cliente_id($request->cliente_id);
+        $direccion_sucursal = Str::upper($request->direccion_sucursal) ?: Str::upper($cliente->sucursal->direccion);
+        $data = [
+            'cliente' => $cliente,
+            'fecha_hoy' => date('d/m/Y', strtotime($datetime_now)),
+            'mostrar_foto' => $request->agregar_foto,
+            'saldo_total' => $saldo_total,
+            'mostrar_direccion_sucursal' => $request->mostrar_direccion_sucursal,
+            'direccion_sucursal' => $direccion_sucursal
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_certificado_patrimonial', 'certificado_patrimonial');
+    }
+
+    public function carta_urgente_pdf(Request $request){
+        $datetime_now = HelperCrediuno::get_datetime();
+
+        $nota = new tbl_notas();
+        $nota->cliente_id = $request->cliente_id;
+        $nota->nota = 'Se envio una carta urgente. ' . $request->argumento;
+        $nota->tipo = tipo_nota::Ventanilla;
+        $nota->activo = true;
+        $nota->creado_por = auth()->user()->id;
+        $nota->fecha_creacion = $datetime_now;
+
+        $response = tbl_notas::create($nota);
+
+
+        $cliente  = tbl_clientes::get_by_id($request->cliente_id);
+
+        $cliente->calle = $request->calle ?: $cliente->calle;
+        $cliente->numero_exterior = $request->numero_exterior ?: $cliente->numero_exterior;
+        $cliente->colonia = $request->colonia ?: $cliente->colonia;
+        $cliente->codigo_postal = $request->codigo_postal ?: $cliente->codigo_postal;
+
+        $saldo_total = $request->saldo_total ?: tbl_adeudos::get_total_adeudo_cliente_id($request->cliente_id);
+        $direccion_sucursal = $request->direccion_sucursal ?: Str::upper($cliente->sucursal->direccion);
+        $data = [
+            'cliente' => $cliente,
+            'fecha_hoy' => date('d/m/Y', strtotime($datetime_now)),
+            'mostrar_foto' => $request->agregar_foto,
+            'saldo_total' => $saldo_total,
+            'mostrar_direccion_sucursal' => $request->mostrar_direccion_sucursal,
+            'direccion_sucursal' => $direccion_sucursal
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_carta_urgente', 'carta_urgente');
+    }
+
+    public function recordatorio_atrasos_pdf(Request $request){
+        $datetime_now = HelperCrediuno::get_datetime();
+
+        $nota = new tbl_notas();
+        $nota->cliente_id = $request->cliente_id;
+        $nota->nota = 'Se envio una carta urgente. ' . $request->argumento;
+        $nota->tipo = tipo_nota::Ventanilla;
+        $nota->activo = true;
+        $nota->creado_por = auth()->user()->id;
+        $nota->fecha_creacion = $datetime_now;
+
+        $response = tbl_notas::create($nota);
+
+
+        $cliente  = tbl_clientes::get_by_id($request->cliente_id);
+
+        $cliente->calle = $request->calle ?: $cliente->calle;
+        $cliente->numero_exterior = $request->numero_exterior ?: $cliente->numero_exterior;
+        $cliente->colonia = $request->colonia ?: $cliente->colonia;
+        $cliente->codigo_postal = $request->codigo_postal ?: $cliente->codigo_postal;
+
+        $saldo_total = $request->saldo_total ?: tbl_adeudos::get_total_adeudo_cliente_id($request->cliente_id);
+        $pagos_vencidos = $request->pagos_vencidos ?: tbl_adeudos::get_total_pagos_cliente_id($request->cliente_id);
+
+        $direccion_sucursal = Str::upper($request->direccion_sucursal) ?: Str::upper($cliente->sucursal->direccion);
+
+        $data = [
+            'cliente' => $cliente,
+            'fecha_hoy' => date('d/m/Y', strtotime($datetime_now)),
+            'mostrar_foto' => $request->agregar_foto,
+            'saldo_total' => $saldo_total,
+            'pagos_vencidos' => $pagos_vencidos,
+            'mostrar_telefono' => $request->mostrar_telefono,
+            'telefonos' => $request->telefonos ?: '2373946 Y 2678484',
+            'mostrar_direccion_sucursal' => $request->mostrar_direccion_sucursal,
+            'direccion_sucursal' => $direccion_sucursal
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_recordatorio_atrasos', 'recordatorio-atrasos');
     }
 }

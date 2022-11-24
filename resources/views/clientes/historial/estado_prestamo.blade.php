@@ -81,6 +81,12 @@
                                             </div>
                                             <div class="col-md-3 col-sm-6 col-12">
                                                 <div class="form-group">
+                                                    <label>Adeudo cargos:</label>
+                                                    <div class="form-control-plaintext">@money_format($prestamo->total_cargos)</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 col-12">
+                                                <div class="form-group">
                                                     <label>Adeudo recibos:</label>
                                                     <div class="form-control-plaintext">@money_format($prestamo->total_recibos)</div>
                                                 </div>

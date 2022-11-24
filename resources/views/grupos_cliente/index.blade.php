@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-3 col-sm-4 col-12 text-left">
                         <label class="d-block">&nbsp;</label>
-                        <button class="btn btn-sm btn-blue filtrar" type="submit">Buscar</button>
+                        <button class="btn btn-sm btn-blue" type="submit">Buscar</button>
                         <a href="#" id="btnCleanFilter" class="btn btn-sm btn-white">Limpiar filtros</a>
                     </div>
                 </div>
@@ -38,33 +38,34 @@
         </div>
     {{ Form::close() }}
 
-@endsection
-
-<div class="modal inmodal" id="modalAddToGroup" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content animated bounceInUp">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Agregar cliente a grupo <span id="sGrupo"></span></h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            {{ Form::label('cliente_id', __('validation.attributes.cliente')) }}
-                            {{ Form::select('cliente_id', [], null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion', 'autofocus' => true ]) }}
+    <div class="modal inmodal" id="modalAddToGroup" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInUp">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Agregar cliente a grupo <span id="sGrupo"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{ Form::label('cliente_id', __('validation.attributes.cliente')) }}
+                                {{ Form::select('cliente_id', [], null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion', 'autofocus' => true ]) }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnAddCliente" class="btn btn-primary">Guardar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnAddCliente" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endsection
+
+
 
 
 @section("scripts")

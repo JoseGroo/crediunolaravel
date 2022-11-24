@@ -20,7 +20,7 @@
 
 
                             <div class="w-75 m-auto text-muted text-center">
-                                <small>Bienvenido, puedes iniciar sesión con tu correo electrónico y contraseña</small>
+                                <small>Bienvenido, puedes iniciar sesión con tu usuario y contraseña</small>
                             </div>
 
                             <form action="{{ route('login_post') }}" method="POST" id="frmLogin">

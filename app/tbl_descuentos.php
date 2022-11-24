@@ -17,6 +17,12 @@ class tbl_descuentos extends Model
         'descuento_id', 'cliente_id', 'importe', 'fecha_vigencia', 'comentario', 'importe_acreditado'
     ];
 
+    public function __construct(array $attributes = array())
+    {
+        parent::__construct($attributes);
+        self::update_estatus();
+    }
+
     public function tbl_cliente()
     {
         return $this->belongsTo(tbl_clientes::class, 'cliente_id', 'cliente_id');
@@ -88,7 +94,6 @@ class tbl_descuentos extends Model
 
     public static function get_pagination($fecha_inicio, $fecha_fin, $estatus, $perPage)
     {
-        self::update_estatus();
         $model = tbl_descuentos::where([
             ['activo', '=', true],
         ])

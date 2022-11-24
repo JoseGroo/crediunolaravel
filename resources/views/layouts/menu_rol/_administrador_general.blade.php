@@ -20,7 +20,7 @@
 <li class="{{ HelperCrediuno::ActiveMenuControllers($controllers_catalagos) }}">
     <a href="#">
         <i class="mdi mdi-library-books"></i>
-        <span class="nav-label">Catalagos </span>
+        <span class="nav-label">Panel de control </span>
         <span class="mdi mdi-chevron-down"></span>
     </a>
     <ul class="nav nav-second-level collapse ">
@@ -34,13 +34,12 @@
             <a href="{{ route('grupos-cliente.index') }}">Grupos</a>
             <a href="{{ route('intereses.index') }}">Intereses</a>
             <a href="{{ route('medios-publicitarios.index') }}">Medios publicitarios</a>
+            <a href="#" data-toggle="modal" data-target="#ReestructuraCredito">Reestructurar prestamo</a>
             <a href="{{ route('sucursales.index') }}">Sucursales</a>
             <a href="{{ route('users.index') }}">Usuarios</a>
         </li>
     </ul>
 </li>
-
-
 
 <li class="{{ HelperCrediuno::ActiveMenuControllers(array('cortes')) }}">
     <a href="{{ route('cortes.index') }}" aria-expanded="false">
@@ -69,3 +68,4 @@
         <span class="nav-label">Bitacora</span>
     </a>
 </li>
+

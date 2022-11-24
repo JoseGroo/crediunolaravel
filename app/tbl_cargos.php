@@ -64,6 +64,19 @@ class tbl_cargos extends Model
         return $affected;
     }
 
+    public static function delete_by_prestamo_id($prestamo_id)
+    {
+        $affected = DB::table('tbl_cargos')
+            ->where('prestamo_id', $prestamo_id)
+            ->update(
+                [
+                    'activo' => false
+                ]
+            );
+
+        return $affected;
+    }
+
     public static function get_by_id($id)
     {
         $model = tbl_cargos::where([

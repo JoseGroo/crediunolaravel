@@ -1238,7 +1238,7 @@
                 }
 
             });
-            
+
             _this.$outer.on('mousemove.lg', function() {
                 mousedown = false;
             });

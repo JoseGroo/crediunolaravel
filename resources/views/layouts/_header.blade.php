@@ -38,6 +38,7 @@
                     <i class="mdi mdi-download-multiple"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                     <a class="dropdown-item" href="{{ route('clientes.download_fie', \App\Enums\archivos_descarga::SolicitudCliente) }}">
                         <span class="mdi mdi-file-pdf"></span>
                         Solicitud cliente
@@ -100,6 +101,10 @@
                             {{ Form::close() }}
                         </a>
                    @endif
+                    <a class="dropdown-item" href="{{ route('prestamos.simulate') }}">
+                        <span class="mdi mdi-remote-desktop"></span>
+                        Simular prestamo
+                    </a>
                 </div>
             </li>
 

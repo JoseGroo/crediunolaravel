@@ -24,7 +24,7 @@
 
                     <div class="col-md-3 col-sm-4 col-12 text-left">
                         <label class="d-block">&nbsp;</label>
-                        <button class="btn btn-sm btn-blue filtrar" type="submit">Buscar</button>
+                        <button class="btn btn-sm btn-blue" type="submit">Buscar</button>
                         <a href="#" id="btnCleanFilter" class="btn btn-sm btn-white">Limpiar filtros</a>
                     </div>
                 </div>

@@ -45,6 +45,7 @@
                                 <a href="{{ route('prestamos.entregar', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-cash-refund"></i> Entregar prestamo</a>
                             @endif
                             <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalLigas"><i class="mdi mdi-link"></i> Ligas</a>
                         </div>
                     </div>
                 </div>
@@ -295,35 +296,53 @@
         </div>
     </div>
 
-<div class="modal inmodal" id="modalReportes" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal inmodal" id="modalReportes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated bounceInUp">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Reportes</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-row">
+                        <div class="col">
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal inmodal" id="modalLigas" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated bounceInUp">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Reportes</h4>
+                <h4 class="modal-title">Ligas</h4>
             </div>
             <div class="modal-body">
 
-                <div class="form-row">
-                    <div class="col">
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                    </div>
-                </div>
             </div>
 
             <div class="modal-footer">
@@ -927,7 +946,57 @@
             @endif
 
             $('#btnNotasAvisoVistas').click(function(){
+                ShowLoading('Guardando información...');
+                $.ajax({
+                    url: "{{route('clientes.notas_aviso_vistas')}}",
+                    dataType: "json",
+                    type: "POST",
+                    data: {
+                        cliente_id: '{{ $model->cliente_id }}',
+                        _token: "{{ csrf_token() }}"
+                    },
+                    cache: false,
+                    success: function (data) {
 
+                        if(data.Saved)
+                        {
+                            $('#modalNotasAviso').modal('hide');
+                        }
+
+                        var vMessageClass = data.Saved ? 'success' : 'error';
+                        MyToast('Notificación', data.Message, vMessageClass);
+                        HideLoading();
+                    },
+                    error: function (error) {
+                        console.log("error");
+                        console.log(error.responseText);
+                    }
+                });
+            })
+
+            var LigasOpened = false;
+            $('[data-target="#modalLigas"]').click(function () {
+                if(!LigasOpened){
+                    LigasOpened = true;
+                    $.ajax({
+                        url: "{{route('clientes.get_ligas')}}",
+                        dataType: "html",
+                        type: "GET",
+                        data: {
+                            cliente_id: '{{ $model->cliente_id }}',
+                            full_name: '{{ $model->full_name }}',
+                            aval_id: '{{ $model->aval_id }}'
+                        },
+                        cache: false,
+                        success: function (data) {
+                            $('#modalLigas .modal-body').html(data);
+                        },
+                        error: function (error) {
+                            console.log("error");
+                            console.log(error.responseText);
+                        }
+                    });
+                }
             })
 
             $("#btnSaveLimiteCredito").click(function(){

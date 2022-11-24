@@ -3,6 +3,14 @@
 @section("title", "Pagos")
 
 @section('content')
+    @if(session()->has('message_prestamo'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message_prestamo') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     {{ Form::open([ 'route' => ['clientes.pago_post' ], 'method' => 'POST', 'id' => 'frmPagos' ]) }}
     {{ Form::hidden('cliente_id', $model->cliente_id) }}
 

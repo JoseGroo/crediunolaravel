@@ -5,6 +5,7 @@ namespace App;
 use App\Enums\estatus_adeudos;
 use App\Enums\estatus_prestamo;
 use App\Enums\periodos_prestamos;
+use App\Helpers\HelperCrediuno;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -78,6 +79,19 @@ class tbl_prestamos extends Model
         return $model;
     }
 
+    public static function get_total_by_cliente_id_and_status($cliente_id, $estatus)
+    {
+        $model = tbl_prestamos::where([
+            ['cliente_id', '=', $cliente_id],
+            ['estatus', '=', $estatus],
+            ['activo', '=', true]
+        ])->orderby('prestamo_id', 'desc')
+            ->count();
+        return $model;
+    }
+
+
+
     public static function check_if_liquidado_by_prestamo_id($prestamo_id)
     {
         $model = \DB::select("
@@ -111,6 +125,28 @@ class tbl_prestamos extends Model
         return $model;
     }
 
+    public static function get_ligas_avales_by_cliente_id($cliente_id)
+    {
+        $query = tbl_prestamos::query()
+            ->where([
+                ['activo', '=', true],
+                ['cliente_id', '=', $cliente_id]
+            ])->whereNotNull('aval_id');
+
+        return $query->get();
+    }
+
+    public static function get_ligas_avalados_by_aval_id($aval_id)
+    {
+        $query = tbl_prestamos::query()
+            ->where([
+                ['activo', '=', true],
+                ['aval_id', '=', $aval_id]
+            ])->whereNotNull('aval_id');
+
+        return $query->get();
+    }
+
     #region Objetos de llaves foraneas
     public function tbl_interes()
     {
@@ -130,6 +166,14 @@ class tbl_prestamos extends Model
             ->orderBy('fecha_limite_pago');
     }
 
+    public function tbl_prestamos_reestructurados()
+    {
+        $model = $this->hasMany(tbl_prestamos_reestructurados::class, 'prestamo_id', 'prestamo_id');
+        return $model->where('activo', '=', true)
+            ->orderBy('fecha_creacion', 'desc');
+    }
+
+
     public function tbl_cargos()
     {
         $model = $this->hasMany(tbl_cargos::class, 'prestamo_id', 'prestamo_id');
@@ -141,7 +185,8 @@ class tbl_prestamos extends Model
                 'tbl_cargos.importe_total',
                 'adeu.numero_pago',
                 'adeu.fecha_limite_pago',
-                'tbl_cargos.cargo_id'
+                'tbl_cargos.cargo_id',
+                'tbl_cargos.estatus'
             ]);
     }
 
@@ -149,22 +194,30 @@ class tbl_prestamos extends Model
     {
         return $this->belongsTo(tbl_avales::class, 'aval_id', 'aval_id');
     }
+
+    public function tbl_cliente()
+    {
+        return $this->belongsTo(tbl_clientes::class, 'cliente_id', 'cliente_id');
+    }
     #endregion
 
     #region Attributes
 
     public function getFolioAttribute()
     {
-        $id_length = Str::length($this->prestamo_id);
-        $ceros = '00000';
-        $folio = Str::substr($ceros, 0,Str::length($ceros) - $id_length);
-
-        return $folio . $this->prestamo_id;
+        $folio = HelperCrediuno::get_folio_prestamo($this->prestamo_id);
+        return $folio;
     }
 
     public function getTotalRecibosAttribute()
     {
         $total_recibos = $this->tbl_adeudos->where('estatus', '=', estatus_adeudos::Vigente)->sum('importe_total') + $this->tbl_cargos->where('estatus', '=', estatus_adeudos::Vigente)->sum('tbl_cargo->importe_total');
+        return $total_recibos;
+    }
+
+    public function getTotalCapitalAttribute()
+    {
+        $total_recibos = $this->tbl_adeudos->where('estatus', '=', estatus_adeudos::Vigente)->sum('capital');
         return $total_recibos;
     }
 

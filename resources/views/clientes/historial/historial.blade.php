@@ -38,7 +38,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tab-prestamos-liquidados" role="tab" aria-controls="tab-prestamos-liquidados" aria-selected="true">Prestamos liquidados</a>
+                        <a class="nav-link" data-toggle="tab" href="#tab-prestamos-liquidados" role="tab" aria-controls="tab-prestamos-liquidados" aria-selected="true">Prestamos liquidados ({{ $total_prestamos_liquidados }})</a>
                     </li>
 
                 </ul>
@@ -237,9 +237,16 @@
             $("#modalNuevaNotaCliente").modal('show');
         })
 
+        $(document).on('click', '.show-reestructuras', function(event){
+            event.preventDefault();
+            var prestamoId = $(this).data('prestamo-id');
+            $('.childs-' + prestamoId).toggle();
+            var buttonText = $(this).text() == 'Mostrar reestructuras' ? 'Ocultar reestructuras' : 'Mostrar reestructuras';
+            $(this).text(buttonText);
+        })
+
         $(function()
         {
-
         })
 
     </script>

@@ -7,3 +7,4 @@
 <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
 <link rel="stylesheet" href="{{asset('js/bootstrap/datepicker/datepicker.css')}}">
 <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+<link rel="stylesheet" href="{{asset('css/pretty-checkbox.min.css')}}">

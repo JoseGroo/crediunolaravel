@@ -24,6 +24,13 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{ route('prestamos.index') }}" aria-expanded="false">
+                    <i class="mdi mdi-cash-refund"></i>
+                    <span class="nav-label">Cobranza</span>
+                </a>
+            </li>
+
             <li class="{{ HelperCrediuno::ActiveMenuControllers(array('avales')) }}">
                 <a href="{{ route('avales.index') }}" aria-expanded="false">
                     <i class="mdi mdi-account-cash"></i>

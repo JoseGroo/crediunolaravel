@@ -13,7 +13,7 @@
             </div>
             <div class="form-group col-3">
 
-                {{ Form::select('iPerPage', array(10 => 10, 25 => 25, 50 => 50, 100 => 100), $perPage, ['class' => 'form-control form-control-sm filtrar']) }}
+                {{ Form::select('iPerPage', array(10 => 10, 25 => 25, 50 => 50, 100 => 100, 1000 => 1000), $perPage, ['class' => 'form-control form-control-sm filtrar']) }}
             </div>
             <div class="form-group col-4">
                 <span class="font-weight-bold mt-1 d-block"> reigstros </span>
@@ -23,7 +23,6 @@
     </div>
 
     <div class="col-md-4 col-sm-4 col-12 text-right">
-        <!--<span class="mt-2 d-block">@(Model.Model.LastItemOnPage > 0 ? Model.Model.FirstItemOnPage : 0) - @Model.Model.LastItemOnPage de @Model.Model.TotalItemCount @DiccionarioSistema._Registros</span><span class="mt-2 d-block">@(Model.Model.LastItemOnPage > 0 ? Model.Model.FirstItemOnPage : 0) - @Model.Model.LastItemOnPage de @Model.Model.TotalItemCount @DiccionarioSistema._Registros</span>-->
         <span class="mt-2 d-block">{{ $model->lastItem() > 0 ? $model->firstItem() : 0 }} - {{ $model->lastItem() ?? 0 }} de {{ $model->total() }} registros</span>
     </div>
 </div>

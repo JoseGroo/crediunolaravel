@@ -32,9 +32,32 @@
                         </div>
                     </div>
 
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Estatus</label>
+
+                            <div>
+                                <div class="radio radio-success inline">
+                                    <input type="radio" checked name="estatus" id="estatus_1" class="check-box-value" value="" placeholder="">
+                                    <label for="estatus_1">Todos</label>
+                                </div>
+
+                                <div class="radio radio-success inline">
+                                    <input type="radio" name="estatus" id="estatus_2" class="check-box-value" value="2" placeholder="">
+                                    <label for="estatus_2">Abiertos</label>
+                                </div>
+
+                                <div class="radio radio-success inline">
+                                    <input type="radio" name="estatus" id="estatus_3" class="check-box-value" value="1" placeholder="">
+                                    <label for="estatus_3">Cerrados</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md-3 col-sm-4 col-12 text-left">
                         <label class="d-block">&nbsp;</label>
-                        <button class="btn btn-sm btn-blue filtrar" type="submit">Buscar</button>
+                        <button class="btn btn-sm btn-blue" type="submit">Buscar</button>
                         <a href="#" id="btnCleanFilter" class="btn btn-sm btn-white">Limpiar filtros</a>
                     </div>
                 </div>

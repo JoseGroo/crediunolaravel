@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 use Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -206,8 +207,16 @@ class HelperCrediuno
 
     public static function generate_pdf($data, $view, $file_name)
     {
-        $pdf = \PDF::loadView($view, $data)->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        $contxt = stream_context_create([
+            'ssl' => [
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed' => TRUE,
+            ]
+        ]);
 
+        $pdf = \PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($view, $data);
+        $pdf->getDomPDF()->setHttpContext($contxt);
         return $pdf->download($file_name. '-'. time() .'.pdf');
     }
 
@@ -395,5 +404,29 @@ class HelperCrediuno
         //Zi hack --> return ucfirst($tex);
         $end_num=ucfirst($tex).' PESOS 00/100 M. N.';
         return $end_num;
+    }
+
+    public static function get_folio_prestamo($id)
+    {
+        $id_length = Str::length($id);
+        $ceros = '00000';
+        $folio = Str::substr($ceros, 0,Str::length($ceros) - $id_length);
+
+        return $folio . $id;
+    }
+
+    public static function convert_url_to_base64($url)
+    {
+        $path = $url;
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = \File::get($path);
+
+        $base64 = "";
+        if ($type == "svg") {
+            $base64 = "data:image/svg+xml;base64,".base64_encode($data);
+        } else {
+            $base64 = "data:image/". $type .";base64,".base64_encode($data);
+        }
+        return $base64;
     }
 }

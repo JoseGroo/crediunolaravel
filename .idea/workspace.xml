@@ -1,56 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="x">
-      <change afterPath="$PROJECT_DIR$/app/Enums/archivos_descarga.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/CobroConceptosController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CobroOtrosConceptosRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/NotaAvisoRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/NotaClienteRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/tbl_cobro_otros_conceptos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/tbl_notas_aviso.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/files/aviso-de-cobro.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/files/cuestionario.doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/files/formato-corte-ventanilla.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/files/formato-ingresos.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/files/hoja-logo.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/files/solicitud-prestamo.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/clientes/historial/_notas_aviso.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/clientes/historial/_notas_cliente.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/clientes/historial/_prestamos.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/clientes/historial/estado_prestamo.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/clientes/historial/historial.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cobro_otros_conceptos/cobro.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cobro_otros_conceptos/pdf_cobro.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/general/_errors.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/crediuno.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crediuno.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="7b69592a-4c15-47b2-bd5b-b683399a999d" name="Default Changelist" comment="entrega febrero">
+      <change afterPath="$PROJECT_DIR$/app/Enums/tipo_transferencia_fondo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/ReestructuraPrestamoRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/SimulacionPrestamoRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/TransferenciaEntreCajasRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/TransferenciaRetiroRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tbl_prestamos_reestructurados.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tbl_transferencias_entre_cajas.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/tbl_transferencias_fondos.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/pretty-checkbox.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pdfs/carta-urgente.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pdfs/proximo-embargo.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/clientes/pdfs/pdf_carta_urgente.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/clientes/pdfs/pdf_certificado_patrimonial.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/clientes/pdfs/pdf_recordatorio_atrasos.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/_ligas.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/cortes/_movimientos.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/cortes/_resumen.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/cortes/_transferencias_entre_caja.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/cortes/_traspasos_retiros.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/prestamos/_index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/prestamos/_prestamos_reestructura.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/prestamos/_simulacion_adeudos.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/prestamos/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/prestamos/reestructurar.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/prestamos/simulador.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/update prestamos a liquidados.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_ide_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/_ide_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/catalago_sistema.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/catalago_sistema.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/movimiento_bitacora.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/movimiento_bitacora.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Enums/tipos_movimientos_corte.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/tipos_movimientos_corte.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enums/unidad_tiempo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/unidad_tiempo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/HelperCrediuno.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/HelperCrediuno.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DivisasController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DivisasController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CortesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CortesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tbl_adeudos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_adeudos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tbl_cargos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_cargos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tbl_clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_clientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tbl_notas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_notas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_cobro_otros_conceptos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_cobro_otros_conceptos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_compra_venta_divisas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_compra_venta_divisas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_cortes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_cortes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_descuentos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_descuentos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_divisas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_divisas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_movimientos_corte.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_movimientos_corte.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_pagos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_pagos.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tbl_prestamos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_prestamos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tbl_referencias_cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tbl_referencias_cliente.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/lightGallery-master/dist/js/lightgallery-all.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lightGallery-master/dist/js/lightgallery-all.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/lightGallery-master/dist/js/lightgallery.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lightGallery-master/dist/js/lightgallery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/lightGallery-master/src/js/lightgallery.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lightGallery-master/src/js/lightgallery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/en/enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/enums.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clientes/_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/_index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/avales/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/avales/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/bitacora/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/bitacora/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/clientes/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/historial/_prestamos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/historial/_prestamos.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/historial/estado_prestamo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/historial/estado_prestamo.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/historial/historial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/historial/historial.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clientes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/clientes/pagos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/pagos.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clientes/pdfs/pdf_pagos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/pdfs/pdf_pagos.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clientes/views_details/_datos_generales.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clientes/views_details/_datos_generales.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/contactos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/contactos/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/cortes/_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cortes/_index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cortes/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cortes/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cortes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cortes/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/descuentos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/descuentos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dias_festivos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dias_festivos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fondos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fondos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/grupos_cliente/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/grupos_cliente/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/_header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/_header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/_pagination.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/_pagination.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/_styles.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/_styles.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/layout_login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/layout_login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/layout_pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/layout_pdf.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/menu_rol/_administrador_general.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/menu_rol/_administrador_general.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/medios_publicitarios/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/medios_publicitarios/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pagos/_eliminar_cargos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pagos/_eliminar_cargos.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pagos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pagos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/prestamos/_pagos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/prestamos/_pagos.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/prestamos/generar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/prestamos/generar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sucursales/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sucursales/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/_index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -340,7 +379,9 @@
     <option name="height" value="1050" />
   </component>
   <component name="ProjectId" id="1yrgjfk7hbWCaKxsdp4jS61JKzy" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -410,6 +451,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -419,7 +461,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="dumpAutoload /Users/josegroo/LaravelProjects/crediunolaravel/composer.json" value="--no-interaction --ansi --verbose --classmap-authoritative" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/prestamos" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -429,11 +471,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/storage/app/public" />
-      <recent name="$PROJECT_DIR$/resources/views/clientes/historial" />
-      <recent name="$PROJECT_DIR$/resources/views/clientes" />
-      <recent name="$PROJECT_DIR$/public/files" />
-      <recent name="$PROJECT_DIR$/app/Enums" />
+      <recent name="$PROJECT_DIR$/resources/views/prestamos" />
+      <recent name="$PROJECT_DIR$/app/Http/Requests" />
+      <recent name="$PROJECT_DIR$/resources/views/clientes/pdfs" />
+      <recent name="$PROJECT_DIR$/public/images/pdfs" />
+      <recent name="$PROJECT_DIR$/resources/views/clientes/views_details" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/clientes/historial" />
@@ -688,7 +730,43 @@
       <workItem from="1642301109153" duration="9828000" />
       <workItem from="1643042617179" duration="15000" />
       <workItem from="1644260050262" duration="5840000" />
-      <workItem from="1644296334383" duration="6340000" />
+      <workItem from="1644296334383" duration="6904000" />
+      <workItem from="1645507644499" duration="219000" />
+      <workItem from="1645578384577" duration="647000" />
+      <workItem from="1646181955162" duration="599000" />
+      <workItem from="1646267187490" duration="4640000" />
+      <workItem from="1646502646016" duration="5852000" />
+      <workItem from="1646714179656" duration="4475000" />
+      <workItem from="1647010118692" duration="92000" />
+      <workItem from="1647010394700" duration="639000" />
+      <workItem from="1647110549283" duration="2175000" />
+      <workItem from="1647119949663" duration="2848000" />
+      <workItem from="1648169130977" duration="2906000" />
+      <workItem from="1648248400901" duration="9081000" />
+      <workItem from="1648598890171" duration="4011000" />
+      <workItem from="1648684876067" duration="4475000" />
+      <workItem from="1648924693442" duration="5980000" />
+      <workItem from="1651281423562" duration="230000" />
+      <workItem from="1651290851476" duration="217000" />
+      <workItem from="1651292906127" duration="11811000" />
+      <workItem from="1651584670464" duration="4030000" />
+      <workItem from="1654561270047" duration="13118000" />
+      <workItem from="1657993261554" duration="6448000" />
+      <workItem from="1659045533470" duration="198000" />
+      <workItem from="1659411820660" duration="1813000" />
+      <workItem from="1659494889399" duration="544000" />
+      <workItem from="1660415100534" duration="13237000" />
+      <workItem from="1662475292621" duration="1000" />
+      <workItem from="1662481839466" duration="762000" />
+      <workItem from="1662564484530" duration="496000" />
+      <workItem from="1662648953171" duration="8000" />
+      <workItem from="1662656736174" duration="7020000" />
+      <workItem from="1666066383708" duration="8801000" />
+      <workItem from="1667057694782" duration="599000" />
+      <workItem from="1667061677361" duration="565000" />
+      <workItem from="1668293513775" duration="505000" />
+      <workItem from="1668999882442" duration="546000" />
+      <workItem from="1669320039428" duration="198000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1588263522778</created>
@@ -746,7 +824,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638554641610</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="entrega febrero">
+      <created>1644305325812</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1644305325813</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -781,31 +866,33 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
+    <option name="COLUMN_ID_ORDER">
       <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
       </list>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="quitando mascara de telefonos" />
     <MESSAGE value="avances" />
     <MESSAGE value="cargos manuales" />
     <MESSAGE value="x" />
-    <option name="LAST_COMMIT_MESSAGE" value="x" />
+    <MESSAGE value="entrega febrero" />
+    <option name="LAST_COMMIT_MESSAGE" value="entrega febrero" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Helpers/HelperCrediuno.php</url>
-          <line>94</line>
+          <line>95</line>
           <properties>
             <option name="className" value="\App\Helpers\HelperCrediuno" />
             <option name="methodName" value="checar_dia_festivo_y_descanso" />

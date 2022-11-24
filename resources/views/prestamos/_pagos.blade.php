@@ -61,7 +61,7 @@
                                 <label for="select_adeudo{{ $renglon }}"></label>
                             </div>
                         </td>
-                        <td>{{ $item->numero_pago }}</td>
+                        <td>{{ $item->numero_pago }} - {{ $item->tbl_cargo->cargo_id }}</td>
                         <td>{{ \App\Helpers\HelperCrediuno::$nombres_dias[\Carbon\Carbon::parse($item->fecha_limite_pago)->format('l')] }}</td>
                         <td class="fecha-pago">{{ \Carbon\Carbon::parse($item->fecha_limite_pago)->format('d/m/Y') }}</td>
                         <td>$0.00</td>

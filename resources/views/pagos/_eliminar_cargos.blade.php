@@ -18,17 +18,18 @@
                     <tbody>
                     @foreach ($model as $item)
                         @foreach($item->tbl_cargos as $cargo)
-
-                            <tr>
-                                <td>{{ $item->folio }}</td>
-                                <td>{{ $cargo->numero_pago }}</td>
-                                <td>{{ \App\Helpers\HelperCrediuno::$nombres_dias[\Carbon\Carbon::parse($cargo->fecha_limite_pago)->format('l')] }}</td>
-                                <td class="fecha-pago">{{ \Carbon\Carbon::parse($cargo->fecha_limite_pago)->format('d/m/Y') }}</td>
-                                <td>@money_format($cargo->importe_total)</td>
-                                <td class="text-center">
-                                    <button type="button" data-cargo-id="{{ $cargo->cargo_id }}" class="btn btn-sm btn-danger delete-cargo">Eliminar</button>
-                                </td>
-                            </tr>
+                            @if($cargo->estatus == \App\Enums\estatus_adeudos::Vigente)
+                                <tr>
+                                    <td>{{ $item->folio }}</td>
+                                    <td>{{ $cargo->numero_pago }}</td>
+                                    <td>{{ \App\Helpers\HelperCrediuno::$nombres_dias[\Carbon\Carbon::parse($cargo->fecha_limite_pago)->format('l')] }}</td>
+                                    <td class="fecha-pago">{{ \Carbon\Carbon::parse($cargo->fecha_limite_pago)->format('d/m/Y') }}</td>
+                                    <td>@money_format($cargo->importe_total)</td>
+                                    <td class="text-center">
+                                        <button type="button" data-cargo-id="{{ $cargo->cargo_id }}" class="btn btn-sm btn-danger delete-cargo">Eliminar</button>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
 
                     @endforeach

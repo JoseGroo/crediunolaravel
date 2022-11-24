@@ -102,6 +102,59 @@
         .table-bordered th, .table-bordered td {
             border: 1px solid #000;
         }
+
+        .imagen-urgente
+        {
+            position: absolute;
+            top:200px;
+            left:120px;
+            opacity: 0.2;
+        }
+
+        .titulo-contrato
+        {
+            margin-top: -40px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .nota-carta-urgente
+        {
+            position: absolute;
+            top: 880px;
+            left: 50px;
+            padding: 5px;
+            font-size: 11px;
+            border-style: solid;
+            border-width: 1px;
+            font-weight: bolder;
+            text-align: justify;
+        }
+
+        .lugar-fecha-carta-urgente
+        {
+            position: absolute;
+            top:-15px;
+            left:385px;
+        }
+
+        .informacion-cliente-recordatorio
+        {
+            margin-top:30px;
+            width: 700px;
+        }
+
+        .cliente-informacion
+        {
+            width: 500px;
+            vertical-align: top;
+            display: inline-block;
+        }
+
+        td.numero-cuenta
+        {
+            width: 158px;
+        }
     </style>
 </head>
 <body>

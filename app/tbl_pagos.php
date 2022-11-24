@@ -43,6 +43,15 @@ class tbl_pagos extends Model
         }
     }
 
+    public static function get_by_id($id)
+    {
+        $model = tbl_pagos::where([
+            ['pago_id', '=', $id],
+            ['activo', '=', true]
+        ])->first();
+        return $model;
+    }
+
     public static function get_list_by_ids($ids)
     {
         $model = tbl_pagos::where([

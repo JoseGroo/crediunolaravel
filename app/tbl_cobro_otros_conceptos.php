@@ -26,6 +26,18 @@ class tbl_cobro_otros_conceptos extends Model
         }
     }
 
+    public static function edit(tbl_cobro_otros_conceptos $model)
+    {
+        try{
+
+            $model->update();
+            return ['saved' => true, 'error' => ''];
+        }
+        catch(\Exception $e){
+            return ['saved' => false, 'error' => $e];
+        }
+    }
+
     public static function get_by_id($id)
     {
         $model = tbl_cobro_otros_conceptos::where([

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HelperCrediuno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Response;
 
 
 class HomeController extends Controller
@@ -29,6 +31,22 @@ class HomeController extends Controller
 
         return view('home')
             ->with(compact("corte"));
+    }
+
+    public function displayImage($filename)
+    {
+        $path = storage_public($filename);
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+dd($path,$file,$type);
+        return $response;
     }
 
     public function download()

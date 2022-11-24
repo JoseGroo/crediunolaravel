@@ -113,3 +113,25 @@
 .dropdown-menu{
     z-index: 2010!important;
 }
+
+.table-fix-head {
+    overflow-y: auto;
+    max-height: 400px;
+}
+.table-fix-head thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+}
+
+.card.card-cortes-totales .card-title{
+    font-size: 15px;
+}
+
+.card.card-cortes-totales .card-text.text-monospace{
+    font-size: 18px;
+}
+
+.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top{
+    z-index: 2210!important;
+}
