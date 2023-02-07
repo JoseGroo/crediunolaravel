@@ -5,6 +5,7 @@
     <div class="col-md-3">
         <div class="ibox-content no-padding text-center">
             <img alt="image" style="width: 163px; height: 163px;" class="img-fluid img-circle" src="{{ Storage::url($foto_perfil) }}">
+
             <h5 class="text-center">
                 <strong>#{{ $model->cliente_id }} - {{ $model->nombre }} {{ $model->apellido_paterno }} {{ $model->apellido_materno }}</strong>
                 <span id="spanEstatus">({{ \App\Enums\estatus_cliente::getDescription($model->estatus) }})</span>

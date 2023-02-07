@@ -94,7 +94,7 @@
                 <div class="form-row">
                     <div class="col-md-12 col-sm-12 col-12">
                         <div class="form-group text-right">
-                            <button type="submit" class="btn btn-sm btn-primary">Simular</button>
+                            <button type="button" id="btnSimulate" class="btn btn-sm btn-primary">Simular</button>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
 
     <script>
 
-
+        var downloadPdf = false;
         $(function()
         {
             $('#periodo').change(function () {
@@ -179,22 +179,27 @@
                 var vSubmit = $(this).valid();
                 var $form = this;
                 if(vSubmit){
-                    ShowLoading();
+                    if(!downloadPdf)
+                    {
+                        ShowLoading();
 
-                    $.ajax({
-                        url: "{{route('prestamos.get_adeudos_simulador')}}",
-                        dataType: "html",
-                        type: "POST",
-                        data: $($form).serialize(),
-                        cache: false,
-                        success: function (data) {
-                            $('#divAmortizacion').html(data);
-                        },
-                        error: function (error) {
-                            console.log("error");
-                            console.log(error.responseText);
-                        }
-                    });
+                        $.ajax({
+                            url: "{{route('prestamos.get_adeudos_simulador')}}",
+                            dataType: "html",
+                            type: "POST",
+                            data: $($form).serialize(),
+                            cache: false,
+                            success: function (data) {
+                                $('#divAmortizacion').html(data);
+                            },
+                            error: function (error) {
+                                console.log("error");
+                                console.log(error.responseText);
+                            }
+                        });
+                    }else{
+                        return true;
+                    }
                 }
 
                 return false;
@@ -203,5 +208,16 @@
 
         })
 
+        $(document).on('click', '#btnDownloadSimulation', function(){
+            $('#frmSimulate').prop('action', '{{ route('prestamos.simulacion_pdf') }}');
+            downloadPdf = true;
+            $('#frmSimulate').submit();
+        })
+
+        $(document).on('click', '#btnSimulate', function(){
+            $('#frmSimulate').prop('action', '{{ route('prestamos.simulate_post') }}');
+            downloadPdf = false;
+            $('#frmSimulate').submit();
+        })
     </script>
 @endsection

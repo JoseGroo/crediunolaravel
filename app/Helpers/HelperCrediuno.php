@@ -215,7 +215,7 @@ class HelperCrediuno
             ]
         ]);
 
-        $pdf = \PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView($view, $data);
+        $pdf = \PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true,"DOMPDF_ENABLE_REMOTE" => true])->loadView($view, $data);
         $pdf->getDomPDF()->setHttpContext($contxt);
         return $pdf->download($file_name. '-'. time() .'.pdf');
     }

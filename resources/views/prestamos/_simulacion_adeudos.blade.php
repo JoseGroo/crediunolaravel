@@ -86,7 +86,7 @@
 <div class="form-row">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-sm btn-primary">Descargar tabla amortización</button>
+            <button type="button" id="btnDownloadSimulation" class="btn btn-sm btn-primary">Descargar tabla amortización</button>
         </div>
     </div>
 </div>

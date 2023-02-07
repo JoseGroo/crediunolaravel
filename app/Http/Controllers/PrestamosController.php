@@ -92,9 +92,17 @@ class PrestamosController extends Controller
 
     public function get_adeudos_simulador(SimulacionPrestamoRequest $request)
     {
+
+
+        $adeudos = $this->data_para_simulacion($request);
+
+        return view('prestamos._simulacion_adeudos')
+            ->with(compact('adeudos'));
+    }
+
+    private function data_para_simulacion(SimulacionPrestamoRequest $request){
         $datetime_now = HelperCrediuno::get_datetime();
         $data_model = request()->except(['_token', '_method']);
-
         $model = new tbl_prestamos($data_model);
         $interes = tbl_intereses::get_by_id($request->interes_id);
 
@@ -128,9 +136,7 @@ class PrestamosController extends Controller
 
 
         $adeudos = $this->generate_adeudos($model, $interes, $datetime_now, true);
-
-        return view('prestamos._simulacion_adeudos')
-            ->with(compact('adeudos'));
+        return $adeudos;
     }
 
     public function generar($cliente_id)
@@ -810,6 +816,7 @@ class PrestamosController extends Controller
         return Response::json(null);
     }
 
+
     public function get_recibos_by_prestamo_id(Request $request)
     {
         auth()->user()->authorizeRoles([HelperCrediuno::$admin_gral_rol]);
@@ -822,5 +829,17 @@ class PrestamosController extends Controller
         }
 
         return Response::json(null);
+    }
+
+    public function simulacion_pdf(SimulacionPrestamoRequest $request){
+
+        $datetime_now = HelperCrediuno::get_datetime();
+        $adeudos = $this->data_para_simulacion($request);
+        $data = [
+            'date' => $datetime_now,
+            'adeudos' => $adeudos
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'prestamos.pdf_simulador_tabla_amortizacion', 'simulacion-prestamo');
     }
 }

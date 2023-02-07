@@ -79,6 +79,18 @@ class tbl_prestamos extends Model
         return $model;
     }
 
+    public static function get_list_by_cliente_id_for_reports($cliente_id)
+    {
+        $model = tbl_prestamos::where([
+            ['cliente_id', '=', $cliente_id],
+            ['activo', '=', true]
+        ])
+            ->whereIn('estatus', [estatus_prestamo::Generado, estatus_prestamo::Vigente])
+            ->orderby('prestamo_id', 'desc')
+            ->get();
+        return $model;
+    }
+
     public static function get_total_by_cliente_id_and_status($cliente_id, $estatus)
     {
         $model = tbl_prestamos::where([
@@ -198,6 +210,16 @@ class tbl_prestamos extends Model
     public function tbl_cliente()
     {
         return $this->belongsTo(tbl_clientes::class, 'cliente_id', 'cliente_id');
+    }
+
+    public function tbl_usuario_genero()
+    {
+        return $this->belongsTo(tbl_usuarios::class, 'creado_por', 'id');
+    }
+
+    public function tbl_usuario_entrego()
+    {
+        return $this->belongsTo(tbl_usuarios::class, 'usuario_entrego_id', 'id');
     }
     #endregion
 

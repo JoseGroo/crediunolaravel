@@ -307,22 +307,25 @@
 
                     <div class="form-row">
                         <div class="col">
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                            <a href="{{ route('clientes.ficha_socio_pdf', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-file-pdf"></i> Ficha de socio</a>
+                            <a href="#" data-para-cliente="false" class="btn btn-info download-tabla-amortizacion"><i class="mdi mdi-file-pdf"></i> Tabla de amortización 1</a>
+                            <a href="#" data-para-cliente="true" class="btn btn-info download-tabla-amortizacion"><i class="mdi mdi-file-pdf"></i> Tabla de amortización 2</a>
                         </div>
+                    </div>
+                    <div class="form-row mt-2">
                         <div class="col">
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                            <a href="#" class="btn btn-info download-pagare"><i class="mdi mdi-file-pdf"></i> Pagare</a>
+                            <a href="#" class="btn btn-info download-contrato"><i class="mdi mdi-file-pdf"></i> Contrato</a>
+                            <a href="{{ route('clientes.carta_invitacion_pdf', $model->cliente_id) }}" class="btn btn-info"><i class="mdi mdi-file-pdf"></i> Carta de invitación</a>
                         </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalReportes"><i class="mdi mdi-file-pdf"></i> Reportes</a>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                {{ Form::label('prestamo_report', 'Seleccione su prestamo') }}
+                                {{ Form::select('prestamo_report', $prestamos, null, ['class' => 'form-control', 'placeholder' => 'Seleccionar opcion']) }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1030,6 +1033,40 @@
                         console.log(error.responseText);
                     }
                 });
+            })
+
+            $('.download-tabla-amortizacion').click(function(event){
+                event.preventDefault();
+                var prestamoId = $('#prestamo_report').val();
+                if(!prestamoId)
+                {
+                    MyToast('Notificación', 'Seleccione un prestamo para generar el reporte.', 'warning');
+                    return;
+                }
+                var paraCliente = $(this).data('para-cliente');
+                location.href = '{{ route('clientes.tabla_amortizacion_pdf') }}?id=' + prestamoId + '&para_cliente=' + paraCliente;
+            })
+
+            $('.download-pagare').click(function(event){
+                event.preventDefault();
+                var prestamoId = $('#prestamo_report').val();
+                if(!prestamoId)
+                {
+                    MyToast('Notificación', 'Seleccione un prestamo para generar el reporte.', 'warning');
+                    return;
+                }
+                location.href = '{{ route('clientes.pagare_pdf') }}?id=' + prestamoId;
+            })
+
+            $('.download-contrato').click(function(event){
+                event.preventDefault();
+                var prestamoId = $('#prestamo_report').val();
+                if(!prestamoId)
+                {
+                    MyToast('Notificación', 'Seleccione un prestamo para generar el reporte.', 'warning');
+                    return;
+                }
+                location.href = '{{ route('clientes.contrato_pdf') }}?id=' + prestamoId;
             })
         })
 

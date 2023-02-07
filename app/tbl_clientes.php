@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\tipos_documento;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Model;
@@ -89,6 +90,17 @@ class tbl_clientes extends Model
     public function tbl_economia()
     {
         return $this->belongsTo(tbl_economia_cliente::class, 'cliente_id', 'cliente_id');
+    }
+
+    public function tbl_historial()
+    {
+        return $this->belongsTo(tbl_historial_cliente::class, 'cliente_id', 'cliente_id');
+    }
+
+    public function tbl_referencias()
+    {
+        $model = $this->hasMany(tbl_referencias_cliente::class, 'cliente_id', 'cliente_id');
+        return $model->where('activo', '=', true);
     }
     #endregion
 
@@ -208,6 +220,15 @@ class tbl_clientes extends Model
     public function getFullNameAttribute()
     {
        return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
+    }
+
+    public function getClaveIdentificacionAttribute()
+    {
+       $identificacion = $this->tbl_documentos->where('tipo', tipos_documento::Identificacion)->first();
+       if($identificacion)
+           return $identificacion->clave_identificacion;
+       else
+           return 'Sin identificacion';
     }
     #endregion
 }

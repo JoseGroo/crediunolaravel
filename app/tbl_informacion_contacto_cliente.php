@@ -44,4 +44,14 @@ class tbl_informacion_contacto_cliente extends Model
         ])->first();
         return $model;
     }
+
+    public function getAlternativo1Attribute()
+    {
+        return $this->nombre_alternativo_1 . '(' . $this->parentesco_alternativo_1 . ') (' . $this->telefono_alternativo_1 . ')';
+    }
+
+    public function getAlternativo2Attribute()
+    {
+        return $this->nombre_alternativo_2 . '(' . $this->parentesco_alternativo_2 . ') (' . $this->telefono_alternativo_2 . ')';
+    }
 }

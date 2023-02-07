@@ -172,6 +172,11 @@ Route::post('clientes/notas_aviso_vistas', 'ClientesController@notas_aviso_vista
 Route::post('clientes/certificado_patrimonial_pdf', 'ClientesController@certificado_patrimonial_pdf')->name('clientes.certificado_patrimonial_pdf');
 Route::post('clientes/carta_urgente_pdf', 'ClientesController@carta_urgente_pdf')->name('clientes.carta_urgente_pdf');
 Route::post('clientes/recordatorio_atrasos_pdf', 'ClientesController@recordatorio_atrasos_pdf')->name('clientes.recordatorio_atrasos_pdf');
+Route::get('clientes/{id}/ficha_socio_pdf', 'ClientesController@ficha_socio_pdf')->name('clientes.ficha_socio_pdf');
+Route::get('clientes/tabla_amortizacion_pdf', 'ClientesController@tabla_amortizacion_pdf')->name('clientes.tabla_amortizacion_pdf');
+Route::get('clientes/pagare_pdf', 'ClientesController@pagare_pdf')->name('clientes.pagare_pdf');
+Route::get('clientes/contrato_pdf', 'ClientesController@contrato_pdf')->name('clientes.contrato_pdf');
+Route::get('clientes/{id}/carta_invitacion_pdf', 'ClientesController@carta_invitacion_pdf')->name('clientes.carta_invitacion_pdf');
 //endregion
 
 //region avales
@@ -209,6 +214,7 @@ Route::post('prestamos/reestructurar_post', 'PrestamosController@reestructurar_p
 Route::get('prestamos/get_view_prestamos_by_cliente_id', 'PrestamosController@get_view_prestamos_by_cliente_id')->name('prestamos.get_view_prestamos_by_cliente_id');
 Route::get('prestamos/simulate', 'PrestamosController@simulate')->name('prestamos.simulate');
 Route::post('prestamos/simulate_post', 'PrestamosController@simulate_post')->name('prestamos.simulate_post');
+Route::post('prestamos/simulacion_pdf', 'PrestamosController@simulacion_pdf')->name('prestamos.simulacion_pdf');
 Route::post('prestamos/get_adeudos_simulador', 'PrestamosController@get_adeudos_simulador')->name('prestamos.get_adeudos_simulador');
 //endregion
 

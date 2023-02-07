@@ -38,6 +38,7 @@ use App\tbl_clientes;
 use App\tbl_conyuge_aval;
 use App\tbl_conyuge_cliente;
 use App\tbl_descuentos;
+use App\tbl_dias_festivos;
 use App\tbl_documentos_aval;
 use App\tbl_documentos_cliente;
 use App\tbl_economia_aval;
@@ -238,6 +239,8 @@ class ClientesController extends Controller
 
         $notas_aviso = tbl_notas_aviso::get_list_by_cliente_id_no_visto($id);
 
+        $prestamos = tbl_prestamos::get_list_by_cliente_id_for_reports($id)->pluck('folio', 'prestamo_id');
+
         return view('clientes.details')
             ->with(compact('model'))
             ->with(compact('estatus'))
@@ -249,6 +252,7 @@ class ClientesController extends Controller
             ->with(compact('sexos'))
             ->with(compact('unidades_tiempo'))
             ->with(compact('notas_aviso'))
+            ->with(compact('prestamos'))
             ->with(compact('estados_civiles'));
     }
 
@@ -1878,5 +1882,80 @@ class ClientesController extends Controller
         ];
 
         return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_recordatorio_atrasos', 'recordatorio-atrasos');
+    }
+
+    public function ficha_socio_pdf($id){
+        $datetime_now = HelperCrediuno::get_datetime();
+        $cliente  = tbl_clientes::get_by_id($id);
+
+        $cliente->fecha_nacimiento = Carbon::createFromFormat('Y-m-d', $cliente->fecha_nacimiento);
+        $cliente->fecha_creacion = Carbon::createFromFormat('Y-m-d H:m:s', $cliente->fecha_creacion);
+        $data = [
+            'cliente' => $cliente,
+            'date' => $datetime_now
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_ficha_socio', 'ficha-de-socio-'.$id);
+    }
+
+    public function tabla_amortizacion_pdf(Request $request){
+
+        $datetime_now = HelperCrediuno::get_datetime();
+        $prestamo = tbl_prestamos::get_by_id($request->id);
+        $cliente  = tbl_clientes::get_by_id($prestamo->cliente_id);
+
+
+        $data = [
+            'cliente' => $cliente,
+            'date' => $datetime_now,
+            'prestamo' => $prestamo,
+            'para_cliente' => $request->para_cliente != 'false'
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_tabla_amortizacion', 'tabla-amortizacion'.$request->id);
+    }
+
+    public function pagare_pdf(Request $request){
+
+        $datetime_now = HelperCrediuno::get_datetime();
+        $prestamo = tbl_prestamos::get_by_id($request->id);
+        $cliente  = tbl_clientes::get_by_id($prestamo->cliente_id);
+        $dias_festivos = tbl_dias_festivos::get_list_by_date(HelperCrediuno::get_datetime());
+
+
+        $data = [
+            'cliente' => $cliente,
+            'date' => $datetime_now,
+            'prestamo' => $prestamo,
+            'dias_festivos' => $dias_festivos
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_pagare', 'pagare'.$request->id);
+    }
+
+    public function contrato_pdf(Request $request){
+
+        $datetime_now = HelperCrediuno::get_datetime();
+        $prestamo = tbl_prestamos::get_by_id($request->id);
+        $cliente  = tbl_clientes::get_by_id($prestamo->cliente_id);
+        $data = [
+            'cliente' => $cliente,
+            'date' => $datetime_now,
+            'prestamo' => $prestamo
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_contrato', 'contrato'.$request->id);
+    }
+
+    public function carta_invitacion_pdf($id){
+
+        $datetime_now = HelperCrediuno::get_datetime();
+        $cliente  = tbl_clientes::get_by_id($id);
+        $data = [
+            'cliente' => $cliente,
+            'date' => $datetime_now
+        ];
+
+        return HelperCrediuno::generate_pdf($data, 'clientes.pdfs.pdf_carta_invitacion', 'carta-invitacion'.$id);
     }
 }
